@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6 small">Copyright &copy; bitress 2024</div>
             <div class="col-md-6 text-md-end small">
-                E-BASURA: IoT Based Waste Segregation System
+                <?= CAPSTONE_TITLE ?>
             </div>
         </div>
     </div>

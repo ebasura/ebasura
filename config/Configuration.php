@@ -11,6 +11,7 @@ const DB_PASS = "";
 const DB_NAME = "monitoring-system";
 
 // System Configuration
+const CAPSTONE_TITLE = "E-BASURA: IoT Based Waste Segregation System";
 const APP_NAME = "E-Basura Web Monitoring System";
 const APP_VERSION = "1.0.0";
 const ENVIRONMENT = "developement";

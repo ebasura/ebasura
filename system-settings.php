@@ -1,10 +1,10 @@
 <?php
 include_once 'init.php';
-//
-//if (!$login->isLoggedIn()) {
-//    header("Location: login.php");
-//    die();
-//}
+
+if (!$login->isLoggedIn()) {
+    header("Location: login.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

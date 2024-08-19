@@ -1,10 +1,10 @@
 <?php
     include_once 'init.php';
-//
-//if (!$login->isLoggedIn()) {
-//    header("Location: login.php");
-//    die();
-//}
+
+if (!$login->isLoggedIn()) {
+    header("Location: login.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,10 +19,34 @@
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <style>
         .responsive-canvas {
             width: 100%;
         }
+        .video-container {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            position: relative; 
+        }
+
+        .video-container .video-js {
+            width: 100%; 
+            height: 0;
+            padding-top: 56.25%;
+            top: 0;
+            left: 0;
+        }
+
+        .video-container .vjs-tech {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
     </style>
 </head>
 <body class="nav-fixed">
@@ -52,6 +76,30 @@
             <div class="container-xl px-4 mt-n10">
                 <div class="row">
                     <div class="col-xl-4 mb-4">
+                        <!-- Dashboard example card 3-->
+                        <a class="card lift h-100" href="#!">
+                            <div class="card-body d-flex justify-content-center flex-column">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="me-3">
+                                        <h5>Live Camera Feed</h5>
+                                    </div>
+                                </div>
+                                <div class="video-container">
+                                    <video
+                                            id="my-video"
+                                            class="video-js embed-responsive-item"
+                                            controls
+                                            preload="auto"
+                                            width="100%"
+                                            data-setup="{}"
+                                    >
+                                        <source src="assets/test_feed.mp4" type="video/mp4" />
+                                    </video>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-4 mb-4">
                         <!-- Dashboard example card 1-->
                         <a class="card lift h-100" href="#!">
                             <div class="card-body d-flex justify-content-center flex-column">
@@ -77,21 +125,6 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 mb-4">
-                        <!-- Dashboard example card 3-->
-                        <a class="card lift h-100" href="#!">
-                            <div class="card-body d-flex justify-content-center flex-column">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="me-3">
-                                        <i class="feather-xl text-green mb-3" data-feather="layout"></i>
-                                        <h5>Pages &amp; Layouts</h5>
-                                        <div class="text-muted small">To help get you started when building your new UI</div>
-                                    </div>
-                                    <img src="assets/img/illustrations/windows.svg" alt="..." style="width: 8rem" />
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
         </main>
 
@@ -108,6 +141,11 @@
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
     <script src="js/litepicker.js"></script>
     <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
+
+
 </body>
 </html>

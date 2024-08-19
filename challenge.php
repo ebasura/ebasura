@@ -1,6 +1,6 @@
 <?php
 
-include_once 'config/init.php';
+include_once 'init.php';
 
 
 if(!Session::checkSession('tfaChallenge')){
@@ -26,6 +26,7 @@ if ($login->isLoggedIn()) {
     <!--    Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"/>
+
 </head>
 
 <body class="my-login-page">
