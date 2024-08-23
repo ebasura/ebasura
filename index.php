@@ -1,10 +1,10 @@
 <?php
     include_once 'init.php';
 
-if (!$login->isLoggedIn()) {
-    header("Location: login.php");
-    die();
-}
+// if (!$login->isLoggedIn()) {
+//     header("Location: login.php");
+//     die();
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +20,7 @@ if (!$login->isLoggedIn()) {
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
     <style>
         .responsive-canvas {
             width: 100%;
@@ -125,6 +126,48 @@ if (!$login->isLoggedIn()) {
                             </div>
                         </a>
                     </div>
+
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="table_logs">
+                                        <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Classification</th>
+                                            <th>Data</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Classification</th>
+                                            <th>Data</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar me-2"><img class="avatar-img img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></div>
+                                                    Tiger Nixon
+                                                </div>
+                                            </td>
+                                            <td>20 Jun 2021</td>
+                                            <td>20 Jun 2021</td>
+                                            <td>
+                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="#"><i data-feather="edit"></i></a>
+                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
                 </div>
         </main>
 
@@ -139,6 +182,7 @@ if (!$login->isLoggedIn()) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
     <script src="js/litepicker.js"></script>
     <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>

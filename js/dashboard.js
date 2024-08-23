@@ -40,3 +40,7 @@ non_recycle_bin_gauge.maxValue = 100; // set max gauge value
 non_recycle_bin_gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
 non_recycle_bin_gauge.animationSpeed = 50; // set animation speed (32 is default value)
 non_recycle_bin_gauge.set(20); // set actual value
+
+
+
+const dataTable = new simpleDatatables.DataTable("#table_logs")
