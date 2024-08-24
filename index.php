@@ -28,8 +28,7 @@
         .video-container {
             width: 100%;
             max-width: 100%;
-            height: auto;
-            position: relative; 
+            position: relative;
         }
 
         .video-container .video-js {
@@ -86,16 +85,7 @@
                                     </div>
                                 </div>
                                 <div class="video-container">
-                                    <video
-                                            id="my-video"
-                                            class="video-js embed-responsive-item"
-                                            controls
-                                            preload="auto"
-                                            width="100%"
-                                            data-setup="{}"
-                                    >
-                                        <source src="assets/test_feed.mp4" type="video/mp4" />
-                                    </video>
+                                    <img id="video-stream" width="640" height="250" alt="Video Stream" class="img-thumbnail">
                                 </div>
                             </div>
                         </a>
@@ -127,47 +117,64 @@
                         </a>
                     </div>
 
-                        <div class="col-lg-12">
+                    <div class="col-xl-12 mb-2">
+                        <div class="d-flex justify-content-center">
+                            <div class="card">
+                               <div class="card-body">
+                                   LOL
+                               </div>
+                            </div>
                             <div class="card">
                                 <div class="card-body">
-                                    <table id="table_logs">
-                                        <thead>
-                                        <tr>
-                                            <th>Image</th>
-                                            <th>Classification</th>
-                                            <th>Data</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tfoot>
-                                        <tr>
-                                            <th>Image</th>
-                                            <th>Classification</th>
-                                            <th>Data</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </tfoot>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="avatar me-2"><img class="avatar-img img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></div>
-                                                    Tiger Nixon
-                                                </div>
-                                            </td>
-                                            <td>20 Jun 2021</td>
-                                            <td>20 Jun 2021</td>
-                                            <td>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="#"><i data-feather="edit"></i></a>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    LOL
                                 </div>
                             </div>
-
+                            <div class="card">
+                                <div class="card-body">
+                                    LOL
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    LOL
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="table_logs">
+                                    <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Classification</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2"><img class="avatar-img img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></div>
+                                                Tiger Nixon
+                                            </div>
+                                        </td>
+                                        <td>Non-Recyclable</td>
+                                        <td>August 23, 2024 8:21 AM</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
         </main>
 
@@ -189,6 +196,27 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
+    <script>
+        const videoStream = document.getElementById('video-stream');
+        const socket = new WebSocket('ws://localhost:8765');
+
+        socket.onopen = function() {
+            console.log("WebSocket connection established");
+        };
+
+        socket.onmessage = function(event) {
+            // Set the image source to the received base64 image data
+            videoStream.src = 'data:image/jpeg;base64,' + event.data;
+        };
+
+        socket.onclose = function() {
+            console.log("WebSocket connection closed");
+        };
+
+        socket.onerror = function(error) {
+            console.error("WebSocket error observed:", error);
+        };
+    </script>
 
 
 </body>
