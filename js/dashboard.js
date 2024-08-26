@@ -27,20 +27,76 @@ var opts = {
     }
 
 };
-var recycle_bin = document.getElementById('recyclable_bin'); // your canvas element
-var recycle_bin_gauge = new Gauge(recycle_bin).setOptions(opts); // create sexy gauge!
-recycle_bin_gauge.maxValue = 100; // set max gauge value
-recycle_bin_gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-recycle_bin_gauge.animationSpeed = 50; // set animation speed (32 is default value)
-recycle_bin_gauge.set(60); // set actual value
 
-var non_recycle_bin = document.getElementById('non_recyclable_bin'); // your canvas element
-var non_recycle_bin_gauge = new Gauge(non_recycle_bin).setOptions(opts); // create sexy gauge!
-non_recycle_bin_gauge.maxValue = 100; // set max gauge value
-non_recycle_bin_gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-non_recycle_bin_gauge.animationSpeed = 50; // set animation speed (32 is default value)
-non_recycle_bin_gauge.set(20); // set actual value
+
+/**
+ * Update the gauge dynamically
+ * @param non_recycle
+ * @param recycle
+ */
+function updateGauge(non_recycle = 0, recycle = 0   ) {
+
+    var recycle_bin = document.getElementById('recyclable_bin'); // your canvas element
+    var recycle_bin_gauge = new Gauge(recycle_bin).setOptions(opts); // create sexy gauge!
+    recycle_bin_gauge.maxValue = 100; // set max gauge value
+    recycle_bin_gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+    recycle_bin_gauge.set(recycle); // set actual value
+
+    var non_recycle_bin = document.getElementById('non_recyclable_bin'); // your canvas element
+    var non_recycle_bin_gauge = new Gauge(non_recycle_bin).setOptions(opts); // create sexy gauge!
+    non_recycle_bin_gauge.maxValue = 100; // set max gauge value
+    non_recycle_bin_gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+    non_recycle_bin_gauge.set(non_recycle   ); // set actual value
+
+}
+
+
+function readGaugeValue(){
+    updateGauge(0,0)
+    setInterval(() => {
+        const num1 = getRandomValue();
+        const num2 = getRandomValue();
+        updateGauge(num1, num2);
+    }, 5000);
+}
+
+function getRandomValue() {
+    return Math.floor(Math.random() * 100) + 1;
+}
+
+function liveVideoMonitoring(){
+
+    const videoStream = document.getElementById('video-stream');
+    const socket = new WebSocket('ws://localhost:8765');
+
+    socket.onopen = function() {
+        console.log("WebSocket connection established");
+    };
+
+    socket.onmessage = function(event) {
+        // Set the image source to the received base64 image data
+        videoStream.src = 'data:image/jpeg;base64,' + event.data;
+    };
+
+    socket.onclose = function() {
+        console.log("WebSocket connection closed");
+    };
+
+    socket.onerror = function(error) {
+        console.error("WebSocket error observed:", error);
+    };
+
+}
+
+
+
+function init(){
+    liveVideoMonitoring()
+    readGaugeValue()
+}
 
 
 
 const dataTable = new simpleDatatables.DataTable("#table_logs")
+
+window.onload = init;

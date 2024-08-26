@@ -33,6 +33,12 @@ class SensorManager:
         for fullIndicatorPin in self.fullIndicator.values():
             GPIO.setup(fullIndicatorPin, GPIO.OUT)
 
+    while True:
+
+        
+
+
+
 
 if __name__ == "__main__":
     # Example usage

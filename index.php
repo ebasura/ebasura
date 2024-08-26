@@ -1,10 +1,10 @@
 <?php
     include_once 'init.php';
 
-// if (!$login->isLoggedIn()) {
-//     header("Location: login.php");
-//     die();
-// }
+ if (!$login->isLoggedIn()) {
+     header("Location: login.php");
+     die();
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +45,47 @@
             left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        /* Card styling */
+        .rpi {
+            width: 150px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            margin: 8px;
+        }
+
+        .card-body {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .card-body h6 {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        /* Progress bar container */
+        .progress {
+            background-color: #f1f1f1;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 20px;
+            width: 100%;
+        }
+
+        /* Progress bar itself */
+        .progress-bar {
+            background-color: #4caf50;
+            height: 100%;
+            text-align: center;
+            color: #fff;
+            line-height: 20px; /* vertically centers the text */
+            transition: width 0.4s ease;
         }
 
     </style>
@@ -119,24 +160,35 @@
 
                     <div class="col-xl-12 mb-2">
                         <div class="d-flex justify-content-center">
-                            <div class="card">
-                               <div class="card-body">
-                                   LOL
-                               </div>
-                            </div>
-                            <div class="card">
+                            <div class="card rpi">
                                 <div class="card-body">
-                                    LOL
+                                    <h6>CPU Usage</h6>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 25%;">25%</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card">
+
+                            <div class="card rpi">
                                 <div class="card-body">
-                                    LOL
+                                    <h6>RAM Usage</h6>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 25%;">25%</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card">
+                            <div class="card rpi">
                                 <div class="card-body">
-                                    LOL
+                                    <h6>Temperature</h6>
+                                    36
+                                </div>
+                            </div>
+                            <div class="card rpi">
+                                <div class="card-body">
+                                    <h6>Total Uptime</h6>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 25%;">25%</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -196,28 +248,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
-    <script>
-        const videoStream = document.getElementById('video-stream');
-        const socket = new WebSocket('ws://localhost:8765');
-
-        socket.onopen = function() {
-            console.log("WebSocket connection established");
-        };
-
-        socket.onmessage = function(event) {
-            // Set the image source to the received base64 image data
-            videoStream.src = 'data:image/jpeg;base64,' + event.data;
-        };
-
-        socket.onclose = function() {
-            console.log("WebSocket connection closed");
-        };
-
-        socket.onerror = function(error) {
-            console.error("WebSocket error observed:", error);
-        };
-    </script>
-
 
 </body>
 </html>

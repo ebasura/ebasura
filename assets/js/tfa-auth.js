@@ -106,7 +106,7 @@ $(document).ready(function(e) {
 				password: password,
 			},
 			beforeSend: function() {
-				$('#disable2faBtn').html('<i class="fa fa-spinner fa-spin"></i> &nbsp; Wait...')
+				$('#disable2faBtn').html('<i class="fa fa-spinner fa-spin"></i> &nbsp; Please wait...')
 			},
 			success: function(response) {
 				var res = JSON.parse(response);
