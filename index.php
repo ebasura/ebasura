@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
                                 <div class="video-container">
-                                    <img id="video-stream" width="640" height="250" alt="Video Stream" class="img-thumbnail">
+                                    <img id="video-stream"  alt="Video Stream" class="img-thumbnail">
                                 </div>
                             </div>
                         </a>
@@ -193,40 +193,52 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="row">
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 mb-2">
                         <div class="card">
+                            <div class="card-header bg-transparent">
+                                <div class="d-flex float-end w-25">
+                                    <select id="monthly_log_option" class="form-control">
+                                        <option selected disabled>Choose Year</option>
+                                        <option>2024</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="card-body">
-                                <table id="table_logs">
-                                    <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Classification</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar me-2"><img class="avatar-img img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></div>
-                                                Tiger Nixon
-                                            </div>
-                                        </td>
-                                        <td>Non-Recyclable</td>
-                                        <td>August 23, 2024 8:21 AM</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div id="monthly_logs_chart"></div>
                             </div>
                         </div>
-
                     </div>
+
+
+                    <div class="col-lg-8 mb-2">
+
+                        <div class="col-lg-12 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    e
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    e
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                e
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
         </main>
 
@@ -246,6 +258,7 @@
     <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
 

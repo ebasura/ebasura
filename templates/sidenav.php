@@ -21,7 +21,7 @@
                     Dashboard
                     <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
+                <div class="collapsed" id="collapseDashboards" data-bs-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                         <a class="nav-link" href="index.php">
                             Overview
@@ -33,10 +33,6 @@
                 <a class="nav-link" href="analytics.php">
                     <div class="nav-link-icon"><i data-feather="bar-chart-2"></i></div>
                     Analytics
-                </a>
-                <a class="nav-link" href="historical-data.php">
-                    <div class="nav-link-icon"><i data-feather="file-text"></i></div>
-                    Historical Data
                 </a>
                 <a class="nav-link" href="reports.php">
                     <div class="nav-link-icon"><i data-feather="book"></i></div>
