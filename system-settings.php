@@ -19,11 +19,6 @@ if (!$login->isLoggedIn()) {
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
-    <style>
-        .responsive-canvas {
-            width: 100%;
-        }
-    </style>
 </head>
 <body class="nav-fixed">
 
@@ -32,16 +27,15 @@ if (!$login->isLoggedIn()) {
     <?php include __DIR__ . '/templates/sidenav.php'; ?>
     <div id="layoutSidenav_content">
         <main>
-            <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-                <div class="container-xl px-4">
-                    <div class="page-header-content pt-4">
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-auto mt-4">
+            <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                <div class="container-fluid px-4">
+                    <div class="page-header-content">
+                        <div class="row align-items-center justify-content-between pt-3">
+                            <div class="col-auto mb-3">
                                 <h1 class="page-header-title">
-                                    <div class="page-header-icon"><i data-feather="activity"></i></div>
-                                    Welcome to E-Basura
+                                    <div class="page-header-icon"><i class="fa-light fa-monitor-waveform"></i></div>
+                                    System Setting
                                 </h1>
-                                <div class="page-header-subtitle">A Web Monitoring System</div>
                             </div>
                         </div>
                     </div>
@@ -49,7 +43,13 @@ if (!$login->isLoggedIn()) {
             </header>
 
             <!-- Main page content-->
-            <div class="container-xl px-4 mt-n10">
+            <div class="container px-4">
+                <div class="card">
+                    <div class="card-body">
+
+
+                    </div>
+                </div>
             </div>
         </main>
 

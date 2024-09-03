@@ -21,6 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css" integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .responsive-canvas {
             width: 100%;
@@ -122,7 +123,7 @@
                             <div class="card-body d-flex justify-content-center flex-column">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="me-3">
-                                        <h5>Live Camera Feed</h5>
+                                        <h5>Real Time Monitoring</h5>
                                     </div>
                                 </div>
                                 <div class="video-container">
@@ -158,41 +159,7 @@
                         </a>
                     </div>
 
-                    <div class="col-xl-12 mb-2">
-                        <div class="d-flex justify-content-center">
-                            <div class="card rpi">
-                                <div class="card-body">
-                                    <h6>CPU Usage</h6>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 25%;">25%</div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="card rpi">
-                                <div class="card-body">
-                                    <h6>RAM Usage</h6>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 25%;">25%</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card rpi">
-                                <div class="card-body">
-                                    <h6>Temperature</h6>
-                                    36
-                                </div>
-                            </div>
-                            <div class="card rpi">
-                                <div class="card-body">
-                                    <h6>Total Uptime</h6>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 25%;">25%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="row">
@@ -218,25 +185,85 @@
 
                         <div class="col-lg-12 mb-2">
                             <div class="card">
+                                <div class="card-header">Logs</div>
                                 <div class="card-body">
-                                    e
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover" id="logs_table">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Image</th>
+                                                <th>Trash Type</th>
+                                                <th>Date Created</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td class="col-4">
+                                                    <img id="image" class="img-thumbnail w-25" src="assets/maria-kujou-roshidere.gif" alt="Trash Image">
+                                                </td>
+                                                <td><div class="badge bg-primary rounded-pill">Recyclable</div></td>
+                                                <td>2024-09-03</td>
+                                                <td>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-regular fa-trash-can"></i></button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12 mb-2">
                             <div class="card">
                                 <div class="card-body">
-                                    e
+                                    <div id="daily_logs_chart"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 mb-2">
-                        <div class="card">
-                            <div class="card-body">
-                                e
+                        <!-- Project tracker card example-->
+                        <div class="card card-header-actions mb-4">
+                            <div class="card-header">
+                                System Information
                             </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between small mb-1">
+                                    <div class="fw-bold">Kernel Version</div>
+                                    <div class="small">Linux</div>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-between small mb-1">
+                                    <div class="fw-bold">Uptime</div>
+                                    <div class="small">1 hours</div>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-between small mb-1">
+                                    <div class="fw-bold">Temperature</div>
+                                    <div class="small">40</div>
+                                </div>
+
+                                <hr class="p-1">
+                                <!-- Progress item 1-->
+                                <div class="d-flex align-items-center justify-content-between small mb-1">
+                                    <div class="fw-bold">CPU Usage</div>
+                                    <div class="small">25%</div>
+                                </div>
+                                <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                <!-- Progress item 2-->
+                                <div class="d-flex align-items-center justify-content-between small mb-1">
+                                    <div class="fw-bold">RAM Usage</div>
+                                    <div class="small">50%</div>
+                                </div>
+                                <div class="progress mb-3"><div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div></div>
+                              </div>
                         </div>
+                    </div>
                     </div>
 
                 </div>
@@ -259,8 +286,21 @@
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js" integrity="sha512-EC3CQ+2OkM+ZKsM1dbFAB6OGEPKRxi6EDRnZW9ys8LghQRAq6cXPUgXCCujmDrXdodGXX9bqaaCRtwj4h4wgSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
+    <script>
+        const dataTable = new simpleDatatables.DataTable("#logs_table");
+
+        const viewer = new Viewer(document.getElementById('image'), {
+            inline: false,
+            toolbar: false,
+            viewed() {
+                viewer.zoomTo(1);
+            },
+        });
+
+    </script>
 
 </body>
 </html>
