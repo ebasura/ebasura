@@ -1,10 +1,9 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from threading import Thread
+from app import system_monitor, live_monitoring
 import asyncio
-from app import system_monitor
-
-from app import live_monitoring
+import random
 
 api_server = Flask(__name__)
 CORS(api_server)
@@ -36,6 +35,16 @@ def system_info():
         "temperature": monitor.get_rpi_temperature_from_file()
     }
     return jsonify(info)
+
+
+@api_server.route('/gauge', methods=['GET'])
+def gauge():
+    gauge_values = {
+        "recyclable_bin": random.randint(1, 100),
+        "non_recyclable_bin": random.randint(1, 100),
+
+    }
+    return jsonify(gauge_values)
 
 
 if __name__ == "__main__":

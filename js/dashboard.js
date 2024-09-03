@@ -56,10 +56,24 @@ function updateGauge(non_recycle = 0, recycle = 0   ) {
  */
 function readGaugeValue(){
     updateGauge(0,0)
-    setInterval(() => {
-        const num1 = getRandomValue();
-        const num2 = getRandomValue();
-        updateGauge(num1, num2);
+    setInterval(async () => {
+
+        try {
+            const apiBaseUrl = bitress.Http.system_monitoring; // Ensure this variable is properly set
+            const response = await fetch(`${apiBaseUrl}/gauge`); // Use template literal with `${}`
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+
+            updateGauge(data.recyclable_bin, data.non_recyclable_bin);
+
+
+        } catch (error) {
+            console.error('Error fetching system info:', error);
+        }
+
+
     }, 5000);
 }
 
@@ -108,6 +122,7 @@ function systemMonitoring() {
             document.getElementById('os-version').textContent = data.os;
             document.getElementById('kernel-version').textContent = data.kernel_version;
             document.getElementById('uptime').textContent = data.uptime;
+            document.getElementById('temperature').textContent = data.temperature;
             document.getElementById('cpu-usage').textContent = `${data.cpu_usage}%`;
             document.getElementById('cpu-progress').style.width = `${data.cpu_usage}%`;
             document.getElementById('ram-usage').textContent = `${data.memory_usage.percent}%`;

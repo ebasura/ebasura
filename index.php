@@ -248,6 +248,11 @@
                                     <div id="uptime" class="small">Loading...</div>
                                 </div>
 
+                                <div class="d-flex align-items-center justify-content-between small mb-1">
+                                    <div class="fw-bold">Temperature</div>
+                                    <div id="temperature" class="small">Loading...</div>
+                                </div>
+
                                 <hr class="p-1">
 
                                 <!-- Progress item 1-->
