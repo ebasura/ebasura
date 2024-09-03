@@ -74,7 +74,7 @@ async def video_stream(websocket, path):
                 predicted_label = "Unknown"
 
             # Display the frame with predicted label
-            cv2.putText(frame, predicted_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            # cv2.putText(frame, predicted_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             # cv2.imshow('Camera', frame)
 
             # Encode the frame in JPEG format
