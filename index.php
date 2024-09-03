@@ -199,8 +199,13 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+
+                                            <?php
+                                            for ($i = 0; $i <= 1000; $i++):
+                                            ?>
+
                                             <tr>
-                                                <td>1</td>
+                                                <td><?= $i ?></td>
                                                 <td class="col-4">
                                                     <img id="image" class="img-thumbnail w-25" src="assets/maria-kujou-roshidere.gif" alt="Trash Image">
                                                 </td>
@@ -211,6 +216,9 @@
                                                     <button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-regular fa-trash-can"></i></button>
                                                 </td>
                                             </tr>
+                                            <?php
+                                            endfor;
+                                            ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -226,7 +234,19 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="col-lg-4 mb-2">
+
+                        <div class="card card-header-actions mb-4">
+                            <div class="card-header">
+                                Trash Bin Weights
+                            </div>
+                            <div class="card-body">
+                                <div id="trash_bin_weights"></div>
+                            </div>
+                        </div>
+
                         <!-- Project tracker card example-->
                         <div class="card card-header-actions mb-4">
                             <div class="card-header">

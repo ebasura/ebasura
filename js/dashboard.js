@@ -74,12 +74,10 @@ function readGaugeValue(){
         }
 
 
-    }, 5000);
+    }, 1000);
 }
 
-function getRandomValue() {
-    return Math.floor(Math.random() * 100) + 1;
-}
+
 
 function liveVideoMonitoring(){
 
@@ -250,6 +248,50 @@ var options1 = {
 
 var chart = new ApexCharts(document.querySelector("#daily_logs_chart"), options1);
 chart.render();
+
+
+
+var options2 = {
+    series: [{
+        data: [100, 50]
+    }],
+    chart: {
+        height: 250,
+        type: 'bar',
+        events: {
+            click: function(chart, w, e) {
+                // console.log(chart, w, e)
+            }
+        }
+    },
+    colors: ['#77B6EA', '#545454'],
+    plotOptions: {
+        bar: {
+            columnWidth: '45%',
+            distributed: true,
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    legend: {
+        show: false
+    },
+    xaxis: {
+        categories: [ 'Recyclable', 'Non Recyclable'
+        ],
+        labels: {
+            style: {
+                colors: ['#77B6EA', '#545454'],
+                fontSize: '12px'
+            }
+        }
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#trash_bin_weights"), options2);
+chart.render();
+
 function init(){
     liveVideoMonitoring()
     systemMonitoring()

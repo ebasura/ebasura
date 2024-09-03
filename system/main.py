@@ -42,7 +42,6 @@ def gauge():
     gauge_values = {
         "recyclable_bin": random.randint(1, 100),
         "non_recyclable_bin": random.randint(1, 100),
-
     }
     return jsonify(gauge_values)
 
