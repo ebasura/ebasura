@@ -135,7 +135,7 @@ function systemMonitoring() {
 }
 
 
-var options = {
+var monthly_waste_segregated = {
     series: [
         {
             name: "Recyclable",
@@ -207,7 +207,7 @@ var options = {
     }
 };
 
-var chart = new ApexCharts(document.querySelector("#monthly_logs_chart"), options);
+var chart = new ApexCharts(document.querySelector("#monthly_logs_chart"), monthly_waste_segregated);
 chart.render();
 
 

@@ -1,3 +1,4 @@
-/vendor/
+vendor/
 system/.env
+.env
 system/.venv

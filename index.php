@@ -201,23 +201,31 @@
                                             <tbody>
 
                                             <?php
-                                            for ($i = 0; $i <= 1000; $i++):
-                                            ?>
+                                            $basura = new Basura();
+                                            $trash_data = $basura->get();
 
+                                            echo json_encode($trash_data);
+                                            foreach ($trash_data as $row):
+                                            ?>
                                             <tr>
-                                                <td><?= $i ?></td>
+                                                <td><?= htmlentities($row['waste_data_id']) ?></td>
                                                 <td class="col-4">
-                                                    <img id="image" class="img-thumbnail w-25" src="assets/maria-kujou-roshidere.gif" alt="Trash Image">
+                                                    <img id="image" class="img-thumbnail w-25" src="<?= $row['image_url'] ?>" alt="Trash Image">
                                                 </td>
-                                                <td><div class="badge bg-primary rounded-pill">Recyclable</div></td>
+                                                <?php if($row['name'] == 'Recyclable'): ?>
+                                                <td><div class="badge bg-primary rounded-pill"><?= $row['name'] ?></div></td>
+                                                <?php else: ?>
+                                                <td><div class="badge bg-secondary rounded-pill"><?= $row['name'] ?></div></td>
+                                                <?php endif; ?>
                                                 <td>2024-09-03</td>
                                                 <td>
                                                     <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                                                     <button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-regular fa-trash-can"></i></button>
                                                 </td>
                                             </tr>
+
                                             <?php
-                                            endfor;
+                                            endforeach;
                                             ?>
                                             </tbody>
                                         </table>
