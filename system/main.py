@@ -40,7 +40,7 @@ def system_info():
 
 @api_server.route('/detection', methods=['GET'])
 def detection():
-    return jsonify(monitoring.detection())
+    return monitoring.detection()
 
 
 @api_server.route('/gauge', methods=['GET'])
