@@ -24,6 +24,8 @@ output_details = interpreter.get_output_details()
 
 predicted_label = ""
 frame_encoded = ""
+
+
 # Function to preprocess a frame from the camera
 def preprocess_frame(frame):
     frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -72,7 +74,7 @@ async def video_stream(websocket, path):
                 predicted_label = "Unknown"
 
             # Display the frame with predicted label
-            # cv2.putText(frame, predicted_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            cv2.putText(frame, predicted_label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             # cv2.imshow('Camera', frame)
 
             # Encode the frame in JPEG format
