@@ -23,7 +23,6 @@ input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
 predicted_label = ""
-frame_encoded = ""
 
 
 # Function to preprocess a frame from the camera
@@ -47,7 +46,7 @@ def run_inference(frame):
 
 
 async def video_stream(websocket, path):
-    global predicted_label, frame_encoded
+    global predicted_label
 
     # Initialize the webcam (0 is the default camera)
     cap = cv2.VideoCapture(0)
@@ -102,8 +101,7 @@ class LiveMonitoring:
 
     def detection(self):
         data = {
-            "predicted_label": predicted_label,
-            "image": frame_encoded
+            "predicted_label": predicted_label
         }
         return data
 

@@ -123,11 +123,12 @@
                             <div class="card-body d-flex justify-content-center flex-column">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="me-3">
-                                        <h5>Real Time Monitoring</h5>
+                                        <h5>Real Time Monitoring  </h5>
                                     </div>
                                 </div>
                                 <div class="video-container">
-                                    <img id="video-stream"  alt="Video Stream" class="img-thumbnail">
+                                    <img id="video-stream"  alt="Video Stream" class="img-thumbnail mb-1">
+                                    <h6 class="mb-0">Prediction:</h6><span class="text-xs" id="predicted_category">Loading...</span>
                                 </div>
                             </div>
                         </a>

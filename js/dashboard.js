@@ -79,6 +79,7 @@ function readGaugeValue(){
 
 
 
+
 function liveVideoMonitoring(){
 
     const videoStream = document.getElementById('video-stream');
@@ -100,6 +101,26 @@ function liveVideoMonitoring(){
     socket.onerror = function(error) {
         console.error("WebSocket error observed:", error);
     };
+
+
+    setInterval(async () => {
+
+        try {
+            const apiBaseUrl = bitress.Http.system_monitoring; // Ensure this variable is properly set
+            const response = await fetch(`${apiBaseUrl}/detection`); // Use template literal with `${}`
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+
+            // Update HTML elements with fetched data
+            document.getElementById('predicted_category').textContent = data.predicted_label;
+        } catch (error) {
+            console.error('Error fetching system info:', error);
+        }
+
+    }, 30)
+
 
 }
 

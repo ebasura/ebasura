@@ -50,12 +50,12 @@ if (!$login->isLoggedIn()) {
             <!-- Main page content-->
             <div class="container px-4">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body   text-center ">
                         <div class="video-container">
                             <img id="video-stream"  alt="Video Stream" class="img-fluid rounded mx-auto d-block">
-                        </div>
-                        <div class="d-flex align-items-center">
-                           <p>Predicted Category <br> detected</p>
+                            <h3 class="mt-2">Predicted Category</h3>
+                                <span id="predicted_category">test</span>
+
                         </div>
                     </div>
                 </div>
@@ -81,5 +81,7 @@ if (!$login->isLoggedIn()) {
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
+    <script>
+    </script>
 </body>
 </html>
