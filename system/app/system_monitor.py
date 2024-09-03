@@ -50,7 +50,7 @@ class SystemMonitor:
         os_info = platform.system()  # e.g., 'Linux', 'Windows', 'Darwin' for macOS
         return os_info
 
-    def get_rpi_temperature_from_file():
+    def get_rpi_temperature_from_file(self):
         try:
             # Open the temperature file
             with open('/sys/class/thermal/thermal_zone0/temp', 'r') as file:
