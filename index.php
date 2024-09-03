@@ -234,34 +234,41 @@
                             </div>
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between small mb-1">
+                                    <div class="fw-bold">Operating System</div>
+                                    <div id="os-version" class="small">Loading...</div>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-between small mb-1">
                                     <div class="fw-bold">Kernel Version</div>
-                                    <div class="small">Linux</div>
+                                    <div id="kernel-version" class="small">Loading...</div>
                                 </div>
 
                                 <div class="d-flex align-items-center justify-content-between small mb-1">
                                     <div class="fw-bold">Uptime</div>
-                                    <div class="small">1 hours</div>
-                                </div>
-
-                                <div class="d-flex align-items-center justify-content-between small mb-1">
-                                    <div class="fw-bold">Temperature</div>
-                                    <div class="small">40</div>
+                                    <div id="uptime" class="small">Loading...</div>
                                 </div>
 
                                 <hr class="p-1">
+
                                 <!-- Progress item 1-->
                                 <div class="d-flex align-items-center justify-content-between small mb-1">
                                     <div class="fw-bold">CPU Usage</div>
-                                    <div class="small">25%</div>
+                                    <div id="cpu-usage" class="small">Loading...</div>
                                 </div>
-                                <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                <div class="progress mb-3">
+                                    <div id="cpu-progress" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+
                                 <!-- Progress item 2-->
                                 <div class="d-flex align-items-center justify-content-between small mb-1">
                                     <div class="fw-bold">RAM Usage</div>
-                                    <div class="small">50%</div>
+                                    <div id="ram-usage" class="small">Loading...</div>
                                 </div>
-                                <div class="progress mb-3"><div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div></div>
-                              </div>
+                                <div class="progress mb-3">
+                                    <div id="ram-progress" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     </div>

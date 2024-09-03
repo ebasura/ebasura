@@ -92,6 +92,35 @@ function liveVideoMonitoring(){
 }
 
 
+function systemMonitoring() {
+
+    setInterval(async () => {
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/system-info');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+
+            // Update HTML elements with fetched data
+            document.getElementById('os-version').textContent = data.os;
+            document.getElementById('kernel-version').textContent = data.kernel_version;
+            document.getElementById('uptime').textContent = data.uptime;
+            document.getElementById('cpu-usage').textContent = `${data.cpu_usage}%`;
+            document.getElementById('cpu-progress').style.width = `${data.cpu_usage}%`;
+            document.getElementById('ram-usage').textContent = `${data.memory_usage.percent}%`;
+            document.getElementById('ram-progress').style.width = `${data.memory_usage.percent}%`;
+        } catch (error) {
+            console.error('Error fetching system info:', error);
+        }
+
+    }, 3000)
+
+
+}
+
+
 var options = {
     series: [
         {
@@ -207,6 +236,7 @@ var chart = new ApexCharts(document.querySelector("#daily_logs_chart"), options1
 chart.render();
 function init(){
     liveVideoMonitoring()
+    systemMonitoring()
     readGaugeValue()
 }
 

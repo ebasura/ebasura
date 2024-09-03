@@ -1,47 +1,43 @@
-import cv2
+from flask import Flask, jsonify
+from flask_cors import CORS
+from threading import Thread
 import asyncio
-import websockets
-import base64
+from app import system_monitor
+
+from app import live_monitoring
+
+api_server = Flask(__name__)
+CORS(api_server)
 
 
-async def video_stream(websocket, path):
-    # Initialize the webcam (0 is the default camera)
-    cap = cv2.VideoCapture(0)
-
-    if not cap.isOpened():
-        print("Error: Could not open video device.")
-        return
-
-    try:
-        while True:
-            # Capture frame-by-frame
-            ret, frame = cap.read()
-            if not ret:
-                break
-
-            # Encode the frame in JPEG format
-            _, buffer = cv2.imencode('.jpg', frame)
-
-            # Convert to base64 to send over WebSocket
-            frame_encoded = base64.b64encode(buffer).decode('utf-8')
-
-            # Send the frame over the WebSocket
-            await websocket.send(frame_encoded)
-
-            # Small delay to control frame rate
-            await asyncio.sleep(0.033)  # ~30 FPS
-    except Exception as e:
-        print(f"Error: {e}")
-    finally:
-        cap.release()
+def run_flask_app():
+    api_server.run(host="0.0.0.0", port=5000)
 
 
-async def main():
-    async with websockets.serve(video_stream, "localhost", 8765):
-        print("WebSocket server started at ws://localhost:8765")
-        await asyncio.Future()  # Run forever
+async def start_live_monitoring():
+    monitoring = live_monitoring.LiveMonitoring(host="localhost", port=8765)
+    await monitoring.start()
+
+
+# Define Flask route for system information
+@api_server.route('/system-info', methods=['GET'])
+def system_info():
+    monitor = system_monitor.SystemMonitor()
+    info = {
+        "os": monitor.get_os_info(),
+        "kernel_version": monitor.get_kernel_version(),
+        "uptime": monitor.get_system_uptime(),
+        "cpu_usage": monitor.get_cpu_usage(),
+        "memory_usage": monitor.get_memory_usage(),
+        "disk_usage": monitor.get_disk_usage(),
+    }
+    return jsonify(info)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    # Start Flask app in a separate thread
+    flask_thread = Thread(target=run_flask_app)
+    flask_thread.start()
 
+    # Run the asyncio event loop in the main thread
+    asyncio.run(start_live_monitoring())
