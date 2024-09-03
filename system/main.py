@@ -15,7 +15,10 @@ def run_flask_app():
 
 
 async def start_live_monitoring():
-    monitoring = live_monitoring.LiveMonitoring(host="0.0.0.0", port=8765)
+    monitoring = live_monitoring.LiveMonitoring(
+        host=" 0.0.0.0",
+        port=8765
+    )
     await monitoring.start()
 
 
