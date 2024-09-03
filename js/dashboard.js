@@ -70,7 +70,7 @@ function getRandomValue() {
 function liveVideoMonitoring(){
 
     const videoStream = document.getElementById('video-stream');
-    const socket = new WebSocket('ws://localhost:8765');
+    const socket = new WebSocket(bitress.Http.live_monitoring);
 
     socket.onopen = function() {
         console.log("WebSocket connection established");
@@ -97,7 +97,8 @@ function systemMonitoring() {
     setInterval(async () => {
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/system-info');
+            const apiBaseUrl = bitress.Http.system_monitoring; // Ensure this variable is properly set
+            const response = await fetch(`${apiBaseUrl}/system-info`); // Use template literal with `${}`
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -115,7 +116,7 @@ function systemMonitoring() {
             console.error('Error fetching system info:', error);
         }
 
-    }, 3000)
+    }, 1000)
 
 
 }

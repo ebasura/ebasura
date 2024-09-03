@@ -15,7 +15,7 @@ def run_flask_app():
 
 
 async def start_live_monitoring():
-    monitoring = live_monitoring.LiveMonitoring(host="localhost", port=8765)
+    monitoring = live_monitoring.LiveMonitoring(host=" 0.0.0.0", port=8765)
     await monitoring.start()
 
 
@@ -30,6 +30,7 @@ def system_info():
         "cpu_usage": monitor.get_cpu_usage(),
         "memory_usage": monitor.get_memory_usage(),
         "disk_usage": monitor.get_disk_usage(),
+        "temperature": monitor.get_rpi_temperature_from_file()
     }
     return jsonify(info)
 

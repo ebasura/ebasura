@@ -5,7 +5,10 @@ var bitress = {
     Util: {
         dataTables: {}
     },
-    Http: {}
+    Http: {
+        live_monitoring: 'ws://192.168.0.108:8765',
+        system_monitoring: 'http://192.168.0.108:5000'
+    }
 };
 
 
