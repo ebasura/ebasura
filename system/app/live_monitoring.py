@@ -7,8 +7,8 @@ import websockets
 import base64
 
 # Path to the TensorFlow Lite model and labels file
-model_path = "../models/vww_96_grayscale_quantized.tflite"
-labels_path = "../models/labels.txt"
+model_path = "models/vww_96_grayscale_quantized.tflite"
+labels_path = "models/labels.txt"
 
 # Load the labels
 with open(labels_path, 'r') as f:
