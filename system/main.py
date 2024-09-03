@@ -8,16 +8,17 @@ import random
 api_server = Flask(__name__)
 CORS(api_server)
 
+monitoring = live_monitoring.LiveMonitoring(
+    host="0.0.0.0",
+    port=8765
+)
+
 
 def run_flask_app():
     api_server.run(host="0.0.0.0", port=5000)
 
 
 async def start_live_monitoring():
-    monitoring = live_monitoring.LiveMonitoring(
-        host="0.0.0.0",
-        port=8765
-    )
     await monitoring.start()
 
 
@@ -36,6 +37,12 @@ def system_info():
     }
     return jsonify(info)
 
+
+@api_server.route('/detected', methods=['GET'])
+def detected():
+    return jsonify({
+        "detected": monitoring.detection()
+    })
 
 @api_server.route('/gauge', methods=['GET'])
 def gauge():

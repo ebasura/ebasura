@@ -22,6 +22,7 @@ interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
+predicted_label = ""
 
 # Function to preprocess a frame from the camera
 def preprocess_frame(frame):
@@ -44,6 +45,8 @@ def run_inference(frame):
 
 
 async def video_stream(websocket, path):
+    global predicted_label
+
     # Initialize the webcam (0 is the default camera)
     cap = cv2.VideoCapture(0)
 
@@ -94,6 +97,9 @@ class LiveMonitoring:
     def __init__(self, host, port):
         self.host = host
         self.port = port
+
+    def detection(self):
+        return predicted_label
 
     async def start(self):
         async with websockets.serve(video_stream, self.host, self.port):
