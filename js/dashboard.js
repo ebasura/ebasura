@@ -123,6 +123,8 @@ function systemMonitoring() {
             document.getElementById('temperature').textContent = data.temperature;
             document.getElementById('cpu-usage').textContent = `${data.cpu_usage}%`;
             document.getElementById('cpu-progress').style.width = `${data.cpu_usage}%`;
+            document.getElementById('disk-usage').textContent = `${data.disk_usage.percent}%`;
+            document.getElementById('disk-progress').style.width = `${data.disk_usage.percent}%`;
             document.getElementById('ram-usage').textContent = `${data.memory_usage.percent}%`;
             document.getElementById('ram-progress').style.width = `${data.memory_usage.percent}%`;
         } catch (error) {

@@ -38,11 +38,10 @@ def system_info():
     return jsonify(info)
 
 
-@api_server.route('/detected', methods=['GET'])
-def detected():
-    return jsonify({
-        "detected": monitoring.detection()
-    })
+@api_server.route('/detection', methods=['GET'])
+def detection():
+    return jsonify(monitoring.detection())
+
 
 @api_server.route('/gauge', methods=['GET'])
 def gauge():

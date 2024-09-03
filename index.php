@@ -204,7 +204,6 @@
                                             $basura = new Basura();
                                             $trash_data = $basura->get();
 
-                                            echo json_encode($trash_data);
                                             foreach ($trash_data as $row):
                                             ?>
                                             <tr>
@@ -299,6 +298,15 @@
                                 </div>
                                 <div class="progress mb-3">
                                     <div id="ram-progress" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+
+                                <!-- Progress item 2-->
+                                <div class="d-flex align-items-center justify-content-between small mb-1">
+                                    <div class="fw-bold">Disk Usage</div>
+                                    <div id="disk-usage" class="small">Loading...</div>
+                                </div>
+                                <div class="progress mb-3">
+                                    <div id="disk-progress" class="progress-bar bg-secondary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
 

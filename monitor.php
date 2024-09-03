@@ -54,6 +54,9 @@ if (!$login->isLoggedIn()) {
                         <div class="video-container">
                             <img id="video-stream"  alt="Video Stream" class="img-fluid rounded mx-auto d-block">
                         </div>
+                        <div class="d-flex align-items-center">
+                           <p>Predicted Category <br> detected</p>
+                        </div>
                     </div>
                 </div>
             </div>
