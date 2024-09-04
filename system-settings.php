@@ -44,12 +44,53 @@ if (!$login->isLoggedIn()) {
 
             <!-- Main page content-->
             <div class="container px-4">
-                <div class="card">
-                    <div class="card-body">
+               <div class="row">
+                   <div class="col-lg-8">
+                       <div class="card card-header-actions mb-4">
+                           <div class="card-header">
+                               System Configuration
+<!--                               <div class="form-check form-switch">-->
+<!--                                   <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" checked="" />-->
+<!--                                   <label class="form-check-label" for="flexSwitchCheckChecked"></label>-->
+<!--                               </div>-->
+                           </div>
+                           <div class="card-body">
+                               <form>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="mb-3">
+                                              <label class="small mb-1" for="app_name">App Name</label>
+                                              <input class="form-control" id="app_name" type="text" placeholder="Application Name" value="" />
+                                          </div>
+                                          <div class="mb-3">
+                                              <label class="small mb-1" for="app_version">App Version</label>
+                                              <input class="form-control" id="app_version" type="text" placeholder="Application Name" value="" />
+                                          </div>
 
+                                      </div>
+                                  </div>
+                               </form>
+                           </div>
+                       </div>
 
-                    </div>
-                </div>
+                   </div>
+
+                   <div class="col-lg-4">
+                       <div class="card">
+                           <div class="card-header">Notification Preferences</div>
+                           <div class="card-body">
+                               <form>
+                                   <!-- Form Group (notification preference checkboxes)-->
+                                   <div class="form-check mb-2">
+                                       <input class="form-check-input" id="checkAutoGroup" type="checkbox"  />
+                                       <label class="form-check-label" for="checkAutoGroup">Receive alerts when bin is full. </label>
+                                   </div>
+
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+               </div>
             </div>
         </main>
 

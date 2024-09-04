@@ -19,3 +19,6 @@ $db = Database::getInstance();
 
 $login = new Login();
 
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
