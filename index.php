@@ -217,7 +217,7 @@
                                                 <?php else: ?>
                                                 <td><div class="badge bg-secondary rounded-pill"><?= $row['name'] ?></div></td>
                                                 <?php endif; ?>
-                                                <td>2024-09-03</td>
+                                                <td><?= $row['timestamp'] ?></td>
                                                 <td>
                                                     <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                                                     <button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-regular fa-trash-can"></i></button>
