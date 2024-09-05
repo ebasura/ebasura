@@ -50,9 +50,10 @@ def gauge():
         "non_recyclable_bin": random.randint(1, 100),
     }
     return jsonify(gauge_values)
+    
 
-@api_server.route('/'):
-def ok():
+@api_server.route('/', methods=['GET'])
+def home():
     return jsonify({
         "author": "bitress",
         "status": "okay"
