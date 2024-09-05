@@ -8,18 +8,6 @@ if (!$login->isLoggedIn()) {
 
     $user = new User();
     $userDetail = $user->getUserDetails();
-
-    if(!empty($userDetail['birthdate'])){
-
-        $birthyear = date('Y', strtotime($userDetail['birthdate']));
-        $birthmonth = date('n', strtotime($userDetail['birthdate']));
-        $birthday = date('j', strtotime($userDetail['birthdate']));
-    } else {
-        $birthmonth = 0;
-        $birthyear = 0;
-        $birthday = 0;
-    }
-
 }
 
 ?>
@@ -35,9 +23,12 @@ if (!$login->isLoggedIn()) {
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
+    <script>
+        var id = <?= $userDetail['user_id']; ?>
+    </script>
 </head>
 <body class="nav-fixed">
 
@@ -280,7 +271,6 @@ if (!$login->isLoggedIn()) {
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
-    <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
     <script src="js/dashboard.js"></script>
     <script src="assets/js/sha512.min.js"></script>
     <script src="assets/js/index.js"></script>

@@ -1,7 +1,10 @@
 <?php
 
-require_once 'config/Configuration.php';
 include_once __DIR__ .'/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+require_once 'config/Configuration.php';
 
 spl_autoload_register(function ($class){
 
@@ -20,5 +23,8 @@ $db = Database::getInstance();
 $login = new Login();
 
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+
+if ($login->isLoggedIn()){
+    $user = new User();
+    $u = $user->getUserDetails();
+}

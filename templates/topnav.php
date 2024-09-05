@@ -101,13 +101,13 @@
         </li>
         <!-- User Dropdown-->
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></a>
+            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="<?= $u['avatar']; ?>" /></a>
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 <h6 class="dropdown-header d-flex align-items-center">
-                    <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
+                    <img class="dropdown-user-img" src="<?= $u['avatar']; ?>" />
                     <div class="dropdown-user-details">
-                        <div class="dropdown-user-details-name">Valerie Luna</div>
-                        <div class="dropdown-user-details-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f88e948d9699b8999794d69b9795">[email&#160;protected]</a></div>
+                        <div class="dropdown-user-details-name">@<?= $u['username']; ?></div>
+                        <div class="dropdown-user-details-email"><a href="<?= $u['email']; ?>"><?= $u['email']; ?></a></div>
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>

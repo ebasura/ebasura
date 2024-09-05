@@ -67,7 +67,7 @@
             {
                 $extension = explode('.', $file['name']);
                 $new_name = self::generateKey() . '.' . $extension[1];
-                $destination = '../uploads/avatars/' . $new_name;
+                $destination = 'uploads/avatars/' . $new_name;
                 move_uploaded_file($file['tmp_name'], $destination);
                 return $new_name;
             }
