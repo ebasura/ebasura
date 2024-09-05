@@ -109,8 +109,14 @@ if (!$login->isLoggedIn()) {
                    </div>
 
                    <div class="col-lg-4">
-                       <div class="card mb-4">
-                           <div class="card-header">Notification Preferences</div>
+                       <div class="card card-header-actions mb-4">
+                           <div class="card-header ">
+                               Notification Preferences
+                               <div class="form-check form-switch">
+                                   <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox" checked="" />
+                                   <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                               </div>
+                           </div>
                            <div class="card-body">
                                <form>
                                    <!-- Form Group (notification preference checkboxes)-->
