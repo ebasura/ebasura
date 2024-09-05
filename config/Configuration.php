@@ -7,15 +7,17 @@
 // Database Configuration
 const DB_HOST = "localhost";
 const DB_USER = "root";
-const DB_PASS = "";
-const DB_NAME = "monitoring-system";
+const DB_PASS = "EDscMIJndts4lAo8";
+const DB_NAME = "monitoring_system";
 
 // System Configuration
 const CAPSTONE_TITLE = "E-BASURA: IoT Based Waste Segregation System";
 const APP_NAME = "E-Basura Web Monitoring System";
 const APP_VERSION = "1.0.0";
-const ENVIRONMENT = "developement";
+const ENVIRONMENT = "development";
 const BASE_URL = __DIR__ . '/';
+
+const MAX_UPLOAD_SIZE = 10 * 1024 * 1024;
 
 // System Notification
 const NOTIFY_EMAIL = "admin@e-basura.com";

@@ -32,7 +32,7 @@ $(document).ready(function(e) {
 
 					$.ajax({
 						type: 'POST',
-						url: 'sendData',
+						url: 'ajax.php',
 						data: {
 							action: 'requestTfa'
 						},
