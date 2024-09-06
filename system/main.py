@@ -34,7 +34,7 @@ def system_info():
         "memory_usage": monitor.get_memory_usage(),
         "disk_usage": monitor.get_disk_usage(),
         "temperature": monitor.get_rpi_temperature_from_file()
-            }
+    }
     return jsonify(info)
 
 
@@ -51,12 +51,14 @@ def gauge():
     }
     return jsonify(gauge_values)
 
-@api_server.route('/'):
+
+@api_server.route('/')
 def ok():
     return jsonify({
         "author": "bitress",
         "status": "okay"
     })
+
 
 if __name__ == "__main__":
     # Start Flask app in a separate thread
