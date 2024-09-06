@@ -54,7 +54,18 @@ if (!$login->isLoggedIn()) {
                            <div class="card-body">
                                <form>
                                   <div class="row">
+
                                       <div class="col-md-12">
+
+                                          <div class="mb-3 ">
+                                              <label>Server Status</label>
+                                          <div class="text-center align-items-center">
+                                                  <button type="button" id="iot_server" name="iot_server" class="btn btn-success">Start E-Basura</button>
+                                                  <button type="button" id="iot_server" name="iot_server" class="btn btn-primary">Restart E-Basura</button>
+                                            </div>
+                                          </div>
+
+
                                           <div class="mb-3">
                                               <label class="small mb-1" for="app_name">App Name</label>
                                               <input class="form-control" id="app_name" type="text" placeholder="Application Name" value="<?php echo APP_NAME; ?>" />

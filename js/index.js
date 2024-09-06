@@ -6,8 +6,8 @@ var bitress = {
         dataTables: {}
     },
     Http: {
-        live_monitoring: 'ws://192.168.0.125:8765',
-        system_monitoring: 'http://192.168.0.125:5000'
+        live_monitoring: 'ws://ws.ebasura.online',
+        system_monitoring: 'https://rpi.ebasura.online'
     }
 };
 
