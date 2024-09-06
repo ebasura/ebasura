@@ -25,6 +25,7 @@ output_details = interpreter.get_output_details()
 predicted_label = ""
 frame_encoded = ""
 
+
 # Function to preprocess a frame from the camera
 def preprocess_frame(frame):
     frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -90,13 +91,11 @@ async def video_stream(path):
         cap.release()
 
 
-class LiveMonitoring:
+def detection():
+    data = {
+        "predicted_label": predicted_label,
+        "frame_encoded": frame_encoded
+    }
+    return data
 
-
-    def detection(self):
-        data = {
-            "predicted_label": predicted_label,
-            "frame_encoded": frame_encoded
-        }
-        return data
 

@@ -31,8 +31,7 @@ def system_info():
 
 @api_server.route('/detection', methods=['GET'])
 def detection():
-    monitoring = live_monitoring.LiveMonitoring()
-    return monitoring.detection()
+    return live_monitoring.detection()
 
 
 @api_server.route('/gauge', methods=['GET'])

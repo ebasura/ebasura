@@ -82,27 +82,6 @@ function readGaugeValue(){
 
 function liveVideoMonitoring(){
 
-    const videoStream = document.getElementById('video-stream');
-    const socket = new WebSocket(bitress.Http.live_monitoring);
-
-    socket.onopen = function() {
-        console.log("WebSocket connection established");
-    };
-
-    socket.onmessage = function(event) {
-        // Set the image source to the received base64 image data
-        videoStream.src = 'data:image/jpeg;base64,' + event.data;
-    };
-
-    socket.onclose = function() {
-        console.log("WebSocket connection closed");
-    };
-
-    socket.onerror = function(error) {
-        console.error("WebSocket error observed:", error);
-    };
-
-
     setInterval(async () => {
 
         try {
@@ -112,6 +91,12 @@ function liveVideoMonitoring(){
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
+
+            const videoStream = document.getElementById('video-stream');
+
+
+            videoStream.src = 'data:image/jpeg;base64,' + data.frame_encoded;
+
 
             // Update HTML elements with fetched data
             document.getElementById('predicted_category').textContent = data.predicted_label;
