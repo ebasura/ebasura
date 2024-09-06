@@ -46,7 +46,8 @@ def run_inference(frame):
 
 
 async def video_stream(websocket, path):
-    global predicted_label, image
+    global predicted_label
+    global image
 
     # Initialize the webcam (0 is the default camera)
     cap = cv2.VideoCapture(0)
