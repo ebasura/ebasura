@@ -6,7 +6,7 @@ var bitress = {
         dataTables: {}
     },
     Http: {
-        live_monitoring: 'https://ws.ebasura.online',
+        live_monitoring: 'ws://ws.ebasura.online',
         system_monitoring: 'https://api.ebasura.online'
     }
 };
