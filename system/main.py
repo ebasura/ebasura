@@ -31,7 +31,7 @@ def system_info():
 
 @api_server.route('/detection', methods=['GET'])
 def detection():
-    return live_monitoring.detection()
+    return jsonify(live_monitoring.detection())
 
 
 @api_server.route('/gauge', methods=['GET'])
@@ -46,8 +46,7 @@ def gauge():
 @api_server.route('/')
 def ok():
     return jsonify({
-        "author": "bitress",
-        "status": "okay"
+        "status": "200",
     })
 
 

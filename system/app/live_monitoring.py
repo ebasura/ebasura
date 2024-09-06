@@ -1,4 +1,3 @@
-import cv2
 import tflite_runtime.interpreter as tflite
 import numpy as np
 import cv2
@@ -84,7 +83,6 @@ async def video_stream(path):
             frame_encoded = base64.b64encode(buffer).decode('utf-8')
 
 
-
     except Exception as e:
         print(f"Error: {e}")
     finally:
@@ -97,5 +95,3 @@ def detection():
         "frame_encoded": frame_encoded
     }
     return data
-
-
