@@ -92,7 +92,6 @@ async def video_stream(path):
 
 class LiveMonitoring:
 
-    def __init__(self):
 
     def detection(self):
         data = {
