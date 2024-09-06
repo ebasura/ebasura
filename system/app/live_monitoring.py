@@ -23,7 +23,7 @@ input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
 predicted_label = ""
-
+frame_encoded = ""
 
 # Function to preprocess a frame from the camera
 def preprocess_frame(frame):
@@ -45,8 +45,8 @@ def run_inference(frame):
     return predicted_class_index
 
 
-async def video_stream(websocket, path):
-    global predicted_label
+async def video_stream(path):
+    global predicted_label, frame_encoded
 
     # Initialize the webcam (0 is the default camera)
     cap = cv2.VideoCapture(0)
@@ -82,11 +82,8 @@ async def video_stream(websocket, path):
             # Convert to base64 to send over WebSocket
             frame_encoded = base64.b64encode(buffer).decode('utf-8')
 
-            # Send the frame over the WebSocket
-            await websocket.send(frame_encoded)
 
-            # Small delay to control frame rate
-            await asyncio.sleep(0.033)  # ~30 FPS
+
     except Exception as e:
         print(f"Error: {e}")
     finally:
@@ -95,17 +92,12 @@ async def video_stream(websocket, path):
 
 class LiveMonitoring:
 
-    def __init__(self, host, port):
-        self.host = host
-        self.port = port
+    def __init__(self):
 
     def detection(self):
         data = {
-            "predicted_label": predicted_label
+            "predicted_label": predicted_label,
+            "frame_encoded": frame_encoded
         }
         return data
 
-    async def start(self):
-        async with websockets.serve(video_stream, self.host, self.port):
-            print(f"WebSocket server started at ws://{self.host}:{self.port}")
-            await asyncio.Future()  # Run forever

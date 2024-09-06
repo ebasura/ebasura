@@ -8,18 +8,9 @@ import random
 api_server = Flask(__name__)
 CORS(api_server)
 
-monitoring = live_monitoring.LiveMonitoring(
-    host="0.0.0.0",
-    port=8765
-)
-
 
 def run_flask_app():
     api_server.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)
-
-
-async def start_live_monitoring():
-    await monitoring.start()
 
 
 # Define Flask route for system information
@@ -40,6 +31,7 @@ def system_info():
 
 @api_server.route('/detection', methods=['GET'])
 def detection():
+    monitoring = live_monitoring.LiveMonitoring()
     return monitoring.detection()
 
 
@@ -61,9 +53,5 @@ def ok():
 
 
 if __name__ == "__main__":
-    # Start Flask app in a separate thread
     flask_thread = Thread(target=run_flask_app)
     flask_thread.start()
-
-    # Run the asyncio event loop in the main thread
-    asyncio.run(start_live_monitoring())

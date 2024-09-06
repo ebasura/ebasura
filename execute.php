@@ -1,23 +1,20 @@
 <?php
 include_once 'init.php';
+use phpseclib3\File\ANSI;
+use phpseclib3\Net\SSH2;
 
+$ansi = new ANSI;
+$ssh = new SSH2("192.168.0.125");
 
-$username = getenv('SSH_USER');
-$password = getenv('SSH_PASS');
-$host = getenv('SSH_HOST');
-try {
-    $shell = new Shell($host, $username, $password);
+$ssh = new SSH2("192.168.0.125");
+$ssh->login("bitress", "@bitress123");
+$ssh->enablePTY();
+$ssh->exec('source /var/www/ebasura/system/.venv/bin/activate && cd /var/www/ebasura/system/ && python main.py');
 
-    if (isset($_POST['command'])) {
-        $command = $_POST['command'];
-        $output = $shell->exec($command);
-        echo "<pre style='background-color: #333; color: #fff; padding: 15px; border-radius: 8px; overflow-x: auto;'>";
-        echo htmlspecialchars($output);
-        echo "</pre>";
-    } else {
-        echo "<div class='error'>No command provided.</div>";
-    }
-} catch (Exception $e) {
-    echo "<div class='error'><h2 style='color: #f44336;'>Error</h2>";
-    echo "<p>" . htmlspecialchars($e->getMessage()) . "</p></div>";
-}
+// Set timeout for reading logs
+$ssh->setTimeout(5);
+
+$output = $ssh->read();
+    $ansi->appendString($output);
+    echo $ansi->getScreen();  // Output the log progressively
+
