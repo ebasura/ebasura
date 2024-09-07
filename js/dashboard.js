@@ -80,49 +80,44 @@ function readGaugeValue(){
 
 
 
-function liveVideoMonitoring(){
-
-    const videoStream = document.getElementById('video-stream');
-    const socket = new WebSocket(bitress.Http.live_monitoring);
-
-    socket.onopen = function() {
-        console.log("WebSocket connection established");
-    };
-
-    socket.onmessage = function(event) {
-        // Set the image source to the received base64 image data
-        videoStream.src = 'data:image/jpeg;base64,' + event.data;
-    };
-
-    socket.onclose = function() {
-        console.log("WebSocket connection closed");
-    };
-
-    socket.onerror = function(error) {
-        console.error("WebSocket error observed:", error);
-    };
-
+function liveVideoMonitoring() {
+    const updateInterval = 30; 
 
     setInterval(async () => {
-
         try {
-            const apiBaseUrl = bitress.Http.system_monitoring; // Ensure this variable is properly set
-            const response = await fetch(`${apiBaseUrl}/detection`); // Use template literal with `${}`
+            const apiBaseUrl = bitress.Http.system_monitoring; 
+            const response = await fetch(`${apiBaseUrl}/detection`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
 
-            // Update HTML elements with fetched data
-            document.getElementById('predicted_category').textContent = data.predicted_label;
+            console.log('API Response:', data); 
+
+            const videoStream = document.getElementById('video-stream');
+            if (videoStream) {
+                if (data.image) {
+                    const imageSrc = 'data:image/jpeg;base64,' + data.image;
+                    videoStream.src = imageSrc;
+                } else {
+                    console.warn('Image data not found in response');
+                }
+            } else {
+                console.warn('Video stream element not found');
+            }
+            const predictedCategoryElement = document.getElementById('predicted_category');
+            if (predictedCategoryElement) {
+                predictedCategoryElement.textContent = data.predicted_label || 'Unknown';
+            } else {
+                console.warn('Predicted category element not found');
+            }
+
         } catch (error) {
             console.error('Error fetching system info:', error);
         }
-
-    }, 30)
-
-
+    }, updateInterval);
 }
+
 
 
 function systemMonitoring() {

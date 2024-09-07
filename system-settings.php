@@ -60,8 +60,8 @@ if (!$login->isLoggedIn()) {
                                           <div class="mb-3 ">
                                               <label>Server Status</label>
                                           <div class="text-center align-items-center">
-                                                  <button type="button" id="iot_server" name="iot_server" class="btn btn-success">Start E-Basura</button>
-                                                  <button type="button" id="iot_server" name="iot_server" class="btn btn-primary">Restart E-Basura</button>
+                                                <button type="button" id="toggle_server" name="iot_server" class="btn btn-success">Start E-Basura</button>
+                                                <button type="button" id="restart_server" name="iot_server" class="btn btn-primary">Restart E-Basura</button>
                                             </div>
                                           </div>
 
@@ -81,7 +81,7 @@ if (!$login->isLoggedIn()) {
                            </div>
                        </div>
 
-                       <div class="card card-header-actions ">
+                       <div class="card card-header-actions mb-4">
                            <div class="card-header">
                                Database Configuration
 
@@ -217,10 +217,95 @@ if (!$login->isLoggedIn()) {
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
     <script src="js/litepicker.js"></script>
     <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+    <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
+    <script>
+    $(document).ready(function(){
+        // Dummy server state variable (for testing purposes)
+        let serverRunning = true; // Assume server is initially stopped
+
+        // Initial setup
+        function checkServer(){
+            // Simulate a fetch to check server status (using a dummy server state)
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({ status: serverRunning ? 200 : 500 });
+                }, 500); // Simulate a delay
+            })
+            .then(data => {
+                if(data.status === 200) {
+                    // Server is running, set button to "Stop"
+                    $("#toggle_server")
+                        .removeClass('btn-success')
+                        .addClass('btn-danger')
+                        .text('Stop E-Basura')
+                        .data('server-status', 'running');
+                } else {
+                    // Server is stopped, set button to "Start"
+                    $("#toggle_server")
+                        .removeClass('btn-danger')
+                        .addClass('btn-success')
+                        .text('Start E-Basura')
+                        .data('server-status', 'stopped');
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        }
+
+        // Check the server status when the page loads
+        checkServer();
+
+        // Handle button click to start or stop the server (mock functionality)
+        $("#toggle_server").on('click', function(e){
+            e.preventDefault();
+
+            let currentStatus = $(this).data('server-status');
+
+            if(currentStatus === 'running') {
+                // Simulate stopping the server
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        serverRunning = false; // Simulate the server stopping
+                        resolve();
+                    }, 500); // Simulate a delay
+                })
+                .then(() => {
+                    // Change button to "Start"
+                    $("#toggle_server")
+                        .removeClass('btn-danger')
+                        .addClass('btn-success')
+                        .text('Start E-Basura')
+                        .data('server-status', 'stopped');
+                })
+                .catch(error => console.error('Error stopping server:', error));
+            } else {
+                // Simulate starting the server
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        serverRunning = true; // Simulate the server starting
+                        resolve();
+                    }, 500); // Simulate a delay
+                })
+                .then(() => {
+                    // Change button to "Stop"
+                    $("#toggle_server")
+                        .removeClass('btn-success')
+                        .addClass('btn-danger')
+                        .text('Stop E-Basura')
+                        .data('server-status', 'running');
+                })
+                .catch(error => console.error('Error starting server:', error));
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
