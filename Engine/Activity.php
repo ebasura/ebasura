@@ -54,10 +54,6 @@ class Activity
             } else {
                 return "0";
             }
-
-
-
-
         }
 
     }
