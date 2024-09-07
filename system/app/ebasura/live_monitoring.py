@@ -2,6 +2,7 @@ import cv2
 import tflite_runtime.interpreter as tflite
 import numpy as np
 import base64
+from ..ebasura.database import Database
 
 # Path to the TensorFlow Lite model and labels file
 model_path = "models/vww_96_grayscale_quantized.tflite"
