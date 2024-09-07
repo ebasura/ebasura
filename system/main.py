@@ -13,7 +13,6 @@ def run_flask_app():
     api_server.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)
 
 
-
 # Define Flask route for system information
 @api_server.route('/system-info', methods=['GET'])
 def system_info():
