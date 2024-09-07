@@ -3,7 +3,7 @@ var bitress = {
         lang: "en"
     },
     Util: {
-        dataTables: {}
+        dataTables: {},
     },
     Http: {
         live_monitoring: 'wss://ws.ebasura.online',

@@ -6,20 +6,12 @@ import asyncio
 import random
 
 api_server = Flask(__name__)
-CORS(api_server)
-
-monitoring = live_monitoring.LiveMonitoring(
-    host="0.0.0.0",
-    port=8765
-)
+CORS(api_server, resources={r"/*": {"origins": {"https://ebasura.online", "http://192.168.0.125:8000"}}})
 
 
 def run_flask_app():
     api_server.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)
 
-
-async def start_live_monitoring():
-    await monitoring.start()
 
 
 # Define Flask route for system information
@@ -40,14 +32,14 @@ def system_info():
 
 @api_server.route('/detection', methods=['GET'])
 def detection():
-    return monitoring.detection()
+    return jsonify(live_monitoring.get_frame_data()) 
 
 
 @api_server.route('/gauge', methods=['GET'])
 def gauge():
     gauge_values = {
-        "recyclable_bin": random.randint(1, 100),
-        "non_recyclable_bin": random.randint(1, 100),
+        "recyclable_bin": random.randint(50, 100),
+        "non_recyclable_bin": random.randint(50, 100),
     }
     return jsonify(gauge_values)
 
@@ -55,8 +47,7 @@ def gauge():
 @api_server.route('/')
 def ok():
     return jsonify({
-        "author": "bitress",
-        "status": "okay"
+        "status": 200
     })
 
 
@@ -64,6 +55,3 @@ if __name__ == "__main__":
     # Start Flask app in a separate thread
     flask_thread = Thread(target=run_flask_app)
     flask_thread.start()
-
-    # Run the asyncio event loop in the main thread
-    asyncio.run(start_live_monitoring())
