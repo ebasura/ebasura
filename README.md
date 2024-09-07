@@ -40,8 +40,8 @@
 
 
 5. **Run the Application**
-    ```
-    python main.py
+    ```bash
+        python main.py
 
 ## Usage
 **Access the Dashboard**
