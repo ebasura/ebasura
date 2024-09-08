@@ -7,7 +7,7 @@ from ..routes.system_info import system_info_bp
 from ..routes.system_health import system_health_bp
 from ..routes.detection import detection_bp
 from ..routes.gauge import gauge_bp
-
+from ..engine import db
 
 
 def create_app():
@@ -73,12 +73,11 @@ def create_app():
 
         
         try:
-            connection = get_db_connection()
-            with connection.cursor() as cursor:
-                sql = "INSERT INTO model_uploads (description, file_path) VALUES (%s, %s)"
-                cursor.execute(sql, (description, file_path))
-            connection.commit()
-            connection.close()
+            
+            query = "INSERT INTO models (description, file_path) VALUES (%s, %s)"
+            db.execute(query, (description, file_path))
+            
+            
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 

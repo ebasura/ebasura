@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    image: ebasura
+    ports:
+      - "5000:5000"
+    environment:
+      MARIADB_HOST: 192.168.0.125
+      MARIADB_USER: root
+      MARIADB_PASSWORD: EDscMIJndts4lAo8
+      MARIADB_DATABASE: monitoring_system

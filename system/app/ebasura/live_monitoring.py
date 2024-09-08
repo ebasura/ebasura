@@ -2,9 +2,22 @@ import cv2 # type: ignore
 import tflite_runtime.interpreter as tflite # type: ignore
 import numpy as np
 import base64
+from ..engine import db 
+
+
+def get_active_model():
+    
+    query = "SELECT * FROM models INNER JOIN active_model ON active_model.model_id = models.id WHERE active_model.is_active;"
+    model = db.fetch_one(query)
+    if model:
+        return model['file_path']
+    else:
+        return "models/vww_96_grayscale_quantized.tflite"
+
+model = get_active_model()
 
 # Path to the TensorFlow Lite model and labels file
-model_path = "models/vww_96_grayscale_quantized.tflite"
+model_path = model
 labels_path = "models/labels.txt"
 
 # Load the labels
@@ -35,7 +48,7 @@ def run_inference(frame):
     predicted_class_index = np.argmax(output_data)
     return predicted_class_index
 
-def get_frame_data():
+def get_frame_data(): 
     # Initialize the webcam (0 is the default camera)
     cap = cv2.VideoCapture(0)
 
