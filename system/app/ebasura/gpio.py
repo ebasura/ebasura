@@ -1,4 +1,1 @@
-import RPi.GPIO as GPIO
-import sys
-import time
-
+from gpiozero import Servo

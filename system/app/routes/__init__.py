@@ -1,4 +1,3 @@
-import pymysql
 import uuid
 import os
 from flask import Flask, jsonify, request
@@ -7,6 +6,7 @@ from ..routes.system_info import system_info_bp
 from ..routes.system_health import system_health_bp
 from ..routes.detection import detection_bp
 from ..routes.gauge import gauge_bp
+from ..routes.charts import charts_bp
 from ..engine import db
 
 
@@ -15,14 +15,6 @@ def create_app():
     UPLOAD_FOLDER = 'models'    
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     
-    db_config = {
-    'host': 'localhost',
-    'user': 'root',       
-    'password': 'EDscMIJndts4lAo8',   
-    'db': 'monitoring_system',         
-    'cursorclass': pymysql.cursors.DictCursor
-}
-
 
     CORS(app, resources={r"/*": {"origins": {"https://ebasura.online", "https://www.ebasura.online", "http://192.168.0.125:8000"}}})
     
@@ -31,11 +23,7 @@ def create_app():
     app.register_blueprint(system_health_bp)
     app.register_blueprint(detection_bp)
     app.register_blueprint(gauge_bp)
-    
-    def get_db_connection():
-        """Create a new connection to the MariaDB database."""
-        return pymysql.connect(**db_config)
-    
+    app.register_blueprint(charts_bp)
     
     def generate_random_filename(filename):
         """Generate a random filename with the same file extension."""
@@ -81,7 +69,6 @@ def create_app():
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-        # You can do something with the model description here (e.g., store in a database)
         return jsonify({"message": "File uploaded successfully", "description": description}), 200
 
 
