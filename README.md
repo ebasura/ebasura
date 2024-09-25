@@ -60,6 +60,19 @@
 - The Recent Alerts & Notifications widget displays recent system alerts and user notifications.
 
 
+## To-Do List
+
+- [ ] Improved Login Design
+- [ ] Implementing Sensors
+- [ ] Bin Gauges, and Weights API
+- [ ] Charts & Analytics Page
+- [ ] Logs Page
+- [ ] Analytics Backend
+- [ ] Alerts and Notification
+- [ ] Capture Image and Insert to Database
+- [ ] Trash Bin Prototype
+
+
 
 ## Authors
 
