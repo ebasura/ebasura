@@ -13,4 +13,5 @@ def gauge():
         "non_recyclable_bin":int(next((item['current_fill_level'] for item in data if item['bin_name'] == 'Non-Recyclable'), 0)),
     }
     
+    
     return jsonify(gauge_values)
