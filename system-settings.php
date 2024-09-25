@@ -73,7 +73,7 @@ if (!$login->isLoggedIn()) {
                            </div>
                        </div>
 
-                       <div class="card card-header-actions ">
+                       <div class="card card-header-actions mb-4">
                            <div class="card-header">
                                Database Configuration
 
