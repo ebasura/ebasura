@@ -20,7 +20,7 @@
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/ebasura.git
+   git clone https://github.com/bitress/ebasura.git
    cd ebasura
 
 2. **Set Up Virtual Environment (Recommended)**
@@ -40,8 +40,8 @@
 
 
 5. **Run the Application**
-    ```
-    python main.py
+    ```bash
+        Apython main.py
 
 ## Usage
 **Access the Dashboard**

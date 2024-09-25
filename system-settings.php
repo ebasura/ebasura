@@ -19,6 +19,7 @@ if (!$login->isLoggedIn()) {
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="nav-fixed">
 
@@ -56,15 +57,6 @@ if (!$login->isLoggedIn()) {
                                   <div class="row">
 
                                       <div class="col-md-12">
-
-                                          <div class="mb-3 ">
-                                              <label>Server Status</label>
-                                          <div class="text-center align-items-center">
-                                                <button type="button" id="toggle_server" name="iot_server" class="btn btn-success">Start E-Basura</button>
-                                                <button type="button" id="restart_server" name="iot_server" class="btn btn-primary">Restart E-Basura</button>
-                                            </div>
-                                          </div>
-
 
                                           <div class="mb-3">
                                               <label class="small mb-1" for="app_name">App Name</label>
@@ -162,7 +154,7 @@ if (!$login->isLoggedIn()) {
                                </div>
                            </div>
                            <div class="card-body">
-                               <form>
+                               <form id="update_model">
                                    <div class="mb-3">
                                        <label class="small mb-1" for="model_name">Model Version</label>
                                        <select name="model_name" id="model_name" class="form-control">
@@ -171,7 +163,7 @@ if (!$login->isLoggedIn()) {
                                        </select>
                                    </div>
                                    <div class="mb-3">
-                                       <button type="button" id="update_model" class="btn btn-primary">Save changes</button>
+                                       <button type="button" id="update_model_button" class="btn btn-primary">Save changes</button>
                                    </div>
                                </form>
                            </div>
@@ -199,9 +191,15 @@ if (!$login->isLoggedIn()) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="model-upload-form">
+
                         <div class="mb-3">
-                            <label for="model_file">Upload Model</label>
+                            <label for="model_description">Model Description</label>
+                            <input type="text" id="model_description" name="model_description" class="form-control"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="model_file">Tflite Model</label>
                             <input type="file" name="model_file" id="model_file" class="form-control">
                             <div id="model_file_help" class="form-text">Models are generated from <a target="_blank" href="https://teachablemachine.withgoogle.com/">Teachable Machine by Google</a> </div>
                         </div>
@@ -225,86 +223,60 @@ if (!$login->isLoggedIn()) {
     <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
     <script>
-    $(document).ready(function(){
-        // Dummy server state variable (for testing purposes)
-        let serverRunning = true; // Assume server is initially stopped
-
-        // Initial setup
-        function checkServer(){
-            // Simulate a fetch to check server status (using a dummy server state)
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve({ status: serverRunning ? 200 : 500 });
-                }, 500); // Simulate a delay
-            })
-            .then(data => {
-                if(data.status === 200) {
-                    // Server is running, set button to "Stop"
-                    $("#toggle_server")
-                        .removeClass('btn-success')
-                        .addClass('btn-danger')
-                        .text('Stop E-Basura')
-                        .data('server-status', 'running');
-                } else {
-                    // Server is stopped, set button to "Start"
-                    $("#toggle_server")
-                        .removeClass('btn-danger')
-                        .addClass('btn-success')
-                        .text('Start E-Basura')
-                        .data('server-status', 'stopped');
-                }
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-        }
-
-        // Check the server status when the page loads
-        checkServer();
-
-        // Handle button click to start or stop the server (mock functionality)
-        $("#toggle_server").on('click', function(e){
-            e.preventDefault();
-
-            let currentStatus = $(this).data('server-status');
-
-            if(currentStatus === 'running') {
-                // Simulate stopping the server
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        serverRunning = false; // Simulate the server stopping
-                        resolve();
-                    }, 500); // Simulate a delay
-                })
-                .then(() => {
-                    // Change button to "Start"
-                    $("#toggle_server")
-                        .removeClass('btn-danger')
-                        .addClass('btn-success')
-                        .text('Start E-Basura')
-                        .data('server-status', 'stopped');
-                })
-                .catch(error => console.error('Error stopping server:', error));
-            } else {
-                // Simulate starting the server
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        serverRunning = true; // Simulate the server starting
-                        resolve();
-                    }, 500); // Simulate a delay
-                })
-                .then(() => {
-                    // Change button to "Stop"
-                    $("#toggle_server")
-                        .removeClass('btn-success')
-                        .addClass('btn-danger')
-                        .text('Stop E-Basura')
-                        .data('server-status', 'running');
-                })
-                .catch(error => console.error('Error starting server:', error));
+    $(document).ready(function () {
+    $("#upload_model").on('click', function (e) {
+        e.preventDefault();
+        var formData = new FormData($("#model-upload-form")[0]);
+        
+        $.ajax({
+            url: 'https://api.ebasura.online/upload-model', 
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                // Handle success
+                alert("File uploaded successfully!");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Handle error
+                alert("File upload failed: " + textStatus);
             }
         });
     });
+
+    $("#update_model_button").on('click', function(e){
+        e.preventDefault();
+        var model_name = $('#model_name').val();
+
+        Swal.fire({
+            text: 'Continuing the update will restart the server',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, update it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    # TODO: 
+                    
+                    
+
+
+                    Swal.fire({
+                    title: "Updated!",
+                    text: "The model has been updated. Restarting server.",
+                    icon: "success"
+                    });
+                }
+            });
+
+
+
+    });
+});
+
 </script>
 
 </body>

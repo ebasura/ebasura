@@ -144,8 +144,8 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <div class="small fw-bold text-secondary mb-1">Average sale price</div>
-                                        <div class="h5">$27.00</div>
+                                        <div class="small fw-bold text-secondary mb-1">Recyclable Bin Status</div>
+                                        <div class="h5"><span id="recyclable_bin_value">0</span></div>
                                         <div class="text-xs fw-bold text-danger d-inline-flex align-items-center">
                                             <i class="me-1" data-feather="trending-down"></i>
                                             3%
@@ -162,8 +162,8 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <div class="small fw-bold text-success mb-1">Clicks</div>
-                                        <div class="h5">11,291</div>
+                                        <div class="small fw-bold text-success mb-1">Non-Recyclable Bin Status</div>
+                                        <div class="h5"><span id="non_recyclable_bin_value">0</span></div>
                                         <div class="text-xs fw-bold text-success d-inline-flex align-items-center">
                                             <i class="me-1" data-feather="trending-up"></i>
                                             12%
@@ -427,6 +427,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
     <script src="js/litepicker.js"></script>

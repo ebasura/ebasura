@@ -58,6 +58,7 @@ function readGaugeValue(){
     updateGauge(0,0)
     setInterval(async () => {
 
+        
         try {
             const apiBaseUrl = bitress.Http.system_monitoring; // Ensure this variable is properly set
             const response = await fetch(`${apiBaseUrl}/gauge`); // Use template literal with `${}`
@@ -65,6 +66,10 @@ function readGaugeValue(){
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
+
+            $("#recyclable_bin_value").text(data.recyclable_bin)
+            $("#non_recyclable_bin_value").text(data.non_recyclable_bin)
+
 
             updateGauge(data.recyclable_bin, data.non_recyclable_bin);
 
