@@ -82,6 +82,17 @@
                         echo "true";
                     }
               break;
+
+
+
+
+            // Datatables 
+
+            case 'wasteLogs':
+
+
+
+                break;
             default:
                 break;
 
