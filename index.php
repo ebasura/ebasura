@@ -20,7 +20,7 @@
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css" integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .responsive-canvas {
@@ -253,14 +253,14 @@
                                 <div class="card-header">Logs</div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-hover" id="waste_logs_table">
+                                        <table class="table table-striped table-hover dt-responsive" id="waste_logs_table">
                                             <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Image</th>
                                                 <th>Trash Type</th>
                                                 <th>Date Created</th>
-                                                <th>Actions</th>
+                                                <th class="no-sort">Actions</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -404,7 +404,7 @@
     <script src="js/scripts.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-    <script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.js"></script>
     <script src="js/litepicker.js"></script>
     <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
@@ -412,60 +412,36 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js" integrity="sha512-EC3CQ+2OkM+ZKsM1dbFAB6OGEPKRxi6EDRnZW9ys8LghQRAq6cXPUgXCCujmDrXdodGXX9bqaaCRtwj4h4wgSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/index.js"></script>
-    <!-- <script src="js/dashboard.js"></script> -->
+    <script src="js/dashboard.js"></script>
     <script>
         $(function(){
 
-            var table = $('#waste_logs_table').dataTable( {
+            $('#waste_logs_table').DataTable({
+                "iDisplayLength": 10, 
                 processing: true,
                 serverSide: true,
-
-                columns: [
-    { "name": "waste_data.waste_data_id", "data": "waste_data_id", "searchable": true, "orderable": true },
-    { "name": "waste_data.image_url", "data": "image_url", "searchable": false, "orderable": false },
-    { "name": "waste_type.name", "data": "name", "searchable": true, "orderable": true },
-    { "name": "waste_data.timestamp", "data": "timestamp", "searchable": true, "orderable": true },
-    {
-        "data": null,  // Add the column for buttons without any data source
-        "orderable": false,  // Make sure it's not orderable
-        "searchable": false, // Not searchable either
-        "defaultContent": `
-            <button class="btn btn-datatable btn-icon btn-transparent-dark me-2">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-            </button>
-            <button class="btn btn-datatable btn-icon btn-transparent-dark">
-                <i class="fa-regular fa-trash-can"></i>
-            </button>
-        `
-    }
-],
-
-
-                "language": {
-                    "emptyTable": "No matching records found for "
-                },
-
+                responsive: true,
+                serverMethod: 'post',
                 ajax: {
                     url:'ajax.php',
-                    type: 'POST',
                     data: {
-                        'action': 'wasteLogs'
-                    },
-
-                    /* Error handling */
-                    error: function(xhr, error, thrown){
-                        $(".example-grid-error").html("");
-                        $("#example").append('<tbody class="example-grid-error"><tr><th colspan="3">No data found in the server. Error: ' + xhr.responseText + ' </th></tr></tbody>');
-                        $("#example-grid_processing").css("display","none");
+                        action: 'dtFetchLogs'
                     }
-                }
-
-
-            } );
-
-
-
+                },
+                columns: [
+                    { data: 'waste_id' },
+                    { data: 'waste_image' },
+                    { data: 'waste_type' },
+                    { data: 'date_created' },
+                    { data: 'actions' }
+                ],
+                columnDefs: [ {
+                    "target": "no-sort",
+                    "orderable": false
+                } ]
+            });
         });
+
 
         const viewer = new Viewer(document.getElementById('image'), {
             inline: false,

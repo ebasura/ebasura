@@ -84,14 +84,10 @@
               break;
 
 
-
-
             // Datatables 
-
-            case 'wasteLogs':
-
-
-
+            case 'dtFetchLogs':
+                $dt = new Datatable();
+                $dt->wasteLogs();
                 break;
             default:
                 break;
