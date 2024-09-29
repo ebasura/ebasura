@@ -4,6 +4,8 @@
  * App Configuration
  */
 
+
+ 
 // Database Configuration
 const DB_HOST = "localhost";
 const DB_USER = "ebasura";

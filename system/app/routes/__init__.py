@@ -30,9 +30,6 @@ def create_app():
         ext = os.path.splitext(filename)[1]  
         return str(uuid.uuid4()) + ext 
 
-
-
-
     @app.route('/')
     def ok():
         return jsonify({
