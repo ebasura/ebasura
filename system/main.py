@@ -37,5 +37,6 @@ if __name__ == "__main__":
 
     finally:
         # Cleanup GPIO settings
+        GPIO.setwarnings(False)
         GPIO.cleanup()
         sys.exit(0)  # Exit the program
