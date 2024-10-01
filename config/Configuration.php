@@ -4,6 +4,8 @@
  * App Configuration
  */
 
+
+ 
 // Database Configuration
 const DB_HOST = "localhost";
 const DB_USER = "ebasura";
@@ -27,7 +29,7 @@ const ALERT_THRESHOLD = 90; // Percentage at which to trigger alerts
 const EMAIL_CONFIRMATION = true;
 const MAX_LOGIN_ATTEMPTS = 12;
 
-// 
+
 const IS_SMTP = true;
 const SMTP_HOST = "smtp.gmail.com";
 const SMTP_USERNAME = "byteress@gmail.com";

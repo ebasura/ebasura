@@ -5,7 +5,7 @@ gauge_bp = Blueprint('gauge', __name__)
 
 @gauge_bp.route('/gauge', methods=['GET'])
 def gauge():
-    # Fetch the latest waste bin levels
+
     data = fetch_waste_bin_levels()
 
     gauge_values = {
@@ -15,3 +15,15 @@ def gauge():
     
     
     return jsonify(gauge_values)
+
+@gauge_bp.route('/weights', methods=['GET'])
+def weight():
+    
+    #TODO: fetch database 
+    
+    weight_values  = {
+        "recyclable_bin": 0,
+        "non_recyclable_bin": 0
+    }
+    
+    return jsonify(weight_values)

@@ -12,13 +12,14 @@ def dashboard_charts():
         year = request.args.get('year')  
         if not year:
             return jsonify({"error": "Year is required for yearly waste segregation"}), 400
-        return jsonify({"chart": "yearly-waste-segregation", "year": year})
+        return jsonify({"chart": "yearly-waste-segregation", "data": {}})
 
-
+    elif chart_type == 'monthly-waste-segregation':
+        return jsonify({"chart": 'montly-waste-segregation', "data": {}})
     elif chart_type == 'daily-waste-segregation':
         day = request.args.get('day')  
         if not day:
             return jsonify({"error": "Day is required for daily waste segregation"}), 400
-        return jsonify({"chart": "daily-waste-segregation", "day": day})
+        return jsonify({"chart": "daily-waste-segregation", "data": {}})
 
     return jsonify({"error": "Something is wrong"}), 400
