@@ -7,6 +7,120 @@ body.my-login-page {
 	font-size: 14px;
 }
 
+.title-container {
+	position: absolute; 
+	top: 20px;         
+	right: 20px;       
+	z-index: 1000;     
+}
+
+.site-title {
+	font-family: 'Eurostile', sans-serif; 
+	color: white;      
+	font-size: 24px;   
+	font-weight: bold; 
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 100vh;
+}
+
+.left-side {
+	width: 35%;
+	display: flex;
+	justify-content: center;
+}
+
+.right-side {
+	width: 35%;
+	display: flex;
+	justify-content: center;
+}
+
+.middle-space {
+	width: 30%;
+}
+
+.card-wrapper {
+	max-width: 400px;
+	margin-top: 5%;
+}
+
+.card {
+	border-radius: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-body {
+	padding: 2rem;
+}
+
+.card-title {
+	font-family: 'Arial', sans-serif;
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+	color: #B51717;
+}
+
+form .form-group input {
+	border-radius: 50px;
+	padding: 0.8rem;
+	background-color: #f0f0f0;
+}
+
+form .form-group label {
+	font-size: 0.9rem;
+	color: #666;
+}
+
+.btn-primary {
+	background-color: #b51717;
+	border-color: #b51717;
+	border-radius: 50px;
+	padding: 0.8rem;
+	font-size: 1rem;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.btn-primary:hover {
+	background-color: #a01010;
+	border-color: #a01010;
+}
+
+.form-group .float-right {
+	font-size: 0.8rem;
+	color: #b51717;
+}
+
+.custom-control-label {
+	font-size: 0.9rem;
+	color: #666;
+}
+
+.footer {
+	text-align: center;
+	margin-top: 20px;
+	color: #999;
+}
+
+.footer a {
+	color: #b51717;
+}
+
+.modal-content {
+	border-radius: 20px;
+	padding: 1rem;
+}
+
+.modal-header h5 {
+	color: #b51717;
+}
+
 .my-login-page .brand {
 	width: 90px;
 	height: 90px;
