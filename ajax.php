@@ -82,6 +82,13 @@
                         echo "true";
                     }
               break;
+
+
+            // Datatables 
+            case 'dtFetchLogs':
+                $dt = new Datatable();
+                $dt->wasteLogs();
+                break;
             default:
                 break;
 

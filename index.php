@@ -20,7 +20,7 @@
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css" integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .responsive-canvas {
@@ -253,44 +253,19 @@
                                 <div class="card-header">Logs</div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-hover" id="logs_table">
+                                        <table class="table table-striped table-hover dt-responsive" id="waste_logs_table">
                                             <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Image</th>
                                                 <th>Trash Type</th>
                                                 <th>Date Created</th>
-                                                <th>Actions</th>
+                                                <th class="no-sort">Actions</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            <?php
-                                            $basura = new Basura();
-                                            $trash_data = $basura->get();
 
-                                            foreach ($trash_data as $row):
-                                            ?>
-                                            <tr>
-                                                <td><?= htmlentities($row['waste_data_id']) ?></td>
-                                                <td class="col-4">
-                                                    <img id="image" class="img-thumbnail w-25" src="<?= $row['image_url'] ?>" alt="Trash Image">
-                                                </td>
-                                                <?php if($row['name'] == 'Recyclable'): ?>
-                                                <td><div class="badge bg-primary rounded-pill"><?= $row['name'] ?></div></td>
-                                                <?php else: ?>
-                                                <td><div class="badge bg-secondary rounded-pill"><?= $row['name'] ?></div></td>
-                                                <?php endif; ?>
-                                                <td><?= $row['timestamp'] ?></td>
-                                                <td>
-                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-regular fa-trash-can"></i></button>
-                                                </td>
-                                            </tr>
-
-                                            <?php
-                                            endforeach;
-                                            ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -429,7 +404,7 @@
     <script src="js/scripts.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.js"></script>
     <script src="js/litepicker.js"></script>
     <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
@@ -439,7 +414,34 @@
     <script src="js/index.js"></script>
     <script src="js/dashboard.js"></script>
     <script>
-        const dataTable = new simpleDatatables.DataTable("#logs_table");
+        $(function(){
+
+            $('#waste_logs_table').DataTable({
+                "iDisplayLength": 10, 
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                serverMethod: 'post',
+                ajax: {
+                    url:'ajax.php',
+                    data: {
+                        action: 'dtFetchLogs'
+                    }
+                },
+                columns: [
+                    { data: 'waste_id' },
+                    { data: 'waste_image' },
+                    { data: 'waste_type' },
+                    { data: 'date_created' },
+                    { data: 'actions' }
+                ],
+                columnDefs: [ {
+                    "target": "no-sort",
+                    "orderable": false
+                } ]
+            });
+        });
+
 
         const viewer = new Viewer(document.getElementById('image'), {
             inline: false,
