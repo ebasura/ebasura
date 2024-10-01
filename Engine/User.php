@@ -20,6 +20,15 @@ class User
         
     }
 
+    public function getAllUser() 
+    {
+        $sql = "SELECT * FROM `users` INNER JOIN `user_details` ON user_details.user_id = users.user_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Get logged in user data
      * @return mixed

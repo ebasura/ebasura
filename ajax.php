@@ -12,6 +12,11 @@
                 $response = $login->userLogin($_POST['username'], $_POST['password'], $_POST['token'], $_POST['remember']);
                 
                 break;
+
+            case 'userRegister':
+                $register = new Register();
+                $response = $register->userRegister($_POST['username'], $_POST['email'], $_POST['password'], $_POST['confirm_password'], $_POST['user_role']);
+                break;
             case 'editProfile':
                 $user = new User();
 
@@ -75,14 +80,6 @@
                 $tfa = new TwoFactorAuthentication;
                 $tfa->disableTfa();
                 break;
-            case 'updateActivity';
-                    $act = new Activity();
-                    $response = $act->updateUserActivity($_POST['id']);
-                    if ($response === true){
-                        echo "true";
-                    }
-              break;
-
 
             // Datatables 
             case 'dtFetchLogs':
