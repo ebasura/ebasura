@@ -39,23 +39,31 @@
                     <div class="nav-link-icon"><i data-feather="book"></i></div>
                     Reports
                 </a>
-
-                <!-- Sidenav Heading (Addons)-->
-                <div class="sidenav-menu-heading">Configuration</div>
-                <!-- Sidenav Link (Charts)-->
                 <a class="nav-link" href="logs.php">
                     <div class="nav-link-icon"><i data-feather="file-text"></i></div>
                     Logs
                 </a>
+
+                <!-- Sidenav Heading (Addons)-->
+                <div class="sidenav-menu-heading">Configuration</div>
+                <!-- Sidenav Link (Charts)-->
+               
                 <a class="nav-link" href="account-settings.php">
                     <div class="nav-link-icon"><i data-feather="settings"></i></div>
                     Account Settings
                 </a>
+                <div class="sidenav-menu-heading">Admin Configuration</div>
                 <!-- Sidenav Link (Tables)-->
+                <a class="nav-link" href="user-settings.php">
+                    <div class="nav-link-icon"><i class="fa fa-user-cog"></i></div>
+                    Users Settings
+                </a>
+                
                 <a class="nav-link" href="system-settings.php">
                     <div class="nav-link-icon"><i data-feather="tool"></i></div>
                     System Settings
                 </a>
+               
             </div>
         </div>
         <!-- Sidenav Footer-->
