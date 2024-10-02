@@ -17,7 +17,7 @@ class Basura
     {
         $sql = "SELECT * FROM waste_data 
                 INNER JOIN waste_type ON waste_type.waste_type_id = waste_data.waste_type_id 
-                INNER JOIN waste_bins ON waste_bins.bin_id = waste_data.bin_id LIMIT 10";
+                INNER JOIN waste_bins ON waste_bins.bin_id = waste_data.bin_id";
 
         $stmt = $this->db->prepare($sql);
         if ($stmt->execute()) {
