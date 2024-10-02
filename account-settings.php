@@ -26,68 +26,10 @@ if (!$login->isLoggedIn()) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/custom.css">
     <script>
         var id = <?= $userDetail['user_id']; ?>
     </script>
-    <style>
-    body {
-        background-color: white !important; 
-        color: black !important; 
-    }
-    
-    .sidenav .nav-link {
-    color: black !important; 
-    transition: color 0.3s ease !important; 
-}
-
-
-.sidenav .nav-link:hover {
-    color: darkred !important; 
-    background-color: white !important; 
-}
-
-
-.sidenav .nav-link.active {
-    color: darkred !important; 
-}
-
-    .navbar, .page-header, .card-header {
-        background-color: #8B0000;
-        color: white !important;
-    }
-
-    .btn-primary {
-        background-color: #8B0000 !important; 
-        border-color: #8B0000 !important;
-        color: white !important; 
-    }
-
-    .btn-primary:hover {
-        background-color: #a00000 !important;
-        border-color: #a00000 !important;
-    }
-
-    .card, .table {
-        background-color: #fff; 
-        color: black; 
-    }
-
-    .text-primary, .text-secondary, .text-success, .text-danger, .text-info {
-        color: black !important; 
-    }
-
-    .bg-gradient-primary-to-secondary {
-        background: linear-gradient(90deg, #8B0000, #600000) !important;
-    }
-
-    .progress-bar {
-        background-color: #8B0000 !important; 
-    }
-
-    .page-header-title, .page-header-subtitle, .small {
-        color: darkgrey;
-    }
-</style>
 </head>
 <body class="nav-fixed">
 

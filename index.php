@@ -22,65 +22,7 @@
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css" integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-    body {
-        background-color: white !important; 
-        color: black !important; 
-    }
-   
-    .sidenav .nav-link {
-    color: black !important;
-    transition: color 0.3s ease !important; 
-}
-
-
-.sidenav .nav-link:hover {
-    color: darkred !important; /
-    background-color: white !important; 
-}
-
-
-.sidenav .nav-link.active {
-    color: darkred !important; 
-}
-
-    .navbar, .page-header, .card-header {
-        background-color: #8B0000;
-        color: white !important;
-    }
-
-    .btn-primary {
-        background-color: #8B0000 !important; 
-        border-color: #8B0000 !important;
-        color: white !important; 
-    }
-
-    .btn-primary:hover {
-        background-color: #a00000 !important;
-        border-color: #a00000 !important;
-    }
-
-    .card, .table {
-        background-color: #fff; 
-        color: black; 
-    }
-
-    .text-primary, .text-secondary, .text-success, .text-danger, .text-info {
-        color: black !important; 
-    }
-
-    .bg-gradient-primary-to-secondary {
-        background: linear-gradient(90deg, #8B0000, #600000) !important;
-    }
-
-    .progress-bar {
-        background-color: #8B0000 !important; 
-    }
-
-    .page-header-title, .page-header-subtitle, .small {
-        color: darkgrey; 
-    }
-</style>
+    <link rel="stylesheet" href="assets/css/custom.css">
 </head>
 <body class="nav-fixed">
 
