@@ -8,9 +8,9 @@
  
 // Database Configuration
 const DB_HOST = "localhost";
-const DB_USER = "ebasura";
-const DB_PASS = ".XkMmRfD3avtJ[7!";
-const DB_NAME = "monitoring_system";
+const DB_USER = "root";
+const DB_PASS = "";
+const DB_NAME = "e-basura";
 
 // System Configuration
 const CAPSTONE_TITLE = "E-BASURA: IoT Based Waste Segregation System";

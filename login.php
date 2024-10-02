@@ -55,7 +55,7 @@ if ($login->isRememberSet()) {
         }
 
         body.my-login-page {
-            background: url('image.jpg') no-repeat center center fixed;
+            background: url('ebasura_bg1.png') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Eurostile', sans-serif;
         }

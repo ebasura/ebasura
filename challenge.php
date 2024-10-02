@@ -26,6 +26,64 @@ if ($login->isLoggedIn()) {
     <!--    Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"/>
+    <style>
+    body {
+        background-color: white !important; 
+        color: black !important; 
+    }
+   
+    .sidenav .nav-link {
+    color: black !important; 
+    transition: color 0.3s ease !important;
+}
+
+
+.sidenav .nav-link:hover {
+    color: darkred !important; 
+    background-color: white !important; 
+}
+
+
+.sidenav .nav-link.active {
+    color: darkred !important; 
+}
+
+    .navbar, .page-header, .card-header {
+        background-color: #8B0000;
+        color: white !important;
+    }
+
+    .btn-primary {
+        background-color: #8B0000 !important; 
+        border-color: #8B0000 !important;
+        color: white !important; 
+    }
+
+    .btn-primary:hover {
+        background-color: #a00000 !important;
+        border-color: #a00000 !important;
+    }
+
+    .card, .table {
+        background-color: #fff; 
+        color: black; 
+    }
+    .text-primary, .text-secondary, .text-success, .text-danger, .text-info {
+        color: black !important;
+    }
+
+    .bg-gradient-primary-to-secondary {
+        background: linear-gradient(90deg, #8B0000, #600000) !important;
+    }
+
+    .progress-bar {
+        background-color: #8B0000 !important; 
+    }
+
+    .page-header-title, .page-header-subtitle, .small {
+        color: darkgrey; 
+    }
+</style>
 
 </head>
 

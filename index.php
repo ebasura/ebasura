@@ -23,73 +23,64 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css" integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        .responsive-canvas {
-            width: 100%;
-        }
-        .video-container {
-            width: 100%;
-            max-width: 100%;
-            position: relative;
-        }
+    body {
+        background-color: white !important; 
+        color: black !important; 
+    }
+   
+    .sidenav .nav-link {
+    color: black !important;
+    transition: color 0.3s ease !important; 
+}
 
-        .video-container .video-js {
-            width: 100%; 
-            height: 0;
-            padding-top: 56.25%;
-            top: 0;
-            left: 0;
-        }
 
-        .video-container .vjs-tech {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+.sidenav .nav-link:hover {
+    color: darkred !important; /
+    background-color: white !important; 
+}
 
-        /* Card styling */
-        .rpi {
-            width: 150px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            margin: 8px;
-        }
 
-        .card-body {
-            padding: 12px;
-            text-align: center;
-        }
+.sidenav .nav-link.active {
+    color: darkred !important; 
+}
 
-        .card-body h6 {
-            margin-bottom: 15px;
-            font-size: 13px;
-            color: #333;
-        }
+    .navbar, .page-header, .card-header {
+        background-color: #8B0000;
+        color: white !important;
+    }
 
-        /* Progress bar container */
-        .progress {
-            background-color: #f1f1f1;
-            border-radius: 16px;
-            overflow: hidden;
-            height: 20px;
-            width: 100%;
-        }
+    .btn-primary {
+        background-color: #8B0000 !important; 
+        border-color: #8B0000 !important;
+        color: white !important; 
+    }
 
-        /* Progress bar itself */
-        .progress-bar {
-            background-color: #4caf50;
-            height: 100%;
-            text-align: center;
-            color: #fff;
-            line-height: 20px; /* vertically centers the text */
-            transition: width 0.4s ease;
-        }
+    .btn-primary:hover {
+        background-color: #a00000 !important;
+        border-color: #a00000 !important;
+    }
 
-    </style>
+    .card, .table {
+        background-color: #fff; 
+        color: black; 
+    }
+
+    .text-primary, .text-secondary, .text-success, .text-danger, .text-info {
+        color: black !important; 
+    }
+
+    .bg-gradient-primary-to-secondary {
+        background: linear-gradient(90deg, #8B0000, #600000) !important;
+    }
+
+    .progress-bar {
+        background-color: #8B0000 !important; 
+    }
+
+    .page-header-title, .page-header-subtitle, .small {
+        color: darkgrey; 
+    }
+</style>
 </head>
 <body class="nav-fixed">
 
@@ -450,6 +441,7 @@
                 viewer.zoomTo(1);
             },
         });
+        
 
     </script>
 
