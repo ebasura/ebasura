@@ -20,6 +20,22 @@ class User
         
     }
 
+    /**
+     * check if the user is admin
+     * @return boolean
+     */
+    public function adminAccessOnly() 
+    {
+
+        $user = $this->getUserDetails();
+        // 1 - Administrator, 2 - Staff
+        if($user['user_role'] === 1) {
+            return true;
+        }
+        return false;
+
+    }
+
     public function getAllUser() 
     {
         $sql = "SELECT * FROM `users` INNER JOIN `user_details` ON user_details.user_id = users.user_id";

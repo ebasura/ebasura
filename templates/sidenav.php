@@ -26,9 +26,14 @@
                         <a class="nav-link" href="index.php">
                             Overview
                         </a>
+                        <?php
+                        $user = new User();
+                        if($user->adminAccessOnly()):
+                    ?>
                         <a class="nav-link" href="monitor.php">Real-time Monitoring
                             <span class="badge ms-auto"><i class="fa fa-dot-circle text-danger"></i> </span>
                         </a>
+                        <?php endif; ?>
                     </nav>
                 </div>
                 <a class="nav-link" href="analytics.php">
@@ -39,10 +44,12 @@
                     <div class="nav-link-icon"><i data-feather="book"></i></div>
                     Reports
                 </a>
+                <?php    if($user->adminAccessOnly()): ?>
                 <a class="nav-link" href="logs.php">
                     <div class="nav-link-icon"><i data-feather="file-text"></i></div>
                     Logs
                 </a>
+                <?php endif; ?>
 
                 <!-- Sidenav Heading (Addons)-->
                 <div class="sidenav-menu-heading">Configuration</div>
@@ -52,6 +59,10 @@
                     <div class="nav-link-icon"><i data-feather="settings"></i></div>
                     Account Settings
                 </a>
+
+                <?php
+                    if($user->adminAccessOnly()):
+                ?>
                 <div class="sidenav-menu-heading">Admin Configuration</div>
                 <!-- Sidenav Link (Tables)-->
                 <a class="nav-link" href="user-settings.php">
@@ -63,6 +74,7 @@
                     <div class="nav-link-icon"><i data-feather="tool"></i></div>
                     System Settings
                 </a>
+                <?php endif; ?>
                
             </div>
         </div>

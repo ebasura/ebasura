@@ -209,7 +209,9 @@
                         <div class="col-lg-12 mb-2">
                             <div class="card">
                                 <div class="card-body">
-                                    <div id="daily_logs_chart"></div>
+                                <div class="ratio ratio-16x9">
+                                <iframe src="https://api.ebasura.online/dash/"></iframe>
+                                </div>
                                 </div>
                             </div>
                         </div>

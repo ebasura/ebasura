@@ -26,7 +26,7 @@ const NOTIFY_SMS = "+1234567890";
 const ALERT_THRESHOLD = 90; // Percentage at which to trigger alerts
 
 // 
-const EMAIL_CONFIRMATION = true;
+const EMAIL_CONFIRMATION = false;
 const MAX_LOGIN_ATTEMPTS = 12;
 
 
