@@ -20,6 +20,20 @@ if ($login->isLoggedIn()) {
     <title>Login | <?= APP_NAME ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Android Chrome -->
+      <link rel="icon" sizes="192x192" href="assets/img/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="assets/img/android-chrome-512x512.png">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="assets/img/site.webmanifest">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/my-login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">

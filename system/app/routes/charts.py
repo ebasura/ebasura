@@ -15,14 +15,23 @@ def create_dash(server):
         dcc.Dropdown(id='dropdown-selection', 
                      options=[{'label': 'Recyclable', 'value': 'Recyclable'},
                               {'label': 'Non-recyclable', 'value': 'Non-recyclable'}],
-                     value='Recyclable'),
-        dcc.Graph(id='graph-content'),
-        dcc.Interval(id='interval-component', interval=1000, n_intervals=0),
+                     value='Recyclable',
+                     placeholder="Select waste type"),
+        dcc.Loading(  # Add a loading spinner for better user feedback
+            id="loading-icon",
+            type="default",
+            children=[
+                dcc.Graph(id='graph-content')
+            ]
+        ),
+        dcc.Interval(id='interval-component', interval=10000, n_intervals=0),  # Reduce query interval to avoid overloading
+        html.Div(id='no-data-message')  # Placeholder for no data feedback
     ])
 
     # Define the callback to update the graph based on selected waste type
     @dash.callback(
-        Output('graph-content', 'figure'),
+        [Output('graph-content', 'figure'),
+         Output('no-data-message', 'children')],
         [Input('dropdown-selection', 'value'),
          Input('interval-component', 'n_intervals')]
     )
@@ -34,41 +43,49 @@ def create_dash(server):
         INNER JOIN waste_type ON waste_type.waste_type_id = waste_data.waste_type_id
         WHERE waste_type.name = %s;
         """
-        # Fetch the start date from the database
-        result = db.fetch(sql_start_date, (waste_type,))
-        start_date = result[0]['start_date'] if result else datetime.now().date()
+        try:
+            # Fetch the start date from the database
+            result = db.fetch(sql_start_date, (waste_type,))
+            start_date = result[0]['start_date'] if result else datetime.now().date()
 
-        # Get the current date
-        today = datetime.now().date()
+            # Get the current date
+            today = datetime.now().date()
 
-        # SQL query to get the waste data, grouping by day from the start date to today
-        sql = """
-        SELECT DATE(waste_data.timestamp) AS date, COUNT(waste_data.waste_type_id) as count
-        FROM waste_data
-        INNER JOIN waste_type ON waste_type.waste_type_id = waste_data.waste_type_id
-        WHERE waste_type.name = %s
-        AND waste_data.timestamp BETWEEN %s AND %s
-        GROUP BY DATE(waste_data.timestamp)
-        ORDER BY DATE(waste_data.timestamp);
-        """
-        
-        # Fetch the data from the database for the range from start date to today
-        rows = db.fetch(sql, (waste_type, start_date, today))
-        
-        # If no data returned, handle empty data gracefully
-        if not rows:
-            return px.line()  # Return an empty graph if no data is found
+            # SQL query to get the waste data, grouping by day from the start date to today
+            sql = """
+            SELECT DATE(waste_data.timestamp) AS date, COUNT(waste_data.waste_type_id) as count
+            FROM waste_data
+            INNER JOIN waste_type ON waste_type.waste_type_id = waste_data.waste_type_id
+            WHERE waste_type.name = %s
+            AND waste_data.timestamp BETWEEN %s AND %s
+            GROUP BY DATE(waste_data.timestamp)
+            ORDER BY DATE(waste_data.timestamp);
+            """
+            
+            # Fetch the data from the database for the range from start date to today
+            rows = db.fetch(sql, (waste_type, start_date, today))
+            
+            # If no data returned, handle empty data gracefully
+            if not rows:
+                return px.line(), "No data available for the selected waste type."
 
-        # Convert rows to a DataFrame
-        df = pd.DataFrame(rows, columns=['date', 'count'])
-        
-        # Get the data up to the current day + n_intervals (making it progressive)
-        current_date_range = df[df['date'] <= start_date + timedelta(days=n)]
+            # Convert rows to a DataFrame
+            df = pd.DataFrame(rows, columns=['date', 'count'])
+            
+            # Filter the data up to the current day + n_intervals (making it progressive)
+            current_date_range = df[df['date'] <= start_date + timedelta(days=n)]
 
-        # Create a time series line chart with the fetched data (waste per day)
-        fig = px.line(current_date_range, x='date', y='count', title=f'Waste Data per Day for {waste_type}')
-        fig.update_layout(transition_duration=500)
+            # Create a time series line chart with the fetched data (waste per day)
+            fig = px.line(current_date_range, x='date', y='count', title=f'Waste Data per Day for {waste_type}')
+            fig.update_layout(
+                xaxis_title='Date',
+                yaxis_title='Waste Count',
+                transition_duration=500
+            )
 
-        return fig
+            return fig, ""  # Return the figure and an empty message for no-data
+        except Exception as e:
+            # Handle database or query failure
+            return px.line(), f"Error fetching data: {str(e)}"
 
     return dash

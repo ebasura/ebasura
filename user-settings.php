@@ -6,11 +6,8 @@ if (!$login->isLoggedIn()) {
     die();
 }
 
-
 $user_obj = new User();
 $users = $user_obj->getAllUser();
-
-
 
 ?>
 <!DOCTYPE html>
@@ -20,15 +17,26 @@ $users = $user_obj->getAllUser();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>User Settings | E-Basura Monitoring System</title>
     <link href="css/styles.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"/>
+    <!-- Android Chrome -->
+    <link rel="icon" sizes="192x192" href="assets/img/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="assets/img/android-chrome-512x512.png">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="assets/img/site.webmanifest">    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="assets/css/custom.css">
-
-    </head>
+</head>
 <body>
     <?php include __DIR__ . '/templates/topnav.php'; ?>
     <div id="layoutSidenav">
@@ -72,10 +80,10 @@ $users = $user_obj->getAllUser();
                                             <td><?php echo $user['username']; ?></td>
                                             <td><?php echo $user['email']; ?></td>
                                             <td>
-                                            <div class="btn-group">
-                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fa-solid fa-pencil"></i></button>
-                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-regular fa-trash-can"></i></button>
-                                            </div>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark me-2 edit-user-btn" data-user-id="<?php echo $user['id']; ?>" data-username="<?php echo $user['username']; ?>" data-email="<?php echo $user['email']; ?>"><i class="fa-solid fa-pencil"></i></button>
+                                                    <button class="btn btn-datatable btn-icon btn-transparent-dark delete-user-btn" data-user-id="<?php echo $user['id']; ?>"><i class="fa-regular fa-trash-can"></i></button>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -189,8 +197,61 @@ $users = $user_obj->getAllUser();
     <script src="assets/js/sha512.min.js"></script>
     <script src="assets/js/register.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const dataTable = new simpleDatatables.DataTable("#user_accounts_table")
+        const dataTable = new simpleDatatables.DataTable("#user_accounts_table");
+
+        // Handle edit button click
+        $(document).on('click', '.edit-user-btn', function () {
+            const userId = $(this).data('user-id');
+            const username = $(this).data('username');
+            const email = $(this).data('email');
+
+            $('#editUserId').val(userId);
+            $('#editUsername').val(username);
+            $('#editEmail').val(email);
+
+            $('#editUserModal').modal('show');
+        });
+
+        // Handle delete button click with SweetAlert
+        $(document).on('click', '.delete-user-btn', function () {
+            const userId = $(this).data('user-id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'delete_user.php', // Handle the user deletion in your server-side script
+                        method: 'POST',
+                        data: { user_id: userId },
+                        success: function (response) {
+                            Swal.fire(
+                                'Deleted!',
+                                'User has been deleted.',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        },
+                        error: function () {
+                            Swal.fire(
+                                'Error!',
+                                'An error occurred while deleting the user.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
