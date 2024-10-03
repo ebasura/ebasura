@@ -14,8 +14,27 @@
                 break;
 
             case 'userRegister':
+                adminAccessOnly();
                 $register = new Register();
                 $response = $register->userRegister($_POST['username'], $_POST['email'], $_POST['password'], $_POST['confirm_password'], $_POST['user_role']);
+                break;
+            
+            case 'deleteUser':
+                adminAccessOnly();
+                $user = new User(); 
+                $user->deleteUser($_POST['user_id']);
+                break;
+
+            case 'editUser':
+                adminAccessOnly();
+                $user = new User(); 
+                $user->editUser($_POST['user_id'], $_POST['username'], $_POST['email'], $_POST['role'], $_POST['password']);
+                break;
+
+            case 'fetchUser':
+                adminAccessOnly();
+                $user = new User(); 
+                $user->fetchUser($_POST['user_id']);
                 break;
             case 'editProfile':
                 $user = new User();
@@ -91,3 +110,12 @@
 
         }
     }
+
+function adminAccessOnly(){
+    $user = new User(); 
+    if(!$user->adminAccessOnly()){
+        echo json_encode(["success"=> false, "message" => "You have no permission to do this"]);
+        return false;
+    }
+    return true;
+}

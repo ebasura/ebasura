@@ -38,7 +38,9 @@ class User
 
     public function getAllUser() 
     {
-        $sql = "SELECT * FROM `users` INNER JOIN `user_details` ON user_details.user_id = users.user_id";
+        $sql = "SELECT * FROM `users` 
+        INNER JOIN `user_details` ON user_details.user_id = users.user_id 
+        WHERE users.user_id != -1";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
 
@@ -250,6 +252,41 @@ class User
             echo json_encode(["success" => false, "message" => "Error: Something happened to our end."]);
         }
 
+    }
+
+    public function deleteUser($id) 
+    {
+        $sql = "DELETE FROM users WHERE user_id = :uid";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(":uid", $id);
+        if($stmt->execute()){
+            return true;
+        }
+            return false;
+    }
+
+    public function editUser($id, $username, $email, $role, $password)
+    {
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "UPDATE users SET username = :username, email = :email, password = :pass, user_role = :ur WHERE user_id = :uid";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":pass", $password);
+        $stmt->bindParam(":ur", $role);
+        $stmt->bindParam(":uid", $id);
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public function fetchUser($id){
+        echo json_encode($this->getUserData($id)) ;
     }
 
 
