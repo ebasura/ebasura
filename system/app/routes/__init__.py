@@ -11,8 +11,13 @@ from ..routes.detection import detection_bp
 from ..routes.gauge import gauge_bp
 from ..engine import db
 from .charts import create_dash
+import logging
+
 def create_app():
     app = Flask(__name__)
+    # log = logging.getLogger('werkzeug')
+    # log.setLevel(logging.ERROR)
+
     create_dash(app)
     UPLOAD_FOLDER = 'models'    
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

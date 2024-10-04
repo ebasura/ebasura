@@ -3,8 +3,9 @@ import tflite_runtime.interpreter as tflite # type: ignore
 import numpy as np
 import base64
 from ..engine import db 
-
-
+from .servo import set_servo_angle
+import json
+import time
 def get_active_model():
     
     query = "SELECT * FROM models INNER JOIN active_model ON active_model.model_id = models.id WHERE active_model.is_active;"
@@ -13,6 +14,7 @@ def get_active_model():
         return model['file_path']
     else:
         return "models/vww_96_grayscale_quantized.tflite"
+    
 
 model = get_active_model()
 
@@ -70,21 +72,24 @@ def get_frame_data():
         if predicted_class_index < len(labels):
             predicted_label = labels[predicted_class_index]
         else:
-            predicted_label = "Unknown"
+            predicted_label = "nothing"
 
         # Encode the frame in JPEG format
         _, buffer = cv2.imencode('.jpg', frame)
 
         # Convert to base64 to include in JSON
         frame_encoded = base64.b64encode(buffer).decode('utf-8')
+        
 
         # Return JSON data
         data = {
             "predicted_label": predicted_label,
             "image": frame_encoded
         }
-
+        
+        
         return data
+
 
     except Exception as e:
         print(f"Error: {e}")
@@ -92,3 +97,34 @@ def get_frame_data():
 
     finally:
         cap.release()
+
+def servo():
+    print('loopingg')
+    json_data = json.dumps(get_frame_data())
+    data_dict = json.loads(json_data)
+    predicted_label = data_dict["predicted_label"]
+
+    if predicted_label == 'nothing':
+        time.sleep(1)                   
+        set_servo_angle(90) 
+        time.sleep(2) 
+        print('nothing')
+    elif predicted_label == 'recyclable':
+        set_servo_angle(90) 
+        time.sleep(1)
+        set_servo_angle(0)
+        print('recyclable')
+
+        time.sleep(5) 
+        set_servo_angle(90) 
+    elif predicted_label == 'non-recyclable':
+        set_servo_angle(90) 
+        time.sleep(1)
+        set_servo_angle(180)
+        print('non-recyclable')
+        time.sleep(5) 
+        set_servo_angle(90) 
+    else:
+        set_servo_angle(90) 
+
+

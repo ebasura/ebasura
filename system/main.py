@@ -1,6 +1,7 @@
 from threading import Thread
 from app.routes import create_app
 from app.ebasura.bin_level import recyclable_bin, non_recyclable_bin
+from app.ebasura import live_monitoring
 import time
 import sys
 import RPi.GPIO as GPIO
@@ -9,6 +10,7 @@ def run_flask_app():
     """Start the Flask application."""
     api_server = create_app()
     api_server.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)
+
 
 def run_gpio_bin_level():
     """Run GPIO bin level measurement in a separate thread."""
@@ -23,14 +25,26 @@ def run_gpio_bin_level():
 if __name__ == "__main__":
     try:
 
+       
         flask_thread = Thread(target=run_flask_app)
         flask_thread.start()
         
+        #live_monitoring = Thread(target=live_monitoring.get_frame_data)
+        #live_monitoring.start()
+        
+        # servo = Thread(target=live_monitoring.servo)
+        #servo.start()
+        
         gpio_thread = Thread(target=run_gpio_bin_level)
         gpio_thread.start()
-
+        
         flask_thread.join()
         gpio_thread.join()
+        #live_monitoring.join()
+        #servo.join()
+        
+        
+        
 
     except KeyboardInterrupt:
         print("Shutting down...")
