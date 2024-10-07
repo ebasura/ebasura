@@ -1,3 +1,0 @@
-recyclable
-non-recyclable
-nothing
