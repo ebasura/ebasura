@@ -104,9 +104,11 @@
        const binId = document.getElementById('trash_bin_selector').value; // Get selected bin
 
        const data = await fetchData(year, binId); // Fetch data from the API
+       const iframe = document.getElementById('binIframe');
 
-       // Create or update the chart with new data
+       iframe.src = `https://backend.ebasura.online/daily-waste/${binId}/`;
        createChart(data);
+
    }
 
    // Initial chart load with default values

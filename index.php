@@ -274,8 +274,8 @@
                             <div class="card">
                                 <div class="card-body">
                                 <div class="ratio ratio-16x9">
-                                <iframe src="https://backend.ebasura.online/daily-waste/cas/"></iframe>
-                                </div>
+                                <iframe id="binIframe" src="https://backend.ebasura.online/daily-waste/1/" style="border: 0;"></iframe>
+                                    </div>
                                 </div>
                             </div>
                         </div>
