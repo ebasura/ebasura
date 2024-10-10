@@ -36,9 +36,9 @@
                         <?php endif; ?>
                     </nav>
                 </div>
-                <a class="nav-link" href="analytics.php">
+                <a class="nav-link" href="forecast.php">
                     <div class="nav-link-icon"><i data-feather="bar-chart-2"></i></div>
-                    Analytics
+                    Forecast
                 </a>
                 <a class="nav-link" href="reports.php">
                     <div class="nav-link-icon"><i data-feather="book"></i></div>

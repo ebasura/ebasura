@@ -14,7 +14,7 @@ if (!$login->isLoggedIn()) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Analytics | E-Basura Monitoring System</title>
+    <title>Forecast | E-Basura Monitoring System</title>
     <link href="css/styles.css" rel="stylesheet" />
     <!-- Android Chrome -->
     <link rel="icon" sizes="192x192" href="assets/img/android-chrome-192x192.png">
