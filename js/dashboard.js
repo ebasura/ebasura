@@ -54,32 +54,30 @@ function updateGauge(non_recycle = 0, recycle = 0   ) {
  * TODO: dynamically fetch from the python backend to fetch the values
  * Update the gauge
  */
-function readGaugeValue(){
-    updateGauge(0,0)
-    setInterval(async () => {
-
-        
+function readGaugeValue() {
+    updateGauge(0, 0);
+    (async () => {
         try {
-            const apiBaseUrl = bitress.Http.system_monitoring; // Ensure this variable is properly set
-            const response = await fetch(`${apiBaseUrl}/gauge`); // Use template literal with `${}`
+            // Get the selected trash bin ID from the select element
+            var selectedTrashBinId = $('#trash_bin_selector').val();
+
+            const apiBaseUrl = bitress.Http.system_monitoring;
+            // Use the selected ID to construct the API URL
+            const response = await fetch(`${apiBaseUrl}/gauge/${selectedTrashBinId}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
 
-            $("#recyclable_bin_value").text(data.recyclable_bin)
-            $("#non_recyclable_bin_value").text(data.non_recyclable_bin)
-
+            $("#recyclable_bin_value").text(data.recyclable_bin);
+            $("#non_recyclable_bin_value").text(data.non_recyclable_bin);
 
             updateGauge(data.recyclable_bin, data.non_recyclable_bin);
-
 
         } catch (error) {
             console.error('Error fetching system info:', error);
         }
-
-
-    }, 1000);
+    })();
 }
 
 
@@ -316,9 +314,14 @@ var chart = new ApexCharts(document.querySelector("#trash_bin_weights"), options
 chart.render();
 
 function init(){
-    liveVideoMonitoring()
-    systemMonitoring()
+    // liveVideoMonitoring()
+    // systemMonitoring()
     readGaugeValue()
 }
 
 window.onload = init;
+
+
+$('#trash_bin_selector').on('change', function() {
+    readGaugeValue();
+});

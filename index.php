@@ -35,6 +35,35 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css" integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/custom.css">
+    <style>
+        .status-icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: gray; /* Default color before status is known */
+    }
+
+    .status-icon.online {
+        background-color: green;
+    }
+
+    .status-icon.offline {
+        background-color: red;
+    }
+
+    #trash_bin_status_list {
+        list-style-type: none; /* Remove default list bullets */
+        padding: 0;
+    }
+
+    #trash_bin_status_list li {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    </style>
 </head>
 <body class="nav-fixed">
 
@@ -69,6 +98,7 @@
             <!-- Main page content-->
             <div class="container-xl px-4 mt-n10">
                     <div class="row">
+                        
                     <div class="col-xl-3 col-md-6 mb-4">
                         <!-- Dashboard info widget 1-->
                         <div class="card border-start-lg border-start-danger h-100">
@@ -125,11 +155,13 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <div class="small fw-bold text-info mb-1">Conversion rate</div>
-                                        <div class="h5">1.23%</div>
+                                        <div class="small fw-bold text-info mb-1">Select Trash Bin</div>
                                         <div class="text-xs fw-bold text-danger d-inline-flex align-items-center">
-                                            <i class="me-1" data-feather="trending-down"></i>
-                                            1%
+                                            <select name="trash_bin_selector" id="trash_bin_selector" class="form-control form-control-sm" onchange="updateChart()">
+                                                <option value="1" selected >CAS Trash Bin</option>
+                                                <option value="2">CTE Trash Bin</option>
+                                                <option value="3">CBME Trash Bin</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="ms-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
@@ -140,23 +172,41 @@
                 </div>
 
 
-
-
-
                 <div class="row">
+
+                <!-- <div class="col-xl-12 col-md-2 mb-4 ">
+                    <ul id="trash_bin_status_list" class="d-flex justify-content-center list-unstyled p-0 m-0">
+                        <li id="trash_bin_1_status" class="me-3">
+                            <span class="status-icon online" id="status_icon_1"></span>
+                            CAS Trash Bin
+                        </li>
+                        <li id="trash_bin_2_status" class="me-3">
+                            <span class="status-icon" id="status_icon_2"></span>
+                            CTE Trash Bin
+                        </li>
+                        <li id="trash_bin_3_status">
+                            <span class="status-icon" id="status_icon_3"></span>
+                            CBME Trash Bin
+                        </li>
+                    </ul>
+                </div> -->
+
 
                     <div class="col-lg-8 mb-2">
                         <div class="card">
                             <div class="card-header bg-transparent">
-                                <div class="d-flex float-end w-25">
-                                    <select id="monthly_log_option" class="form-control">
-                                        <option selected disabled>Choose Year</option>
-                                        <option>2024</option>
-                                    </select>
+                                
+                                <div class="d-flex float-start w-50">
+                                <label for="year">Select Year:</label>
+                                <select class="form-control" id="wasteChartyear" onchange="updateChart()">
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024" selected>2024</option>
+                                </select>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="monthly_logs_chart"></div>
+                                <div id="wasteChart"></div>
                             </div>
                         </div>
                     </div>
@@ -193,6 +243,8 @@
 
                     <div class="col-lg-8 mb-2">
 
+                    
+
                         <div class="col-lg-12 mb-2">
                             <div class="card">
                                 <div class="card-header">Logs</div>
@@ -222,7 +274,7 @@
                             <div class="card">
                                 <div class="card-body">
                                 <div class="ratio ratio-16x9">
-                                <iframe src="https://api.ebasura.online/dash/"></iframe>
+                                <iframe src="https://backend.ebasura.online/daily-waste/cas/"></iframe>
                                 </div>
                                 </div>
                             </div>
@@ -231,15 +283,6 @@
 
 
                     <div class="col-lg-4 mb-2">
-
-                        <div class="card card-header-actions mb-4">
-                            <div class="card-header">
-                                Trash Bin Weights
-                            </div>
-                            <div class="card-body">
-                                <div id="trash_bin_weights"></div>
-                            </div>
-                        </div>
 
                         <div class="card mb-4">
                             <div class="card-header"> Reports</div>
@@ -359,6 +402,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js" integrity="sha512-EC3CQ+2OkM+ZKsM1dbFAB6OGEPKRxi6EDRnZW9ys8LghQRAq6cXPUgXCCujmDrXdodGXX9bqaaCRtwj4h4wgSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/index.js"></script>
+    <script src="js/charts.js"></script>
     <script src="js/dashboard.js"></script>
     <script>
         $(function(){
@@ -388,16 +432,6 @@
                 } ]
             });
         });
-
-
-        const viewer = new Viewer(document.getElementById('image'), {
-            inline: false,
-            toolbar: false,
-            viewed() {
-                viewer.zoomTo(1);
-            },
-        });
-        
 
     </script>
 

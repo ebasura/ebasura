@@ -7,7 +7,7 @@ var bitress = {
     },
     Http: {
         live_monitoring: 'wss://ws.ebasura.online',
-        system_monitoring: 'https://api.ebasura.online'
+        system_monitoring: 'https://backend.ebasura.online'
     }
 };
 

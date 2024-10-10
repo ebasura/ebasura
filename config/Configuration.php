@@ -7,9 +7,9 @@
 
  
 // Database Configuration
-const DB_HOST = "localhost";
-const DB_USER = "root";
-const DB_PASS = "";
+const DB_HOST = "139.99.97.250";
+const DB_USER = "ebasura";
+const DB_PASS = "kWeGKUsHM1nNIf-P";
 const DB_NAME = "monitoring_system";
 
 // System Configuration
