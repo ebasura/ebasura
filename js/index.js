@@ -2,26 +2,12 @@ var bitress = {
     App: {
         lang: "en"
     },
-    Util: {
-        dataTables: {},
-    },
+
     Http: {
-        live_monitoring: 'wss://ws.ebasura.online',
-        system_monitoring: 'https://backend.ebasura.online'
+        api_url: 'https://backend.ebasura.online'
     }
 };
 
-
-const table_logs = new simpleDatatables.DataTable("#table_logs");
-bitress.Util.dataTables = table_logs;
-
-
-/**
- * Fetch the camera feed from the Python API
- */
-bitress.Util.cameraFeed = function(){
-    alert("hello")
-}
 
 bitress.Util.checkServerStatus = function(url) {
     fetch(url)
@@ -38,5 +24,5 @@ bitress.Util.checkServerStatus = function(url) {
 }
 
 // Example usage:
-bitress.Util.checkServerStatus('https://example.com/api/endpoint');
+bitress.Util.checkServerStatus(bitress.Http.api_url);
 
