@@ -46,6 +46,30 @@ if (!$login->isLoggedIn()) {
         h1, h2 {
             text-align: center;
         }
+        #loader {
+    text-align: center;
+    margin-top: 20px;
+        }
+
+        .spinner {
+            margin: 0 auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid lightgray;
+            border-top: 5px solid #1E90FF; /* Blue color */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        #loader p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 
@@ -78,6 +102,11 @@ if (!$login->isLoggedIn()) {
                             <div class="card mb-4">
                                 <div class="card-body">
                                  <div id="forecastCharts"></div>
+                                 <div id="loader" style="display: none;">
+                                    <div class="spinner"></div>
+                                    <p>Loading data, please wait...</p>
+                                </div>
+
                                 </div>
                             </div>
                         </div>
@@ -97,145 +126,215 @@ if (!$login->isLoggedIn()) {
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script src="js/index.js"></script>
         <script>
-        var apiEndpoint = `${bitress.Http.api_url}/api/forecast`;
+// Define the API endpoint
+var apiEndpoint = `${bitress.Http.api_url}/api/forecast`;
 
-        // Fetch data from the API
-        fetch(apiEndpoint)
-            .then(function(response) {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+// Maximum number of retries
+var maxRetries = 5;
+
+// Initial delay before retrying (in milliseconds)
+var retryDelay = 2000; // 2 seconds
+
+// Show the loader initially
+document.getElementById('loader').style.display = 'block';
+
+// Function to check if the endpoint is available
+function checkEndpointAvailability(url) {
+    return fetch(url, { method: 'HEAD' })
+        .then(function(response) {
+            return response.ok;
+        })
+        .catch(function(error) {
+            return false;
+        });
+}
+
+// Function to wait for the endpoint to become available
+function waitForEndpoint(url, retries, delay) {
+    return new Promise(function(resolve, reject) {
+        function attempt() {
+            checkEndpointAvailability(url).then(function(isAvailable) {
+                if (isAvailable) {
+                    resolve();
+                } else if (retries > 0) {
+                    console.log(`Endpoint not available. Retrying in ${delay / 1000} seconds...`);
+                    setTimeout(function() {
+                        retries--;
+                        delay *= 2; // Exponential backoff
+                        attempt();
+                    }, delay);
+                } else {
+                    reject(new Error('API endpoint is not available after multiple attempts.'));
                 }
-                return response.json();
-            })
-            .then(function(data) {
-                // Proceed with data processing and chart rendering
-                renderCharts(data);
-            })
-            .catch(function(error) {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-
-        function renderCharts(data) {
-            var chartsDiv = document.getElementById('cha');
-
-            // Group data by bin_name
-            var bins = {};
-
-            data.forEach(function(binData) {
-                var binName = binData.bin_name;
-                if (!bins[binName]) {
-                    bins[binName] = {};
-                }
-                bins[binName][binData.waste_type] = binData.forecast;
-            });
-
-            Object.keys(bins).forEach(function(binName, index) {
-                var binData = bins[binName];
-                var recyclableData = binData['Recyclable'] || [];
-                var nonRecyclableData = binData['Non-Recyclable'] || [];
-
-                var containerDiv = document.createElement('div');
-                containerDiv.className = 'chart-container';
-
-                var heading = document.createElement('h2');
-                heading.textContent = binName;
-                containerDiv.appendChild(heading);
-
-                var chartDiv = document.createElement('div');
-                chartDiv.id = 'chart' + index;
-                containerDiv.appendChild(chartDiv);
-
-                chartsDiv.appendChild(containerDiv);
-
-                // Function to parse date and time into a timestamp
-                function parseDateTime(dateStr, timeStr) {
-                    // dateStr is in "YYYY-MM-DD"
-                    // timeStr is in "HH:MM AM/PM"
-                    var dateTimeStr = dateStr + ' ' + timeStr;
-                    var dateTime = new Date(dateTimeStr);
-                    if (isNaN(dateTime)) {
-                        console.error('Invalid date/time:', dateStr, timeStr);
-                        return null;
-                    }
-                    return dateTime.getTime();
-                }
-
-                // Process data into timestamped data points
-                function processData(forecastData) {
-                    return forecastData.map(function(item) {
-                        var timestamp = parseDateTime(item.date, item.time);
-                        return {
-                            x: timestamp,
-                            y: item.predicted_level
-                        };
-                    }).filter(function(item) {
-                        return item.x !== null;
-                    }).sort(function(a, b) {
-                        return a.x - b.x;
-                    });
-                }
-
-                var recyclableSeries = processData(recyclableData);
-                var nonRecyclableSeries = processData(nonRecyclableData);
-
-                var options = {
-                    chart: {
-                        type: 'area',
-                        height: 350
-                    },
-                    series: [
-                        {
-                            name: 'Recyclable',
-                            data: recyclableSeries
-                        },
-                        {
-                            name: 'Non-Recyclable',
-                            data: nonRecyclableSeries
-                        }
-                    ],
-                    xaxis: {
-                        type: 'datetime',
-                        title: {
-                            text: 'Date and Time'
-                        },
-                        labels: {
-                            datetimeUTC: false,
-                            format: 'dd MMM HH:mm'
-                        }
-                    },
-                    yaxis: {
-                        title: {
-                            text: 'Predicted Level (%)'
-                        },
-                        min: 0,
-                        max: 100
-                    },
-                    tooltip: {
-                        shared: true,
-                        x: {
-                            format: 'dd MMM yyyy HH:mm'
-                        },
-                        y: {
-                            formatter: function(value) {
-                                return value !== null ? value.toFixed(2) + '%' : 'No Data';
-                            }
-                        }
-                    },
-                    markers: {
-                        size: 4
-                    },
-                    stroke: {
-                        curve: 'smooth'
-                    },
-                    legend: {
-                        position: 'top'
-                    }
-                };
-
-                var chart = new ApexCharts(chartDiv, options);
-                chart.render();
             });
         }
+        attempt();
+    });
+}
+
+// Main function to fetch data and render charts
+function fetchDataAndRenderCharts() {
+    // Fetch data from the API
+    fetch(apiEndpoint)
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            // Hide the loader
+            document.getElementById('loader').style.display = 'none';
+
+            // Proceed with data processing and chart rendering
+            renderCharts(data);
+        })
+        .catch(function(error) {
+            console.error('There was a problem with the fetch operation:', error);
+            document.getElementById('loader').style.display = 'none';
+            alert('Unable to fetch data from the API. Please try again later.');
+        });
+}
+
+// Call waitForEndpoint and then fetch data and render charts
+waitForEndpoint(apiEndpoint, maxRetries, retryDelay)
+    .then(function() {
+        // Endpoint is available, proceed to fetch data and render charts
+        fetchDataAndRenderCharts();
+    })
+    .catch(function(error) {
+        console.error(error.message);
+        document.getElementById('loader').style.display = 'none';
+        alert('API endpoint is not available. Please try again later.');
+    });
+
+// Function to render charts
+function renderCharts(data) {
+    var chartsDiv = document.getElementById('forecastCharts');
+
+    // Clear any existing charts (optional)
+    chartsDiv.innerHTML = '';
+
+    // Group data by bin_name
+    var bins = {};
+
+    data.forEach(function(binData) {
+        var binName = binData.bin_name;
+        if (!bins[binName]) {
+            bins[binName] = {};
+        }
+        bins[binName][binData.waste_type] = binData.forecast;
+    });
+
+    Object.keys(bins).forEach(function(binName, index) {
+        var binData = bins[binName];
+        var recyclableData = binData['Recyclable'] || [];
+        var nonRecyclableData = binData['Non-Recyclable'] || [];
+
+        var containerDiv = document.createElement('div');
+        containerDiv.className = 'chart-container';
+
+        var heading = document.createElement('h2');
+        heading.textContent = binName;
+        containerDiv.appendChild(heading);
+
+        var chartDiv = document.createElement('div');
+        chartDiv.id = 'chart' + index;
+        containerDiv.appendChild(chartDiv);
+
+        chartsDiv.appendChild(containerDiv);
+
+        // Function to parse date and time into a timestamp
+        function parseDateTime(dateStr, timeStr) {
+            // dateStr is in "YYYY-MM-DD"
+            // timeStr is in "HH:MM AM/PM"
+            var dateTimeStr = dateStr + ' ' + timeStr;
+            var dateTime = new Date(dateTimeStr);
+            if (isNaN(dateTime)) {
+                console.error('Invalid date/time:', dateStr, timeStr);
+                return null;
+            }
+            return dateTime.getTime();
+        }
+
+        // Process data into timestamped data points
+        function processData(forecastData) {
+            return forecastData.map(function(item) {
+                var timestamp = parseDateTime(item.date, item.time);
+                return {
+                    x: timestamp,
+                    y: item.predicted_level
+                };
+            }).filter(function(item) {
+                return item.x !== null;
+            }).sort(function(a, b) {
+                return a.x - b.x;
+            });
+        }
+
+        var recyclableSeries = processData(recyclableData);
+        var nonRecyclableSeries = processData(nonRecyclableData);
+
+        var options = {
+            chart: {
+                type: 'area',
+                height: 350
+            },
+            series: [
+                {
+                    name: 'Recyclable',
+                    data: recyclableSeries
+                },
+                {
+                    name: 'Non-Recyclable',
+                    data: nonRecyclableSeries
+                }
+            ],
+            xaxis: {
+                type: 'datetime',
+                title: {
+                    text: 'Date and Time'
+                },
+                labels: {
+                    datetimeUTC: false,
+                    format: 'dd MMM HH:mm'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Predicted Level (%)'
+                },
+                min: 0,
+                max: 100
+            },
+            tooltip: {
+                shared: true,
+                x: {
+                    format: 'dd MMM yyyy HH:mm'
+                },
+                y: {
+                    formatter: function(value) {
+                        return value !== null ? value.toFixed(2) + '%' : 'No Data';
+                    }
+                }
+            },
+            markers: {
+                size: 4
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            legend: {
+                position: 'top'
+            }
+        };
+
+        var chart = new ApexCharts(chartDiv, options);
+        chart.render();
+    });
+}
+
+
     </script>
 </body>
 
