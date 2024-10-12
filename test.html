@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Forecast Table</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css">
+
+    <!-- Optional: Include Bootstrap CSS for better styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h3 class="mb-4">Waste Forecast Table</h3>
+
+    <!-- Filter Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label for="binNameSelect">Select Bin Name:</label>
+            <select id="binNameSelect" class="form-control">
+                <option value="all">All</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="wasteTypeSelect">Select Waste Type:</label>
+            <select id="wasteTypeSelect" class="form-control">
+                <option value="all">All</option>
+            </select>
+        </div>
+    </div>
+
+    <button id="printPdfBtn" class="btn btn-primary mb-3">Print PDF</button>
+
+    <!-- Loader -->
+    <div id="loader" class="spinner-border text-primary" role="status" style="display:none;">
+        <span class="sr-only">Loading...</span>
+    </div>
+
+    <!-- Table -->
+    <table id="forecastTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Bin Name</th>
+                <th>Waste Type</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Predicted Level</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+
+<script>
+    let forecastData = [];
+    let dataTable;
+
+    // Function to show the loading spinner
+    function showLoader() {
+        $('#loader').show();
+        $("#forecastTable").hide(); // Hide table while loading
+    }
+
+    // Function to hide the loading spinner
+    function hideLoader() {
+        $('#loader').hide();
+        $("#forecastTable").show(); // Show table after loading is done
+    }
+
+    // Function to populate the select options
+    function populateFilters(data) {
+        const binNames = [...new Set(data.map(bin => bin.bin_name))];
+        const wasteTypes = [...new Set(data.map(bin => bin.waste_type))];
+
+        // Populate bin names
+        const binSelect = $('#binNameSelect');
+        binSelect.empty().append(`<option value="all">All</option>`);
+        binNames.forEach(bin => {
+            binSelect.append(`<option value="${bin}">${bin}</option>`);
+        });
+
+        // Populate waste types
+        const wasteTypeSelect = $('#wasteTypeSelect');
+        wasteTypeSelect.empty().append(`<option value="all">All</option>`);
+        wasteTypes.forEach(type => {
+            wasteTypeSelect.append(`<option value="${type}">${type}</option>`);
+        });
+    }
+
+    // Function to transform data and map it to Simple DataTables
+    function populateTableWithSimpleDataTable(data) {
+        const formattedData = data.map(bin => 
+            bin.forecast.map(forecast => [
+                bin.bin_name,
+                bin.waste_type,
+                forecast.date,
+                forecast.time,
+                forecast.predicted_level.toFixed(2)
+            ])
+        ).flat();
+
+        const headings = ['Bin Name', 'Waste Type', 'Date', 'Time', 'Predicted Level'];
+
+        // Initialize Simple DataTable
+        if (dataTable) {
+            dataTable.destroy();  // Destroy the existing Simple DataTable if it exists
+        }
+
+        dataTable = new simpleDatatables.DataTable("#forecastTable", {
+            data: {
+                headings: headings,
+                data: formattedData
+            },
+            searchable: false,
+            fixedHeight: true
+        });
+    }
+
+    // Function to filter the data based on selected bin name and waste type
+    function filterTable() {
+        const selectedBin = $('#binNameSelect').val();
+        const selectedWasteType = $('#wasteTypeSelect').val();
+
+        const filteredData = forecastData.filter(bin => {
+            const binMatch = (selectedBin === 'all' || bin.bin_name === selectedBin);
+            const wasteTypeMatch = (selectedWasteType === 'all' || bin.waste_type === selectedWasteType);
+            return binMatch && wasteTypeMatch;
+        });
+
+        populateTableWithSimpleDataTable(filteredData);
+    }
+
+    // Fetch forecast data from the API and populate the table and filters
+    function fetchData() {
+        showLoader(); // Show loading spinner
+
+        fetch('https://backend.ebasura.online/api/forecast')
+        .then(response => response.json())
+        .then(data => {
+            forecastData = data; // Store fetched data
+            populateFilters(forecastData); // Populate the filter options
+            populateTableWithSimpleDataTable(forecastData); // Populate the table initially
+            hideLoader(); // Hide loading spinner
+
+            // Add event listeners for the select dropdowns
+            $('#binNameSelect').on('change', filterTable);
+            $('#wasteTypeSelect').on('change', filterTable);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            hideLoader(); // Hide loading spinner in case of an error
+        });
+    }
+
+    // Initialize data fetch
+    $(document).ready(function() {
+        fetchData();
+    });
+</script>
+
+</body>
+</html>

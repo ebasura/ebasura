@@ -63,6 +63,30 @@
         font-size: 16px;
     }
 
+    #loader {
+    text-align: center;
+    margin-top: 20px;
+        }
+
+        .spinner {
+            margin: 0 auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid lightgray;
+            border-top: 5px solid #1E90FF; /* Blue color */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        #loader p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 <body class="nav-fixed">
@@ -196,7 +220,7 @@
                         <div class="card">
                             <div class="card-header bg-transparent">
                                 
-                                <div class="d-flex float-start w-50">
+                                <div class="d-flex float-end w-25">
                                 <label for="year">Select Year:</label>
                                 <select class="form-control" id="wasteChartyear" onchange="updateChart()">
                                     <option value="2022">2022</option>
@@ -206,7 +230,11 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="wasteChart"></div>
+                            <div id="loader" style="display: none;">
+                                    <div class="spinner"></div>
+                                    <p>Loading data, please wait...</p>
+                                </div>
+                            <div id="wasteChart"></div>
                             </div>
                         </div>
                     </div>
