@@ -269,11 +269,6 @@ if (!$login->isLoggedIn()) {
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    # TODO: 
-                    
-                    
-
-
                     Swal.fire({
                     title: "Updated!",
                     text: "The model has been updated. Restarting server.",
