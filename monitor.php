@@ -59,11 +59,10 @@ if (!$login->isLoggedIn()) {
             <!-- Main page content-->
             <div class="container px-4">
                 <div class="card">
-                    <div class="card-body   text-center ">
+                    <div class="card-body  text-center ">
                         <div class="video-container">
-                            <img id="video-stream"  alt="Video Stream" class="img-fluid rounded mx-auto d-block">
-                            <h3 class="mt-2">Predicted Category</h3>
-                                <span id="predicted_category">test</span>
+                            <canvas id="videoCanvas" width="640" height="480"></canvas>
+                                <span id="predictions"></span>
 
                         </div>
                     </div>
@@ -89,8 +88,61 @@ if (!$login->isLoggedIn()) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="js/index.js"></script>
-    <script src="js/dashboard.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const canvas = document.getElementById('videoCanvas');
+            const context = canvas.getContext('2d');
+            const predictionsDiv = document.getElementById('predictions');
+
+            let websocket;
+
+            function connectWebSocket() {
+                websocket = new WebSocket('https://websocket.ebasura.online/');
+
+                websocket.onopen = function() {
+                    console.log('WebSocket connection established');
+                };
+
+                websocket.onmessage = function(event) {
+                    try {
+                        // Parse the incoming message
+                        const message = JSON.parse(event.data);
+                        const frameData = message.frame;
+                        const predictions = message.predictions;
+
+                        // Convert the frame data from base64 to an image
+                        const img = new Image();
+                        img.onload = function() {
+                            context.clearRect(0, 0, canvas.width, canvas.height);
+                            context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        };
+                        img.src = frameData;
+
+                        // Display the predictions
+                        predictionsDiv.innerHTML = '<h3>Predictions:</h3>';
+                        predictions.forEach(prediction => {
+                            const label = prediction[0];
+                            const confidence = prediction[1];
+                            predictionsDiv.innerHTML += `<p>${label}: ${(confidence * 100).toFixed(2)}%</p>`;
+                        });
+                    } catch (error) {
+                        console.error('Error processing message:', error);
+                    }
+                };
+
+                websocket.onerror = function(error) {
+                    console.error('WebSocket Error:', error);
+                };
+
+                websocket.onclose = function(event) {
+                    console.warn('WebSocket closed. Attempting to reconnect in 3 seconds...', event.reason);
+                    setTimeout(connectWebSocket, 3000); // Retry connection after 3 seconds
+                };
+            }
+
+            // Start the initial connection
+            connectWebSocket();
+        });
     </script>
 </body>
 </html>
