@@ -5,6 +5,9 @@ if (!$login->isLoggedIn()) {
     header("Location: login.php");
     die();
 }
+
+$settings_obj = new SystemSettings();
+$settings = $settings_obj->getSettings();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,11 +77,23 @@ if (!$login->isLoggedIn()) {
 
                                           <div class="mb-3">
                                               <label class="small mb-1" for="app_name">App Name</label>
-                                              <input class="form-control" id="app_name" type="text" placeholder="Application Name" value="<?php echo APP_NAME; ?>" />
+                                              <input class="form-control" id="app_name" type="text" placeholder="Application Name" value="<?= $settings['app_name']; ?>" />
                                           </div>
+
                                           <div class="mb-3">
                                               <label class="small mb-1" for="app_version">App Version</label>
                                               <input class="form-control" id="app_version" type="text" placeholder="Application Name" value="<?php echo APP_VERSION; ?>" />
+                                          </div>
+
+                                          <hr>
+
+                                          <div class="mb-3">
+                                              <label class="small mb-1" for="trash_bin_selector">Dashboard Trash Bin</label>
+                                              <select name="trash_bin_selector" id="trash_bin_selector" class="form-control">
+                                                  <option value="1" selected >CAS Trash Bin</option>
+                                                  <option value="2">CTE Trash Bin</option>
+                                                  <option value="3">CBME Trash Bin</option>
+                                              </select>
                                           </div>
 
                                       </div>
@@ -87,76 +102,13 @@ if (!$login->isLoggedIn()) {
                            </div>
                        </div>
 
-                       <div class="card card-header-actions mb-4">
-                           <div class="card-header">
-                               Database Configuration
 
-                           </div>
-                           <div class="card-body">
-                               <form>
-                                   <div class="mb-3">
-
-                                   <label for="db_host">DB Host:</label>
-                                   <input class="form-control" id="db_host" type="text" name="db_host" value="<?php echo DB_HOST; ?>">
-                                   </div>
-                                   <div class="mb-3">
-
-                                       <label for="db_user">DB User:</label>
-                                   <input class="form-control" id="db_user" type="text" name="db_user" value="<?php echo DB_USER; ?>">
-                                       </div>
-                                       <div class="mb-3">
-
-                                           <label for="db_pass">DB Password:</label>
-                                   <input class="form-control" id="db_pass" type="password" name="db_pass" value="<?php echo DB_PASS; ?>">
-                                           </div>
-                                           <div class="mb-3">
-
-                                               <label for="db_name">DB Name:</label>
-                                   <input class="form-control" id="db_name" type="text" name="db_name" value="<?php echo DB_NAME; ?>">
-                                               </div>
-
-                                               <div class="mb-3">
-                                       <button type="button" id="update_model" class="btn btn-primary">Save changes</button>
-                                   </div>
-                               </form>
-                           </div>
-                       </div>
 
 
                    </div>
 
                    <div class="col-lg-4">
                        <div class="card card-header-actions mb-4">
-                           <div class="card-header ">
-                               Notification Preferences
-                           </div>
-                           <div class="card-body">
-                               <form>
-                                   <!-- Form Group (notification preference checkboxes)-->
-                                   <div class="form-check mb-3">
-                                       <input class="form-check-input" id="checkAutoGroup" type="checkbox" checked />
-                                       <label class="form-check-label" for="checkAutoGroup">Receive alerts when bin is full. </label>
-                                   </div>
-
-                                   <div class="mb-3">
-                                       <label for="notify_sms">Notification SMS:</label>
-                                       <input class="form-control" type="text" id="notify_sms" name="notify_sms" value="<?php echo NOTIFY_SMS; ?>">
-                                   </div>
-
-                                   <div class="mb-3">
-                                       <label for="alert_threshold">Alert Threshold:</label>
-                                       <input class="form-control" type="number" id="alert_threshold" name="alert_threshold" value="<?php echo ALERT_THRESHOLD; ?>">
-                                   </div>
-
-                                   <div class="mb-3">
-                                       <button type="button" id="update_model" class="btn btn-primary">Save changes</button>
-                                   </div>
-
-                               </form>
-                           </div>
-                       </div>
-
-                       <div class="card card-header-actions ">
                            <div class="card-header">
                                Model Configuration
                                <div class="d-flex">
@@ -175,6 +127,36 @@ if (!$login->isLoggedIn()) {
                                    <div class="mb-3">
                                        <button type="button" id="update_model_button" class="btn btn-primary">Save changes</button>
                                    </div>
+                               </form>
+                           </div>
+                       </div>
+                       <div class="card card-header-actions mb-4">
+                           <div class="card-header ">
+                               Notification Preferences
+                           </div>
+                           <div class="card-body">
+                               <form>
+
+                                   <div class="mb-3">
+                                       <label for="notify_sms">API Key</label>
+                                       <input class="form-control" type="text" id="sms_api_key" name="sms_api_key" value="<?php echo $settings['api_key']; ?>" readonly>
+                                   </div>
+
+
+                                   <div class="mb-3">
+                                       <label for="notify_sms">SMS Receiver</label>
+                                       <input class="form-control" type="text" id="notify_sms" name="notify_sms" value="<?php echo $settings['sms_receiver']; ?>">
+                                   </div>
+
+                                   <div class="mb-3">
+                                       <label for="alert_threshold">Alert Threshold:</label>
+                                       <input class="form-control" type="number" id="alert_threshold" name="alert_threshold" value="<?php echo $settings['alert_threshold']; ?>">
+                                   </div>
+
+                                   <div class="mb-3">
+                                       <button type="button" id="update_model" class="btn btn-primary">Save changes</button>
+                                   </div>
+
                                </form>
                            </div>
                        </div>
