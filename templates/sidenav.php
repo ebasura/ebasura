@@ -49,12 +49,16 @@
                     <div class="nav-link-icon"><i data-feather="file-text"></i></div>
                     Logs
                 </a>
+                <a class="nav-link" href="system-health.php">
+                    <div class="nav-link-icon"><i data-feather="refresh-cw"></i></div>
+                    System Health
+                </a>
                 <?php endif; ?>
 
                 <!-- Sidenav Heading (Addons)-->
                 <div class="sidenav-menu-heading">Configuration</div>
                 <!-- Sidenav Link (Charts)-->
-               
+
                 <a class="nav-link" href="account-settings.php">
                     <div class="nav-link-icon"><i data-feather="settings"></i></div>
                     Account Settings
@@ -69,7 +73,7 @@
                     <div class="nav-link-icon"><i class="fa fa-user-cog"></i></div>
                     Users Settings
                 </a>
-                
+
                 <a class="nav-link" href="system-settings.php">
                     <div class="nav-link-icon"><i data-feather="tool"></i></div>
                     System Settings

@@ -231,23 +231,34 @@ if (!$login->isLoggedIn()) {
             var recyclableData = binData['Recyclable'] || [];
             var nonRecyclableData = binData['Non-Recyclable'] || [];
 
+            // Create card container
             var containerDiv = document.createElement('div');
-            containerDiv.className = 'chart-container';
+            containerDiv.className = 'card mb-4';
 
-            var heading = document.createElement('h2');
+            // Create card header with bin name
+            var cardHeader = document.createElement('div');
+            cardHeader.className = 'card-header text-center';
+
+            var heading = document.createElement('h5');
+            heading.className = 'card-title';
+            heading.className = 'text-white';
             heading.textContent = binName;
-            containerDiv.appendChild(heading);
+            cardHeader.appendChild(heading);
+            containerDiv.appendChild(cardHeader);
+
+            // Create card body for the chart
+            var cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
 
             var chartDiv = document.createElement('div');
             chartDiv.id = 'chart' + index;
-            containerDiv.appendChild(chartDiv);
+            cardBody.appendChild(chartDiv);
+            containerDiv.appendChild(cardBody);
 
             chartsDiv.appendChild(containerDiv);
 
             // Function to parse date and time into a timestamp
             function parseDateTime(dateStr, timeStr) {
-                // dateStr is in "YYYY-MM-DD"
-                // timeStr is in "HH:MM AM/PM"
                 var dateTimeStr = dateStr + ' ' + timeStr;
                 var dateTime = new Date(dateTimeStr);
                 if (isNaN(dateTime)) {
@@ -278,7 +289,13 @@ if (!$login->isLoggedIn()) {
             var options = {
                 chart: {
                     type: 'area',
-                    height: 350
+                    height: 350,
+                    animations: {
+                        enabled: false
+                    },
+                    zoom: {
+                        enabled: false
+                    }
                 },
                 series: [
                     {
@@ -294,7 +311,11 @@ if (!$login->isLoggedIn()) {
                     enabled: false
                 },
                 stroke: {
-                    curve: 'smooth'
+                    curve: 'straight',
+                    width: 1
+                },
+                markers: {
+                    size: 1 // Disable markers
                 },
                 xaxis: {
                     type: 'datetime',
@@ -324,19 +345,25 @@ if (!$login->isLoggedIn()) {
                         }
                     }
                 },
-                markers: {
-                    size: 4
-                },
-                stroke: {
-                    curve: 'smooth'
-                },
                 legend: {
                     position: 'top'
                 }
             };
 
-            var chart = new ApexCharts(chartDiv, options);
-            chart.render();
+            // Create a function to render a chart when it's visible
+            function lazyLoadChart(chartDiv, options) {
+                var observer = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        var chart = new ApexCharts(chartDiv, options);
+                        chart.render();
+                        observer.disconnect(); // Stop observing after rendering
+                    }
+                });
+                observer.observe(chartDiv);
+            }
+
+            // Use the function when creating chart divs
+            lazyLoadChart(chartDiv, options);
         });
     }
 
