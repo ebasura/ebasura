@@ -32,6 +32,11 @@ if (!$login->isLoggedIn()) {
     <link rel="manifest" href="assets/img/site.webmanifest">    <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/custom.css">
+    <style>
+        ul {
+            list-style-type: none;
+        }
+    </style>
 
 </head>
 <body class="nav-fixed">
@@ -58,7 +63,135 @@ if (!$login->isLoggedIn()) {
 
             <!-- Main page content-->
             <div class="container px-4">
+                <div class="row">
 
+                    <div class="col-md-12">
+
+                <!-- Device Status Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title text-white mb-0">
+                            <i class="fas fa-microchip"></i> CAS Bin
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <!-- Ultrasonic Sensor 1 -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-wave-square me-2"></i> Ultrasonic Sensor (1)
+                                </div>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle"></i> Online
+                                </span>
+                            </li>
+                            <!-- Ultrasonic Sensor 2 -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-wave-square me-2"></i> Ultrasonic Sensor (2)
+                                </div>
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-times-circle"></i> Offline
+                                </span>
+                            </li>
+                            <!-- Servo -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-cogs me-2"></i> Servo
+                                </div>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle"></i> Online
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <!-- Device Status Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title text-white mb-0">
+                            <i class="fas fa-microchip"></i> CBME Bin
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <!-- Ultrasonic Sensor 1 -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-wave-square me-2"></i> Ultrasonic Sensor (1)
+                                </div>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle"></i> Online
+                                </span>
+                            </li>
+                            <!-- Ultrasonic Sensor 2 -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-wave-square me-2"></i> Ultrasonic Sensor (2)
+                                </div>
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-times-circle"></i> Offline
+                                </span>
+                            </li>
+                            <!-- Servo -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-cogs me-2"></i> Servo
+                                </div>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle"></i> Online
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <!-- Device Status Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title text-white mb-0">
+                            <i class="fas fa-microchip"></i> CTE Bin
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <!-- Ultrasonic Sensor 1 -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-wave-square me-2"></i> Ultrasonic Sensor (1)
+                                </div>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle"></i> Online
+                                </span>
+                            </li>
+                            <!-- Ultrasonic Sensor 2 -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-wave-square me-2"></i> Ultrasonic Sensor (2)
+                                </div>
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-times-circle"></i> Offline
+                                </span>
+                            </li>
+                            <!-- Servo -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-cogs me-2"></i> Servo
+                                </div>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle"></i> Online
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                    </div>
+                </div>
             </div>
         </main>
 

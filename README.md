@@ -19,11 +19,11 @@
 
 
 - [ ] Logs Page
-- [ ] Analytics Backend
+- [x] Analytics Backend
 - [ ] Alerts and Notification
-- [ ] Capture Image and Insert to Database
+- [x] Capture Image and Insert to Database
 - [ ] Trash Bin Prototype
 
 - [ ] Failsafe (Alerts and Notification)
 - [ ] Check indicator if working
-- [ ] Trash Bin each Department
+- [x] Trash Bin each Department

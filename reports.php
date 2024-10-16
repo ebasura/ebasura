@@ -31,6 +31,7 @@ if (!$login->isLoggedIn()) {
     <!-- Web App Manifest -->
     <link rel="manifest" href="assets/img/site.webmanifest">    
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.css"/>
     <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/custom.css">
@@ -82,10 +83,34 @@ if (!$login->isLoggedIn()) {
                     </div>
                 </div>
             </header>
-
          
             <div class="container px-4">
                 <div class="row">
+                <div class="col-lg-12 mb-2">
+                            <div class="card">
+                                <div class="card-header">Logs</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover dt-responsive" id="waste_logs_table">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Image</th>
+                                                <th>Trash Type</th>
+                                                <th>Date Created</th>
+                                                <th class="no-sort">Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -149,9 +174,11 @@ if (!$login->isLoggedIn()) {
     <script src="js/litepicker.js"></script>
     <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script src="assets/js/index.js"></script>
     <script>
     let forecastData = [];
     let dataTable;
@@ -266,6 +293,33 @@ if (!$login->isLoggedIn()) {
     $(document).ready(function() {
         fetchData();
     });
+
+
+            $('#waste_logs_table').DataTable({
+                "iDisplayLength": 10, 
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                serverMethod: 'post',
+                ajax: {
+                    url:'ajax.php',
+                    data: {
+                        action: 'dtFetchLogs'
+                    }
+                },
+                columns: [
+                    { data: 'waste_id' },
+                    { data: 'waste_image' },
+                    { data: 'waste_type' },
+                    { data: 'date_created' },
+                    { data: 'actions' }
+                ],
+                columnDefs: [ {
+                    "target": "no-sort",
+                    "orderable": false
+                } ]
+            });
+
 </script>
 
 

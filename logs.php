@@ -70,17 +70,23 @@ if (!$login->isLoggedIn()) {
                                         <thead>
                                             <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
+                                            <th scope="col">Full</th>
+                                            <th scope="col">Bin</th>
+                                            <th scope="col">Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                                <th scope="row">1</th>
+                                                <td>Full</td>
+                                                <td>CAS Bin (Recyclabe)</td>
+                                                <td>10/16/24</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>CAS Bin (Non-Recyclabe)</td>
+                                                <td>10/16/24</td>
                                             </tr>
                                         </tbody>
                                         </table>
@@ -97,11 +103,11 @@ if (!$login->isLoggedIn()) {
                                     <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                            <tr>
+                                        <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
+                                            <th scope="col">Full</th>
+                                            <th scope="col">Bin</th>
+                                            <th scope="col">Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -116,39 +122,8 @@ if (!$login->isLoggedIn()) {
                                     </div>
                                 </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-12">
-
-                        <div class="card mb-4">
-                            <div class="card-header">Classification Activity</div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            </tr>
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                        </div>
-            
                     </div>
                 </div>
-
             </div>
         </main>
 

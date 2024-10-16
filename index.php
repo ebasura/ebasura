@@ -259,50 +259,14 @@
                                 <canvas class="responsive-canvas" id="non_recyclable_bin"></canvas>
                             </div>
                         </div>
-
-
-
-
-
                         </div>
-
-
-
 
                     <div class="col-lg-8 mb-2">
-
-                    
-
-                        <div class="col-lg-12 mb-2">
-                            <div class="card">
-                                <div class="card-header">Logs</div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-hover dt-responsive" id="waste_logs_table">
-                                            <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Image</th>
-                                                <th>Trash Type</th>
-                                                <th>Date Created</th>
-                                                <th class="no-sort">Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-lg-12 mb-2">
                             <div class="card">
                                 <div class="card-body">
-                                <div class="ratio ratio-16x9">
-                                <iframe id="binIframe" src="https://backend.ebasura.online/daily-waste/1/" style="border: 0;"></iframe>
+                                <div class="container">
+                                <iframe id="binIframe" src="https://backend.ebasura.online/daily-waste/1/" scrolling="no" style=" width: 100%; height: 500px;  overflow: hidden;"></iframe>
                                     </div>
                                 </div>
                             </div>
@@ -311,33 +275,20 @@
 
 
                     <div class="col-lg-4 mb-2">
-
                         <div class="card mb-4">
                             <div class="card-header"> Reports</div>
                             <div class="list-group list-group-flush small">
                                 <a class="list-group-item list-group-item-action" href="#!">
                                     <i class="fas fa-dollar-sign fa-fw text-blue me-2"></i>
-                                    Earnings Reports
+                                    Bin Forecasts
                                 </a>
                                 <a class="list-group-item list-group-item-action" href="#!">
-                                    <i class="fas fa-tag fa-fw text-purple me-2"></i>
-                                    Average Sale Price
-                                </a>
-                                <a class="list-group-item list-group-item-action" href="#!">
-                                    <i class="fas fa-mouse-pointer fa-fw text-green me-2"></i>
-                                    Engagement (Clicks &amp; Impressions)
-                                </a>
-                                <a class="list-group-item list-group-item-action" href="#!">
-                                    <i class="fas fa-percentage fa-fw text-yellow me-2"></i>
-                                    Conversion Rate
-                                </a>
-                                <a class="list-group-item list-group-item-action" href="#!">
-                                    <i class="fas fa-chart-pie fa-fw text-pink me-2"></i>
-                                    Segments
+                                    <i class="fas fa-dollar-sign fa-fw text-blue me-2"></i>
+                                    Bin Forecasts
                                 </a>
                             </div>
                             <div class="card-footer position-relative border-top-0">
-                                <a class="stretched-link" href="#!">
+                                <a class="stretched-link" href="reports.php">
                                     <div class="text-xs d-flex align-items-center justify-content-between">
                                         View More Reports
                                         <i class="fas fa-long-arrow-alt-right"></i>
