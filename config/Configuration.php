@@ -4,8 +4,6 @@
  * App Configuration
  */
 
-
- 
 // Database Configuration
 const DB_HOST = "139.99.97.250";
 const DB_USER = "ebasura";
@@ -22,10 +20,7 @@ const MAX_UPLOAD_SIZE = 10 * 1024 * 1024;
 
 // System Notification
 const NOTIFY_EMAIL = "admin@e-basura.com";
-const NOTIFY_SMS = "+1234567890";
-const ALERT_THRESHOLD = 90; // Percentage at which to trigger alerts
 
-// 
 const EMAIL_CONFIRMATION = false;
 const MAX_LOGIN_ATTEMPTS = 12;
 

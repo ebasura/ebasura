@@ -8,11 +8,6 @@
                     Alerts
                     <span class="badge bg-warning-soft text-warning ms-auto">4 New!</span>
                 </a>
-                <a class="nav-link d-sm-none" href="#!">
-                    <div class="nav-link-icon"><i data-feather="mail"></i></div>
-                    Messages
-                    <span class="badge bg-success-soft text-success ms-auto">2 New!</span>
-                </a>
                 <!-- Sidenav Menu Heading (Core)-->
                 <div class="sidenav-menu-heading">Home</div>
                 <!-- Sidenav Accordion (Dashboard)-->
@@ -30,26 +25,26 @@
                         $user = new User();
                         if($user->adminAccessOnly()):
                     ?>
-                        <a class="nav-link" href="monitor.php">Real-time Monitoring
+                        <a class="nav-link" href="monitor">Real-time Monitoring
                             <span class="badge ms-auto"><i class="fa fa-dot-circle text-danger"></i> </span>
                         </a>
                         <?php endif; ?>
                     </nav>
                 </div>
-                <a class="nav-link" href="forecast.php">
+                <a class="nav-link" href="forecast">
                     <div class="nav-link-icon"><i data-feather="bar-chart-2"></i></div>
                     Forecast
                 </a>
-                <a class="nav-link" href="reports.php">
+                <a class="nav-link" href="reports">
                     <div class="nav-link-icon"><i data-feather="book"></i></div>
                     Reports
                 </a>
                 <?php    if($user->adminAccessOnly()): ?>
-                <a class="nav-link" href="logs.php">
+                <a class="nav-link" href="logs">
                     <div class="nav-link-icon"><i data-feather="file-text"></i></div>
                     Logs
                 </a>
-                <a class="nav-link" href="system-health.php">
+                <a class="nav-link" href="system-health">
                     <div class="nav-link-icon"><i data-feather="refresh-cw"></i></div>
                     System Health
                 </a>
@@ -59,7 +54,7 @@
                 <div class="sidenav-menu-heading">Configuration</div>
                 <!-- Sidenav Link (Charts)-->
 
-                <a class="nav-link" href="account-settings.php">
+                <a class="nav-link" href="account-settings">
                     <div class="nav-link-icon"><i data-feather="settings"></i></div>
                     Account Settings
                 </a>
@@ -69,12 +64,12 @@
                 ?>
                 <div class="sidenav-menu-heading">Admin Configuration</div>
                 <!-- Sidenav Link (Tables)-->
-                <a class="nav-link" href="user-settings.php">
+                <a class="nav-link" href="user-settings">
                     <div class="nav-link-icon"><i class="fa fa-user-cog"></i></div>
                     Users Settings
                 </a>
 
-                <a class="nav-link" href="system-settings.php">
+                <a class="nav-link" href="system-settings">
                     <div class="nav-link-icon"><i data-feather="tool"></i></div>
                     System Settings
                 </a>
