@@ -105,6 +105,10 @@
                 $dt = new Datatable();
                 $dt->wasteLogs();
                 break;
+
+            case 'editCurrentTrashBin':
+                $res = new SystemSettings();
+                $res->setCurrentTrashBin($_POST['bin_id']);
             default:
                 break;
 

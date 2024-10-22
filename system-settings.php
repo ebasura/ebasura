@@ -32,9 +32,10 @@ $settings = $settings_obj->getSettings();
     <link rel="icon" type="image/png" href="assets/img/favicon.ico">
 
     <!-- Web App Manifest -->
-    <link rel="manifest" href="assets/img/site.webmanifest">    <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
+    <link rel="manifest" href="assets/img/site.webmanifest">   
+    <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
 
 </head>
@@ -70,10 +71,28 @@ $settings = $settings_obj->getSettings();
 
                            </div>
                            <div class="card-body">
-                               <form>
                                   <div class="row">
-
                                       <div class="col-md-12">
+
+                                      <form>
+
+                                      <div class="mb-3">
+                                              <label class="small mb-1" for="trash_bin_selector">Dashboard Trash Bin</label>
+                                              <select name="trash_bin_selector" id="trash_bin_selector" class="form-control">
+                                                  <option value="1" selected >CAS Trash Bin</option>
+                                                  <option value="2">CTE Trash Bin</option>
+                                                  <option value="3">CBME Trash Bin</option>
+                                              </select>
+                                          </div>
+
+
+                                          <div class="mb-2">
+                                            <button class="btn btn-primary" id="changeCurrentBinButton">Save changes</button>
+                                          </div>
+
+                                      </form>
+
+                                    
 
                                           <div class="mb-3">
                                               <label class="small mb-1" for="app_name">App Name</label>
@@ -85,20 +104,9 @@ $settings = $settings_obj->getSettings();
                                               <input class="form-control" id="app_version" type="text" placeholder="Application Name" value="<?php echo APP_VERSION; ?>" />
                                           </div>
 
-                                          <hr>
-
-                                          <div class="mb-3">
-                                              <label class="small mb-1" for="trash_bin_selector">Dashboard Trash Bin</label>
-                                              <select name="trash_bin_selector" id="trash_bin_selector" class="form-control">
-                                                  <option value="1" selected >CAS Trash Bin</option>
-                                                  <option value="2">CTE Trash Bin</option>
-                                                  <option value="3">CBME Trash Bin</option>
-                                              </select>
-                                          </div>
 
                                       </div>
                                   </div>
-                               </form>
                            </div>
                        </div>
 
@@ -210,10 +218,9 @@ $settings = $settings_obj->getSettings();
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-    <script src="js/litepicker.js"></script>
-    <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script src="assets/js/settings.js"></script>
     <script>
     $(document).ready(function () {
     $("#upload_model").on('click', function (e) {

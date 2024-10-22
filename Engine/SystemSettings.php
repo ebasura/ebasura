@@ -27,4 +27,29 @@ class SystemSettings
         return false;
     }
 
+
+    public function setCurrentTrashBin($binId)
+    {
+
+        try {
+
+            $sql = "UPDATE system_settings SET setting_value = :bin_id WHERE setting_name = 'active_bin'";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(":bin_id", $binId);
+            if($stmt->execute()){
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'Settings updated successfully'
+                ]);
+            }
+            
+        } catch (Exception $e) {
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Error: ' . $e->getMessage()
+            ]);
+        }
+       
+    }
+
 }
