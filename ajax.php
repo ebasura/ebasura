@@ -107,7 +107,7 @@
                 break;
 
             case 'editCurrentTrashBin':
-                $res = new SystemSettings();
+                $res = new Basura();
                 $res->setCurrentTrashBin($_POST['bin_id']);
             default:
                 break;

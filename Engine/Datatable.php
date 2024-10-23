@@ -49,7 +49,7 @@ class Datatable {
         $stmt = $this->db->prepare("SELECT * FROM waste_data
         INNER JOIN waste_type ON waste_type.waste_type_id = waste_data.waste_type_id
         INNER JOIN waste_bins ON waste_bins.bin_id = waste_data.bin_id 
-        WHERE 1 ".$searchQuery."  LIMIT :limit,:offset");
+        WHERE 1 ".$searchQuery." ORDER BY timestamp DESC  LIMIT :limit,:offset");
 
         // Bind values
         foreach ($searchArray as $key=>$search) {
@@ -68,7 +68,8 @@ class Datatable {
 
             $data[] = array(
                 "waste_id"=>$row['waste_data_id'],
-                "waste_image"=> '<img src="'. $row['image_url'] .'">',
+                "waste_image" => '<img src="'. $row['image_url'] .'" class="img-thumbnail w-50" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(\'' . $row['image_url'] . '\')">',
+                "bin_name"=> $row['bin_name'],
                 "waste_type"=> ($row['name'] == 'Recyclable') ? '<div class="badge bg-primary rounded-pill">' . $row['name'] . '</div>' : '<div class="badge bg-secondary rounded-pill">' . $row['name'] . '</div>',
                 "date_created"=> $row['timestamp'],
                 "actions"=> '<div class="btn-group"><button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fa-solid fa-ellipsis-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-regular fa-trash-can"></i></button></div>'

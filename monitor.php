@@ -97,7 +97,7 @@ if (!$login->isLoggedIn()) {
             let websocket;
 
             function connectWebSocket() {
-                websocket = new WebSocket('https://websocket.ebasura.online/');
+                websocket = new WebSocket('https://cas-websocket.ebasura.online/');
 
                 websocket.onopen = function() {
                     console.log('WebSocket connection established');

@@ -27,29 +27,23 @@ class SystemSettings
         return false;
     }
 
-
-    public function setCurrentTrashBin($binId)
+     /**
+     * Get the value of a specific setting by its name
+     * @param string $setting_name
+     * @return string|false
+     */
+    public function getSettingByName(string $setting_name)
     {
+        $sql = "SELECT `setting_value` FROM `system_settings` WHERE `setting_name` = :setting_name";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':setting_name', $setting_name, \PDO::PARAM_STR);
 
-        try {
-
-            $sql = "UPDATE system_settings SET setting_value = :bin_id WHERE setting_name = 'active_bin'";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(":bin_id", $binId);
-            if($stmt->execute()){
-                echo json_encode([
-                    'success' => true, 
-                    'message' => 'Settings updated successfully'
-                ]);
-            }
-            
-        } catch (Exception $e) {
-            echo json_encode([
-                'success' => false, 
-                'message' => 'Error: ' . $e->getMessage()
-            ]);
+        if ($stmt->execute()) {
+            return $stmt->fetchColumn(); // Return the value of the setting
         }
-       
+
+        return false; // Return false if no setting is found or on failure
     }
+
 
 }
