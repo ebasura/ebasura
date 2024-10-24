@@ -69,58 +69,34 @@ function readGaugeValue() {
             }
             const data = await response.json();
 
-            $("#recyclable_bin_value").text(data.recyclable_bin);
-            $("#non_recyclable_bin_value").text(data.non_recyclable_bin);
+            let recyclable_depth = data.recyclable_bin;
+            let non_recyclable_depth = data.non_recyclable_bin;
 
-            updateGauge(data.recyclable_bin, data.non_recyclable_bin);
+            const INITIAL_DEPTH_CM = bitress.Utils.settings.initial_depth;
+
+            if (recyclable_depth > INITIAL_DEPTH_CM) {
+                recyclable_depth = INITIAL_DEPTH_CM;
+            }
+            if (non_recyclable_depth > INITIAL_DEPTH_CM) {
+                non_recyclable_depth = INITIAL_DEPTH_CM;
+            }
+
+            let recyclable_filled_height = INITIAL_DEPTH_CM - recyclable_depth;
+            let non_recyclable_filled_height = INITIAL_DEPTH_CM - non_recyclable_depth;
+
+            let recyclable_percentage_full = (recyclable_filled_height / INITIAL_DEPTH_CM) * 100;
+            let non_recyclable_percentage_full = (non_recyclable_filled_height / INITIAL_DEPTH_CM) * 100;
+
+            $("#recyclable_bin_value").text(`${recyclable_percentage_full.toFixed(2)}%`);
+            $("#non_recyclable_bin_value").text(`${non_recyclable_percentage_full.toFixed(2)}%`);
+
+            updateGauge(Math.round(recyclable_percentage_full), Math.round(non_recyclable_percentage_full));
 
         } catch (error) {
             console.error('Error fetching system info:', error);
         }
     })();
 }
-
-
-
-
-function liveVideoMonitoring() {
-    const updateInterval = 30; 
-
-    setInterval(async () => {
-        try {
-            const apiBaseUrl = bitress.Http.api_url; 
-            const response = await fetch(`${apiBaseUrl}/detection`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-
-            console.log('API Response:', data); 
-
-            const videoStream = document.getElementById('video-stream');
-            if (videoStream) {
-                if (data.image) {
-                    const imageSrc = 'data:image/jpeg;base64,' + data.image;
-                    videoStream.src = imageSrc;
-                } else {
-                    console.warn('Image data not found in response');
-                }
-            } else {
-                console.warn('Video stream element not found');
-            }
-            const predictedCategoryElement = document.getElementById('predicted_category');
-            if (predictedCategoryElement) {
-                predictedCategoryElement.textContent = data.predicted_label || 'Unknown';
-            } else {
-                console.warn('Predicted category element not found');
-            }
-
-        } catch (error) {
-            console.error('Error fetching system info:', error);
-        }
-    }, updateInterval);
-}
-
 
 
 function systemMonitoring() {
@@ -156,8 +132,6 @@ function systemMonitoring() {
 }
 
 function init(){
-    // liveVideoMonitoring()
-    // systemMonitoring()
     readGaugeValue()
 }
 

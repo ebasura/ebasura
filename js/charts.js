@@ -47,14 +47,7 @@ function createChart(data) {
         chart: {
             height: 350,
             type: 'line',
-            dropShadow: {
-                enabled: true,
-                color: '#000',
-                top: 18,
-                left: 7,
-                blur: 10,
-                opacity: 0.2
-            },
+            
             zoom: {
                 enabled: false
             },
@@ -93,8 +86,6 @@ function createChart(data) {
             title: {
                 text: 'Waste Amount'
             },
-            min: 5,
-            max: 100
         },
         legend: {
             position: 'top',
