@@ -29,6 +29,16 @@ class Basura
         return false;
     }
 
+    public function deleteWasteData($id)
+    {
+        $sql = "DELETE FROM waste_data WHERE waste_data_id = :wdi";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(":wdi", $id);
+        if($stmt->execute()){
+            return true;
+        }
+    }
+
     public function setCurrentTrashBin($binId)
     {
 

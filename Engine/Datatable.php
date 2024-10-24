@@ -72,7 +72,7 @@ class Datatable {
                 "bin_name"=> $row['bin_name'],
                 "waste_type"=> ($row['name'] == 'Recyclable') ? '<div class="badge bg-primary rounded-pill">' . $row['name'] . '</div>' : '<div class="badge bg-secondary rounded-pill">' . $row['name'] . '</div>',
                 "date_created"=> $row['timestamp'],
-                "actions"=> '<div class="btn-group"><button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fa-solid fa-ellipsis-vertical"></i></button><button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-regular fa-trash-can"></i></button></div>'
+                "actions"=> '<div class="btn-group"><button data-id="'. $row['waste_data_id'] .'" class="btn btn-datatable btn-icon btn-transparent-dark delete-log"><i class="fa-regular fa-trash-can"></i></button></div>'
             );
         }
 

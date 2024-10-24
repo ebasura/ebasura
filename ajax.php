@@ -106,6 +106,16 @@
                 $dt->wasteLogs();
                 break;
 
+            case 'deleteLog':
+                $res = new Basura();
+                if($res->deleteWasteData($_POST['id'])){
+                    echo json_encode([
+                        'success' => true
+                    ]);
+                    return true;
+                }
+                break;
+
             case 'editCurrentTrashBin':
                 $res = new Basura();
                 $res->setCurrentTrashBin($_POST['bin_id']);
