@@ -97,6 +97,8 @@ if (!$login->isLoggedIn()) {
                             <div class="card">
                                 <div class="card-header">Logs</div>
                                 <div class="card-body">
+                                <button class="btn btn-primary mb-3" onclick="window.open('print_logs.php', '_blank')">Print PDF</button>
+
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover dt-responsive"
                                             id="waste_logs_table">
@@ -205,6 +207,8 @@ if (!$login->isLoggedIn()) {
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js">
         </script>
