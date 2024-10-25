@@ -97,7 +97,8 @@ if (!$login->isLoggedIn()) {
                             <div class="card">
                                 <div class="card-header">Logs</div>
                                 <div class="card-body">
-                                <button class="btn btn-primary mb-3" onclick="window.open('print_logs.php', '_blank')">Print PDF</button>
+                                    <button class="btn btn-primary mb-3"
+                                        onclick="window.open('print_logs.php', '_blank')">Print PDF</button>
 
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover dt-responsive"
@@ -222,8 +223,6 @@ if (!$login->isLoggedIn()) {
         let forecastData = [];
         let dataTable;
 
-
-
         function showLoader() {
             $('#loader').show();
             $("#forecastTable").hide();
@@ -258,19 +257,29 @@ if (!$login->isLoggedIn()) {
             data.forEach(bin => {
                 bin.forecast.forEach(forecast => {
                     const row = `
-                    <tr>
-                        <td>${bin.bin_name}</td>
-                        <td>${bin.waste_type}</td>
-                        <td>${forecast.date}</td>
-                        <td>${forecast.time}</td>
-                        <td>${forecast.predicted_level.toFixed(2)}%</td>
-                    </tr>
-                `;
+                <tr>
+                    <td>${bin.bin_name}</td>
+                    <td>${bin.waste_type}</td>
+                    <td>${forecast.date}</td>
+                    <td>${forecast.time}</td>
+                    <td>${forecast.predicted_level.toFixed(2)}%</td>
+                </tr>
+            `;
                     tableBody.append(row);
                 });
             });
 
+            if (dataTable) {
+                dataTable.clear().destroy();
+            }
 
+            // Initialize DataTables after populating the table
+            dataTable = $('#forecastTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true
+            });
         }
 
         function filterTable() {

@@ -145,11 +145,6 @@ $settings = $settings_obj->getSettings();
                            <div class="card-body">
                                <form>
 
-                                   <div class="mb-3">
-                                       <label for="notify_sms">API Key</label>
-                                       <input class="form-control" type="text" id="sms_api_key" name="sms_api_key" value="<?php echo $settings['api_key']; ?>" readonly>
-                                   </div>
-
 
                                    <div class="mb-3">
                                        <label for="notify_sms">SMS Receiver</label>
