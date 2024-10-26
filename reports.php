@@ -213,8 +213,8 @@ if (!$login->isLoggedIn()) {
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js">
         </script>
-        <script src="assets/js/index.js"></script>
-        <script>
+    <script src="bootstrap.php"></script>
+    <script>
         function showImage(imageUrl) {
             // Set the image URL in the modal
             document.getElementById('modalImage').src = imageUrl;

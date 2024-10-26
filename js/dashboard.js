@@ -59,8 +59,7 @@ function readGaugeValue() {
     (async () => {
         try {
             // Get the selected trash bin ID from the select element
-            var selectedTrashBinId = $('#trash_bin_selector').val();
-
+            var selectedTrashBinId =bitress.Utils.settings.active_bin
             const apiBaseUrl = bitress.Http.api_url;
             // Use the selected ID to construct the API URL
             const response = await fetch(`${apiBaseUrl}/gauge/${selectedTrashBinId}`);
@@ -133,6 +132,7 @@ function systemMonitoring() {
 
 function init(){
     readGaugeValue()
+    currentBin()
 }
 
 window.onload = init;
@@ -141,3 +141,18 @@ window.onload = init;
 $('#trash_bin_selector').on('change', function() {
     readGaugeValue();
 });
+
+function currentBin() { 
+    const activeBin = bitress.Utils.settings.active_bin;
+    
+    if (activeBin == '1') {
+        $("#current_bin").text('CAS Bin');
+    } else if (activeBin == '2') {
+        $("#current_bin").text('CTE Bin');
+    } else if (activeBin == '3') {
+        $("#current_bin").text('CBME Bin');
+
+    } else {
+        $("#current_bin").text('Unknown Bin'); // Optional fallback in case of unrecognized bin
+    }
+}

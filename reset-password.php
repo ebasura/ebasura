@@ -90,6 +90,6 @@ if ($login->isLoggedIn()) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://parsleyjs.org/dist/parsley.min.js"></script>
 <script src="assets/js/sha512.min.js"></script>
-<script src="assets/js/index.js"></script>
+<script src="bootstrap.php"></script>
 </body>
 </html>

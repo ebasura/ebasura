@@ -1,12 +1,9 @@
-// Initialize the chart variable
 let wasteChart;
 
-// Function to show the loader
 function showLoader() {
     document.getElementById("loader").style.display = "block";
 }
 
-// Function to hide the loader
 function hideLoader() {
     document.getElementById("loader").style.display = "none";
 }
@@ -108,12 +105,12 @@ function createChart(data) {
 // Function to update the chart based on selected year and bin
 async function updateChart() {
     const year = document.getElementById('wasteChartyear').value; // Get selected year
-    const binId = document.getElementById('trash_bin_selector').value; // Get selected bin
+    const binId = bitress.Utils.settings.active_bin // Get selected bin
 
     const data = await fetchData(year, binId); // Fetch data from the API
     const iframe = document.getElementById('binIframe');
 
-    iframe.src = `https://backend.ebasura.online/daily-waste/${binId}/`;
+    iframe.src = `${bitress.Http.api_url}/daily-waste/${binId}/`;
     createChart(data);
 }
 

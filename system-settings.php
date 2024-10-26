@@ -214,7 +214,7 @@ $settings = $settings_obj->getSettings();
     <script src="js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="bootstrap.php"></script>
     <script src="assets/js/settings.js"></script>
     <script>
     $(document).ready(function () {

@@ -286,7 +286,7 @@ if (!$login->isLoggedIn()) {
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
     <script src="js/dashboard.js"></script>
     <script src="assets/js/sha512.min.js"></script>
-    <script src="assets/js/index.js"></script>
+    <script src="bootstrap.php"></script>
     <script src="assets/js/tfa-auth.js"></script>
     <script>
         const dataTable = new simpleDatatables.DataTable("#recent_login_table", {

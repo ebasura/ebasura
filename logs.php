@@ -140,6 +140,7 @@ if (!$login->isLoggedIn()) {
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
     <script src="js/litepicker.js"></script>
     <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+    <script src="bootstrap.php"></script>
     <script src="js/dashboard.js"></script>
 </body>
 </html>

@@ -122,21 +122,23 @@
             <!-- Main page content-->
             <div class="container-xl px-4 mt-n10">
                     <div class="row">
-                        
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <!-- Dashboard info widget 1-->
-                        <div class="card border-start-lg border-start-danger h-100">
+                        <!-- Dashboard info widget 4-->
+                        <div class="card border-start-lg border-start-info h-100">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <div class="small fw-bold text-primary mb-1">Prediction</div>
-                                        <div class="h5"><span id="predicted_category">Loading...</span></div>
+                                        <div class="small fw-bold text-info mb-1">Current Trash Bin</div>
+                                        <div class="text-xs fw-bold text-danger d-inline-flex align-items-center">
+                                            <div class="h5"><span id="current_bin"></span> </div>
+                                        </div>
                                     </div>
-                                    <div class="ms-2"><i class="fas fa-dollar-sign fa-2x text-gray-200"></i></div>
+                                    <div class="ms-2"><i class="fas fa-trash fa-2x text-gray-200"></i></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                        
                     <div class="col-xl-3 col-md-6 mb-4">
                         <!-- Dashboard info widget 2-->
                         <div class="card border-start-lg border-start-secondary h-100">
@@ -173,26 +175,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <!-- Dashboard info widget 4-->
-                        <div class="card border-start-lg border-start-info h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <div class="small fw-bold text-info mb-1">Select Trash Bin</div>
-                                        <div class="text-xs fw-bold text-danger d-inline-flex align-items-center">
-                                            <select name="trash_bin_selector" id="trash_bin_selector" class="form-control form-control-sm" onchange="updateChart()">
-                                                <option value="1" selected >CAS Trash Bin</option>
-                                                <option value="2">CTE Trash Bin</option>
-                                                <option value="3">CBME Trash Bin</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="ms-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -223,8 +205,6 @@
                                 <div class="d-flex float-end w-25">
                                 <label for="year">Select Year:</label>
                                 <select class="form-control" id="wasteChartyear" onchange="updateChart()">
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
                                     <option value="2024" selected>2024</option>
                                 </select>
                                 </div>

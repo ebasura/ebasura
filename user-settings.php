@@ -229,6 +229,7 @@ $users = $user_obj->getAllUser();
     <script src="assets/js/sha512.min.js"></script>
     <script src="assets/js/register.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="bootstrap.php"></script>
     <script>
         const dataTable = new simpleDatatables.DataTable("#user_accounts_table");
         var notyf = new Notyf({duration: 1000, position: {x: 'right', y: 'top',}});

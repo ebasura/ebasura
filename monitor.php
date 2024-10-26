@@ -87,7 +87,7 @@ if (!$login->isLoggedIn()) {
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="js/index.js"></script>
+    <script src="bootstrap.php"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const canvas = document.getElementById('videoCanvas');
