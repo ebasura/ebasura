@@ -71,6 +71,7 @@ class Datatable {
                 "waste_image" => '<img src="'. $row['image_url'] .'" class="img-thumbnail w-50" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(\'' . $row['image_url'] . '\')">',
                 "bin_name"=> $row['bin_name'],
                 "waste_type"=> ($row['name'] == 'Recyclable') ? '<div class="badge bg-primary rounded-pill">' . $row['name'] . '</div>' : '<div class="badge bg-secondary rounded-pill">' . $row['name'] . '</div>',
+                "confidence" => empty($row['confidence']) ? 'No data' : number_format($row['confidence'] * 100, 2) . '%',
                 "date_created"=> $row['timestamp'],
                 "actions"=> '<div class="btn-group"><button data-id="'. $row['waste_data_id'] .'" class="btn btn-datatable btn-icon btn-transparent-dark delete-log"><i class="fa-regular fa-trash-can"></i></button></div>'
             );

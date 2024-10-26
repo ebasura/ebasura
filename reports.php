@@ -109,6 +109,7 @@ if (!$login->isLoggedIn()) {
                                                     <th>Image</th>
                                                     <th>Bin Name</th>
                                                     <th>Trash Type</th>
+                                                    <th>Confidence Level</th>
                                                     <th>Date Created</th>
                                                     <th class="no-sort">Actions</th>
                                                 </tr>
@@ -368,6 +369,9 @@ if (!$login->isLoggedIn()) {
                 },
                 {
                     data: 'waste_type'
+                },
+                {
+                    data: 'confidence'
                 },
                 {
                     data: 'date_created'

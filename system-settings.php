@@ -217,6 +217,9 @@ $settings = $settings_obj->getSettings();
     <script src="bootstrap.php"></script>
     <script src="assets/js/settings.js"></script>
     <script>
+        let current_bin = bitress.Utils.settings.active_bin; // Assuming this holds the value you need to select
+document.getElementById("trash_bin_selector").value = current_bin;
+
     $(document).ready(function () {
     $("#upload_model").on('click', function (e) {
         e.preventDefault();
