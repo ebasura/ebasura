@@ -108,9 +108,9 @@
                                 </h1>
                                 <div class="page-header-subtitle">A Web Monitoring System</div>
                                 <div class="small">
-                                    <span class="fw-500 text-dark">Friday</span>
-                                    · September 20, 2021 · 12:16 PM
-                                </div>
+                                        <span class="fw-500 text-white" id="current-day"></span>
+                                        · <span id="current-date"></span> · <span id="current-time"></span>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -392,6 +392,29 @@
             });
         });
 
+        function updateTime() {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const now = new Date();
+
+            const day = days[now.getDay()];
+            const date = now.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const time = now.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            document.getElementById('current-day').textContent = day;
+            document.getElementById('current-date').textContent = date;
+            document.getElementById('current-time').textContent = time;
+        }
+
+        setInterval(updateTime, 1000); 
+        updateTime(); 
     </script>
 
 </body>
