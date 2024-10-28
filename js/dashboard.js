@@ -137,7 +137,7 @@ function init(){
 
 window.onload = init;
 
-setInterval(readGaugeValue, 30000);  // Update gauge every 30 seconds
+setInterval(readGaugeValue, 10000);  // Update gauge every 30 seconds
 
 $('#trash_bin_selector').on('change', function() {
     readGaugeValue();

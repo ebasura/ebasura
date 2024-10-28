@@ -172,6 +172,11 @@ if (!$login->isLoggedIn()) {
         </script>
     <script src="bootstrap.php"></script>
     <script>
+         function showImage(imageUrl) {
+            // Set the image URL in the modal
+            document.getElementById('modalImage').src = imageUrl;
+        }
+
         // Function to print the table as a PDF
         function printPdf() {
             const {
