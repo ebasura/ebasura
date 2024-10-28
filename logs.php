@@ -61,7 +61,7 @@ if (!$login->isLoggedIn()) {
                 
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                     <div class="card mb-4">
                             <div class="card-header">Bin Full Notification</div>
                                 <div class="card-body">
@@ -70,59 +70,33 @@ if (!$login->isLoggedIn()) {
                                         <thead>
                                             <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Full</th>
+                                            <th scope="col">Message</th>
                                             <th scope="col">Bin</th>
                                             <th scope="col">Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                                $sql = "SELECT * FROM `waste_alerts` INNER JOIN waste_bins ON waste_bins.bin_id = waste_alerts.bin_id INNER JOIN waste_type ON waste_type.waste_type_id = waste_alerts.waste_type_id;";
+                                                $stmt = $db->query($sql);
+                                                $stmt->execute();
+                                                $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                                foreach($row as $r):
+                                            ?>
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Full</td>
-                                                <td>CAS Bin (Recyclabe)</td>
-                                                <td>10/16/24</td>
+                                                <th scope="row"><?= $r['alert_id'] ?></th>
+                                                <td><?= $r['message'] ?></td>
+                                                <td><?= $r['bin_name'] ?> (<?= $r['name'] ?>)</td>
+                                                <td><?= $r['timestamp'] ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>CAS Bin (Non-Recyclabe)</td>
-                                                <td>10/16/24</td>
-                                            </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                         </table>
                                     </div>
                                 </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                    <div class="card mb-4">
-                            <div class="card-header">
-                            IoT Sensor Logs
-                            </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Full</th>
-                                            <th scope="col">Bin</th>
-                                            <th scope="col">Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            </tr>
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </main>
