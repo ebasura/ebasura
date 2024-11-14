@@ -1,5 +1,3 @@
-system/.env
 .env
-system/.venv
 .idea
 .vscode

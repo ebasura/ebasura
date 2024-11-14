@@ -18,12 +18,12 @@
 - [x] Implementing Sensors
 
 
-- [ ] Logs Page
+- [x] Logs Page
 - [x] Analytics Backend
-- [ ] Alerts and Notification
+- [x] Alerts and Notification
 - [x] Capture Image and Insert to Database
-- [ ] Trash Bin Prototype
+- [x] Trash Bin Prototype
 
-- [ ] Failsafe (Alerts and Notification)
-- [ ] Check indicator if working
+- [x] Failsafe (Alerts and Notification)
+- [x] Check indicator if working
 - [x] Trash Bin each Department

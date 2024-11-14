@@ -179,25 +179,6 @@
 
 
                 <div class="row">
-
-                <!-- <div class="col-xl-12 col-md-2 mb-4 ">
-                    <ul id="trash_bin_status_list" class="d-flex justify-content-center list-unstyled p-0 m-0">
-                        <li id="trash_bin_1_status" class="me-3">
-                            <span class="status-icon online" id="status_icon_1"></span>
-                            CAS Trash Bin
-                        </li>
-                        <li id="trash_bin_2_status" class="me-3">
-                            <span class="status-icon" id="status_icon_2"></span>
-                            CTE Trash Bin
-                        </li>
-                        <li id="trash_bin_3_status">
-                            <span class="status-icon" id="status_icon_3"></span>
-                            CBME Trash Bin
-                        </li>
-                    </ul>
-                </div> -->
-
-
                     <div class="col-lg-8 mb-2">
                         <div class="card">
                             <div class="card-header bg-transparent">
@@ -258,14 +239,11 @@
                         <div class="card mb-4">
                             <div class="card-header"> Reports</div>
                             <div class="list-group list-group-flush small">
-                                <a class="list-group-item list-group-item-action" href="#!">
+                                <a class="list-group-item list-group-item-action" href="print_logs.php">
                                     <i class="fas fa-dollar-sign fa-fw text-blue me-2"></i>
-                                    Bin Forecasts
+                                    Bin Logs
                                 </a>
-                                <a class="list-group-item list-group-item-action" href="#!">
-                                    <i class="fas fa-dollar-sign fa-fw text-blue me-2"></i>
-                                    Bin Forecasts
-                                </a>
+                                
                             </div>
                             <div class="card-footer position-relative border-top-0">
                                 <a class="stretched-link" href="reports.php">
@@ -278,63 +256,7 @@
                         </div>
 
 
-                        <!-- Project tracker card example-->
-                        <div class="card card-header-actions mb-4">
-                            <div class="card-header">
-                                System Information
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between small mb-1">
-                                    <div class="fw-bold">Operating System</div>
-                                    <div id="os-version" class="small">Loading...</div>
-                                </div>
-
-                                <div class="d-flex align-items-center justify-content-between small mb-1">
-                                    <div class="fw-bold">Kernel Version</div>
-                                    <div id="kernel-version" class="small">Loading...</div>
-                                </div>
-
-                                <div class="d-flex align-items-center justify-content-between small mb-1">
-                                    <div class="fw-bold">Uptime</div>
-                                    <div id="uptime" class="small">Loading...</div>
-                                </div>
-
-                                <div class="d-flex align-items-center justify-content-between small mb-1">
-                                    <div class="fw-bold">Temperature</div>
-                                    <div id="temperature" class="small">Loading...</div>
-                                </div>
-
-                                <hr class="p-1">
-
-                                <!-- Progress item 1-->
-                                <div class="d-flex align-items-center justify-content-between small mb-1">
-                                    <div class="fw-bold">CPU Usage</div>
-                                    <div id="cpu-usage" class="small">Loading...</div>
-                                </div>
-                                <div class="progress mb-3">
-                                    <div id="cpu-progress" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-
-                                <!-- Progress item 2-->
-                                <div class="d-flex align-items-center justify-content-between small mb-1">
-                                    <div class="fw-bold">RAM Usage</div>
-                                    <div id="ram-usage" class="small">Loading...</div>
-                                </div>
-                                <div class="progress mb-3">
-                                    <div id="ram-progress" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-
-                                <!-- Progress item 2-->
-                                <div class="d-flex align-items-center justify-content-between small mb-1">
-                                    <div class="fw-bold">Disk Usage</div>
-                                    <div id="disk-usage" class="small">Loading...</div>
-                                </div>
-                                <div class="progress mb-3">
-                                    <div id="disk-progress" class="progress-bar bg-secondary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-
-                        </div>
+    
                     </div>
                     </div>
 

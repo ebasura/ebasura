@@ -21,8 +21,6 @@ $db = Database::getInstance();
 
 $login = new Login();
 
-
-
 if ($login->isLoggedIn()){
     $user = new User();
     $u = $user->getUserDetails();
