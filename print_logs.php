@@ -47,7 +47,7 @@ class PDF extends FPDF
             $this->Cell($widths[1], $rowHeight, $row['name'], 1, 0, 'C', $fill);
 
             if (!empty($row['image_url'])) {
-                $imageFile = $this->decodeBase64Image($row['image_url'], 'temp_image_' . $index . '.jpg');
+                $imageFile = $this->decodeBase64Image($row['image_url'], 'tmp/temp_image_' . $index . '.jpg');
                 $x = $this->GetX();
                 $y = $this->GetY();
                 $this->Cell($widths[2], $rowHeight, '', 1, 0, 'C', $fill);
