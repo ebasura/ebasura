@@ -60,6 +60,7 @@ $users = $user_obj->getAllUser();
 
                 <div class="container-fluid px-4">
                     <div class="card mb-4">
+                        <div class="card-header">Manage Users</div>
                         <div class="card-body">
                             <div class="text-end mb-3">
                                 <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
