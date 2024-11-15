@@ -40,10 +40,17 @@
                     Reports
                 </a>
                 <?php    if($user->adminAccessOnly()): ?>
+               
                 <a class="nav-link" href="logs.php">
                     <div class="nav-link-icon"><i data-feather="file-text"></i></div>
                     Logs
                 </a>
+
+               <!-- <a class="nav-link" href="manage-bins.php"> 
+                    <div class="nav-link-icon"><i data-feather="trash"></i></div>
+                    Manage Bins
+                </a> --> 
+                
                 <a class="nav-link" href="system-health.php">
                     <div class="nav-link-icon"><i data-feather="heart"></i></div>
                     Heartbeat

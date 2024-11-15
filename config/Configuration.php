@@ -19,7 +19,7 @@ const BASE_URL = __DIR__ . '/';
 const MAX_UPLOAD_SIZE = 10 * 1024 * 1024;
 
 // System Notification
-const NOTIFY_EMAIL = "admin@e-basura.com";
+const NOTIFY_EMAIL = "admin@ebasura.online";
 
 const EMAIL_CONFIRMATION = false;
 const MAX_LOGIN_ATTEMPTS = 12;

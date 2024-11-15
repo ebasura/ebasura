@@ -77,3 +77,8 @@ transition: color 0.3s ease !important;
     background-color: darkred !important;
     border-color: darkred !important;
 }
+
+
+.sidenav-menu-heading {
+    color: darkred !important;
+}

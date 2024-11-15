@@ -89,7 +89,7 @@ function readGaugeValue() {
             $("#recyclable_bin_value").text(`${recyclable_percentage_full.toFixed(2)}%`);
             $("#non_recyclable_bin_value").text(`${non_recyclable_percentage_full.toFixed(2)}%`);
 
-            updateGauge(Math.round(recyclable_percentage_full), Math.round(non_recyclable_percentage_full));
+            updateGauge(Math.round(non_recyclable_percentage_full), Math.round(recyclable_percentage_full));
 
         } catch (error) {
             console.error('Error fetching system info:', error);

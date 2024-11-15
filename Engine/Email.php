@@ -56,7 +56,7 @@ class Email
         $mail = $this->initMailer();
         $mail->addAddress($email);
 
-        $link = BASE_URL . "/reset-password.php?key=" . $key;
+        $link = "https://www.ebasura.online/reset-password.php?key=" . $key;
 
         //Content
         $mail->Subject = APP_NAME . " - Password Reset";
