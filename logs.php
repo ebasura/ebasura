@@ -78,7 +78,7 @@ if (!$login->isLoggedIn()) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php
+                                                <?php                                 
                                                     $sql = "SELECT * FROM `waste_alerts` INNER JOIN waste_bins ON waste_bins.bin_id = waste_alerts.bin_id INNER JOIN waste_type ON waste_type.waste_type_id = waste_alerts.waste_type_id;";
                                                     $stmt = $db->query($sql);
                                                     $stmt->execute();
@@ -112,11 +112,15 @@ if (!$login->isLoggedIn()) {
                                                     <th>Bin Name</th>
                                                     <th>Bin Type</th>
                                                     <th>Waste Level</th>
+                                                    <th>Waste Level Percentage</th>
                                                     <th>Date Created</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
+                                                $settings_obj = new SystemSettings();
+                                                $settings = $settings_obj->getSettings();
+                                                
                                                 $sql = "SELECT * FROM `bin_fill_levels` INNER JOIN waste_type ON waste_type.waste_type_id = bin_fill_levels.waste_type INNER JOIN waste_bins ON waste_bins.bin_id = bin_fill_levels.bin_id ORDER BY timestamp DESC;";
                                                 $stmt = $db->prepare($sql);
                                                 $stmt->execute();
@@ -127,6 +131,12 @@ if (!$login->isLoggedIn()) {
                                                 <th scope="row"><?= $r['bin_name'] ?></th>
                                                 <td><?= $r['name'] ?></td>
                                                 <td><?= $r['fill_level'] ?></td>
+                                                <td>
+                                                <?php 
+                                                    $height = floatval($settings['initial_depth']) - floatval($r['fill_level']); 
+                                                    echo ($height / floatval($settings['initial_depth'])) * 100;
+                                                ?>
+                                                </td>
                                                 <td><?= $r['timestamp'] ?></td>
                                             </tr>
                                             <?php endforeach; ?>

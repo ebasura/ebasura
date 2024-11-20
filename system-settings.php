@@ -76,7 +76,24 @@ $settings = $settings_obj->getSettings();
 
                                       <form>
 
+                                      
                                       <div class="mb-3">
+                                              <label class="small mb-1" for="app_name">App Name</label>
+                                              <input class="form-control" id="app_name" type="text" placeholder="Application Name" value="<?= $settings['app_name']; ?>" />
+                                          </div>
+
+                                          <div class="mb-3">
+                                              <label class="small mb-1" for="app_version">App Version</label>
+                                              <input class="form-control" id="app_version" type="text" placeholder="Application Name" value="<?php echo APP_VERSION; ?>" />
+                                          </div>
+
+                                          <div class="mb-3">
+                                              <label class="small mb-1" for="app_version">Initial Depth</label>
+                                              <input class="form-control" id="app_version" type="text" placeholder="Application Name" value="<?= $settings['initial_depth']; ?>" />
+                                          </div>
+
+
+                                          <div class="mb-3">
                                               <label class="small mb-1" for="trash_bin_selector">Dashboard Trash Bin</label>
                                               <select name="trash_bin_selector" id="trash_bin_selector" class="form-control">
                                                   <option value="1" selected >CAS Trash Bin</option>
@@ -91,20 +108,6 @@ $settings = $settings_obj->getSettings();
                                           </div>
 
                                       </form>
-
-                                    
-
-                                          <div class="mb-3">
-                                              <label class="small mb-1" for="app_name">App Name</label>
-                                              <input class="form-control" id="app_name" type="text" placeholder="Application Name" value="<?= $settings['app_name']; ?>" />
-                                          </div>
-
-                                          <div class="mb-3">
-                                              <label class="small mb-1" for="app_version">App Version</label>
-                                              <input class="form-control" id="app_version" type="text" placeholder="Application Name" value="<?php echo APP_VERSION; ?>" />
-                                          </div>
-
-
                                       </div>
                                   </div>
                            </div>
@@ -117,35 +120,11 @@ $settings = $settings_obj->getSettings();
 
                    <div class="col-lg-4">
                        <div class="card card-header-actions mb-4">
-                           <div class="card-header">
-                               Model Configuration
-                               <div class="d-flex">
-                                   <button type="button" class="btn btn-outline-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#model_modal">Upload Model</button>
-                               </div>
-                           </div>
-                           <div class="card-body">
-                               <form id="update_model">
-                                   <div class="mb-3">
-                                       <label class="small mb-1" for="model_name">Model Version</label>
-                                       <select name="model_name" id="model_name" class="form-control">
-                                           <option disabled>Select Version</option>
-                                           <option value="1" selected>TensorFlow Lite v1.1</option>
-                                       </select>
-                                   </div>
-                                   <div class="mb-3">
-                                       <button type="button" id="update_model_button" class="btn btn-primary">Save changes</button>
-                                   </div>
-                               </form>
-                           </div>
-                       </div>
-                       <div class="card card-header-actions mb-4">
                            <div class="card-header ">
                                Notification Preferences
                            </div>
                            <div class="card-body">
                                <form>
-
-
                                    <div class="mb-3">
                                        <label for="notify_sms">SMS Receiver</label>
                                        <input class="form-control" type="text" id="notify_sms" name="notify_sms" value="<?php echo $settings['sms_receiver']; ?>">

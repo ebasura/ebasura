@@ -108,6 +108,52 @@ if (!$login->isLoggedIn()) {
                             </div>
                         </div>
 
+                        <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Waste Forecast Table
+                        </div>
+                        <div class="card-body">
+                        <!-- Filter Section -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="binNameSelect">Select Bin Name:</label>
+                                <select id="binNameSelect" class="form-control">
+                                    <option value="all">All</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="wasteTypeSelect">Select Waste Type:</label>
+                                <select id="wasteTypeSelect" class="form-control">
+                                    <option value="all">All</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button id="printPdfBtn" class="btn btn-primary mb-3">Print PDF</button>
+
+                        <div id="loader" style="display: none;">
+                                    <div class="spinner"></div>
+                                    <p>Loading data, please wait...</p>
+                                </div>
+
+                        <table id="forecastTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Bin Name</th>
+                                    <th>Waste Type</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Predicted Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+
+                    </div>
+
                     </div>
                 </div>
             </main>
@@ -115,12 +161,151 @@ if (!$login->isLoggedIn()) {
             <?php include_once __DIR__ . '/templates/footer.php'; ?>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-        <script src="js/litepicker.js"></script>
-        <script src="bootstrap.php"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+    <script src="js/litepicker.js"></script>
+    <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script src="bootstrap.php"></script>
+
+<script>
+function showImage(imageUrl) {
+    // Set the image URL in the modal
+    document.getElementById('modalImage').src = imageUrl;
+}
+
+let forecastData = [];
+let dataTable;
+
+function showLoader() {
+    $('#loader').show();
+    $("#forecastTable").hide(); 
+}
+
+function hideLoader() {
+    $('#loader').hide();
+    $("#forecastTable").show(); 
+}
+
+function populateFilters(data) {
+    const binNames = [...new Set(data.map(bin => bin.bin_name))];
+    const wasteTypes = [...new Set(data.map(bin => bin.waste_type))];
+
+    const binSelect = $('#binNameSelect');
+    binSelect.empty().append(`<option value="all">All</option>`); 
+    binNames.forEach(bin => {
+        binSelect.append(`<option value="${bin}">${bin}</option>`);
+    });
+
+    const wasteTypeSelect = $('#wasteTypeSelect');
+    wasteTypeSelect.empty().append(`<option value="all">All</option>`);  // Clear old options
+    wasteTypes.forEach(type => {
+        wasteTypeSelect.append(`<option value="${type}">${type}</option>`);
+    });
+}
+
+function populateTable(data) {
+    const tableBody = $('#forecastTable tbody');
+    tableBody.empty();
+
+    data.forEach(bin => {
+        bin.forecast.forEach(forecast => {
+            const row = `
+                <tr>
+                    <td>${bin.bin_name}</td>
+                    <td>${bin.waste_type}</td>
+                    <td>${forecast.date}</td>
+                    <td>${forecast.time}</td>
+                    <td>${forecast.predicted_level.toFixed(2)}%</td>
+                </tr>
+            `;
+            tableBody.append(row);
+        });
+    });
+
+    // Initialize DataTable
+    if ($.fn.dataTable.isDataTable('#forecastTable')) {
+        dataTable.clear().destroy();  // Destroy the existing DataTable instance
+    }
+    
+    dataTable = $('#forecastTable').DataTable({
+        paging: true,
+        searching: false,
+        ordering: true,
+        lengthChange: true,
+        pageLength: 10,  // Set default page length
+        order: [[0, 'asc']],  // Default sorting by Bin Name
+    });
+}
+
+function filterTable() {
+    const selectedBin = $('#binNameSelect').val();
+    const selectedWasteType = $('#wasteTypeSelect').val();
+
+    const filteredData = forecastData.filter(bin => {
+        const binMatch = (selectedBin === 'all' || bin.bin_name === selectedBin);
+        const wasteTypeMatch = (selectedWasteType === 'all' || bin.waste_type === selectedWasteType);
+        return binMatch && wasteTypeMatch;
+    });
+
+    populateTable(filteredData);  // Populate table with filtered data
+}
+
+// Fetch forecast data from the API and populate the table and filters
+function fetchData() {
+    showLoader(); // Show loading spinner
+
+    fetch('https://backend.ebasura.online/api/forecast-data')
+    .then(response => response.json())
+    .then(data => {
+        forecastData = data; // Store fetched data
+        populateFilters(forecastData); // Populate the filter options
+        populateTable(forecastData); // Populate the table initially
+        hideLoader(); // Hide loading spinner
+
+        // Add event listeners for the select dropdowns
+        $('#binNameSelect').on('change', filterTable);
+        $('#wasteTypeSelect').on('change', filterTable);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+        hideLoader(); // Hide loading spinner in case of an error
+    });
+}
+
+// Function to print the table as a PDF
+function printPdf() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text('Waste Forecast Table', 10, 10);
+    doc.autoTable({
+        html: '#forecastTable',
+        startY: 20,
+        theme: 'grid'
+    });
+
+    doc.save('waste_forecast.pdf');
+}
+
+// Event listener for printing the PDF
+$('#printPdfBtn').on('click', function() {
+    printPdf();
+});
+
+// Initialize data fetch
+$(document).ready(function() {
+    fetchData();
+});
+
+</script>
+
 </body>
 
 </html>
