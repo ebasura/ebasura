@@ -46,15 +46,15 @@
                     Logs
                 </a>
 
-               <!-- <a class="nav-link" href="manage-bins.php"> 
-                    <div class="nav-link-icon"><i data-feather="trash"></i></div>
-                    Manage Bins
-                </a> --> 
-                
                 <a class="nav-link" href="system-health.php">
                     <div class="nav-link-icon"><i data-feather="heart"></i></div>
                     Heartbeat
                 </a>
+
+                <a class="nav-link" href="manage-bins.php"> 
+                    <div class="nav-link-icon"><i data-feather="trash"></i></div>
+                    Manage Bins
+                </a> 
                 <?php endif; ?>
 
                 <!-- Sidenav Heading (Addons)-->

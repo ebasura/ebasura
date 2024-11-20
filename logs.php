@@ -32,6 +32,7 @@ if (!$login->isLoggedIn()) {
     <link rel="manifest" href="assets/img/site.webmanifest">    <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
 
 </head>
 <body class="nav-fixed">
@@ -40,81 +41,125 @@ if (!$login->isLoggedIn()) {
 <div id="layoutSidenav">
     <?php include __DIR__ . '/templates/sidenav.php'; ?>
     <div id="layoutSidenav_content">
-        <main>
-            <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-                <div class="container-fluid px-4">
-                    <div class="page-header-content">
-                        <div class="row align-items-center justify-content-between pt-3">
-                            <div class="col-auto mb-3">
-                                <h1 class="page-header-title">
-                                    <div class="page-header-icon"><i class="fa-light fa-monitor-waveform"></i></div>
-                                        Logs
-                                </h1>
+            <main>
+                <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                    <div class="container-fluid px-4">
+                        <div class="page-header-content">
+                            <div class="row align-items-center justify-content-between pt-3">
+                                <div class="col-auto mb-3">
+                                    <h1 class="page-header-title">
+                                        <div class="page-header-icon"><i class="fa-light fa-monitor-waveform"></i></div>
+                                            Logs
+                                    </h1>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </header>
+                </header>
 
-            <!-- Main page content-->
-            <div class="container px-4">
-                
-                <div class="row">
+                <!-- Main page content-->
+                <div class="container px-4">
+                    
+                    <div class="row">
 
-                    <div class="col-md-12">
-                    <div class="card mb-4">
-                            <div class="card-header">Bin Full Notification</div>
+                        <div class="col-md-12">
+                        <div class="card mb-4">
+                                <div class="card-header">Bin Full Notification</div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                        <table class="table table-striped table-hover dt-responsive"
+                                            id="bin_full_logs_table">                         
+                                                               <thead>
+                                                <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Message</th>
+                                                <th scope="col">Bin</th>
+                                                <th scope="col">Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                    $sql = "SELECT * FROM `waste_alerts` INNER JOIN waste_bins ON waste_bins.bin_id = waste_alerts.bin_id INNER JOIN waste_type ON waste_type.waste_type_id = waste_alerts.waste_type_id;";
+                                                    $stmt = $db->query($sql);
+                                                    $stmt->execute();
+                                                    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                                    foreach($row as $r):
+                                                ?>
+                                                <tr>
+                                                    <th scope="row"><?= $r['alert_id'] ?></th>
+                                                    <td><?= $r['message'] ?></td>
+                                                    <td><?= $r['bin_name'] ?> (<?= $r['name'] ?>)</td>
+                                                    <td><?= $r['timestamp'] ?></td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header">Bin Level Logs</div>
                                 <div class="card-body">
+                                    <button class="btn btn-primary mb-3"
+                                        onclick="window.open('print_logs.php', '_blank')">Print PDF</button>
+
                                     <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Message</th>
-                                            <th scope="col">Bin</th>
-                                            <th scope="col">Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                                $sql = "SELECT * FROM `waste_alerts` INNER JOIN waste_bins ON waste_bins.bin_id = waste_alerts.bin_id INNER JOIN waste_type ON waste_type.waste_type_id = waste_alerts.waste_type_id;";
-                                                $stmt = $db->query($sql);
+                                        <table class="table table-striped table-hover dt-responsive"
+                                            id="bin_logs_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Bin Name</th>
+                                                    <th>Bin Type</th>
+                                                    <th>Waste Level</th>
+                                                    <th>Date Created</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $sql = "SELECT * FROM `bin_fill_levels` INNER JOIN waste_type ON waste_type.waste_type_id = bin_fill_levels.waste_type INNER JOIN waste_bins ON waste_bins.bin_id = bin_fill_levels.bin_id ORDER BY timestamp DESC;";
+                                                $stmt = $db->prepare($sql);
                                                 $stmt->execute();
                                                 $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                 foreach($row as $r):
                                             ?>
                                             <tr>
-                                                <th scope="row"><?= $r['alert_id'] ?></th>
-                                                <td><?= $r['message'] ?></td>
-                                                <td><?= $r['bin_name'] ?> (<?= $r['name'] ?>)</td>
+                                                <th scope="row"><?= $r['bin_name'] ?></th>
+                                                <td><?= $r['name'] ?></td>
+                                                <td><?= $r['fill_level'] ?></td>
                                                 <td><?= $r['timestamp'] ?></td>
                                             </tr>
                                             <?php endforeach; ?>
-                                        </tbody>
+                                            </tbody>
                                         </table>
                                     </div>
+
                                 </div>
+                            </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
-        </main>
+            </main>
 
-        <?php
+            <?php
 
-        include_once __DIR__ . '/templates/footer.php';
+            include_once __DIR__ . '/templates/footer.php';
 
-        ?>
+            ?>
 
-    </div>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-    <script src="js/litepicker.js"></script>
-    <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
-    <script src="bootstrap.php"></script>
-    <script src="js/dashboard.js"></script>
-</body>
-</html>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+        <script src="js/litepicker.js"></script>
+        <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+        <script src="bootstrap.php"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+        <script>
+            const dataTable = new simpleDatatables.DataTable("#bin_full_logs_table");
+            const dataTable1 = new simpleDatatables.DataTable("#bin_logs_table");
+        </script>
+    </body>
+    </html>
