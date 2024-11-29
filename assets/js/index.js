@@ -7,6 +7,7 @@ $(function() {
         let avatar = $('#avatar').prop('files')[0];
         let first_name = $("#firstname-input").val();
         let last_name = $("#lastname-input").val();
+        
 
         let action = "editProfile";
 
@@ -15,6 +16,11 @@ $(function() {
         data.append('first_name', first_name);
         data.append('last_name', last_name);
         data.append('action',action);
+
+        if(is_guest === true) {
+            notyf.error("Sorry we can't let you procceed.");
+            return false;
+        }
 
 
 
@@ -96,6 +102,11 @@ $(function() {
         let oldPassword = $("#old_password").val();
         let newPassword = $("#new_password").val();
         let confirmPassword = $("#confirm_password").val();
+
+        if(is_guest === true) {
+            notyf.error("Sorry we can't let you procceed.");
+            return false;
+        }
         
         if(oldPassword.trim() === "" || newPassword.trim() === "" || confirmPassword.trim() === ""){
             notyf.error("Field required");

@@ -12,6 +12,11 @@ $(document).ready(function(e) {
 		var setup = new bootstrap.Modal(document.getElementById('tfaSetup'));
 		var validatePass = new bootstrap.Modal(document.getElementById('validatePass'));
 
+		 if(is_guest === true) {
+            notyf.error("Sorry we can't let you procceed.");
+            return false;
+        }
+
 		validatePass.hide();
 		password = CryptoJS.SHA512(password).toString();
 

@@ -8,6 +8,15 @@ if (!$login->isLoggedIn()) {
 
     $user = new User();
     $userDetail = $user->getUserDetails();
+
+    function isGuest() 
+    {
+        global $userDetail;
+        if($userDetail['username'] == 'guest') {
+            return true;
+        }
+        return false;
+    }
 }
 
 ?>
@@ -40,8 +49,9 @@ if (!$login->isLoggedIn()) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/custom.css">
     <script>
-        var id = <?= $userDetail['user_id']; ?>
-    </script>
+        var id = <?= $userDetail['user_id']; ?>;
+        var is_guest = <?= isGuest() ? 'true' : 'false' ?>;
+        </script>
 </head>
 <body class="nav-fixed">
 
