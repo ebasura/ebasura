@@ -69,7 +69,7 @@ if ($login->isRememberSet()) {
         }
 
         body.my-login-page {
-            background: url('ebasura_bg1.png') no-repeat center center fixed;
+            background: url('ebasura_bg3.png') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Eurostile', sans-serif;
         }
@@ -108,7 +108,7 @@ if ($login->isRememberSet()) {
 
 <body class="my-login-page">
     <div class="title-container">
-        <h1 class="site-title">E-BASURA</h1>
+        <h1 class="site-title"></h1>
     </div>
     <section class="h-100">
         <div class="container d-flex align-items-center">
@@ -117,7 +117,7 @@ if ($login->isRememberSet()) {
                     <div class="card fat">
                         <div class="card-body">
                             <?php if (!$login->isRememberSet()): ?>
-                            <h4 class="card-title">Login to E-Basura Web Monitoring System</h4>
+                            <h4 class="card-title">Login</h4>
                             <?php else: ?>
                                 <h4 class="card-title">Login as <?= htmlentities(
                                     $row["username"]
