@@ -137,11 +137,10 @@ if ($login->isRememberSet()) {
                                 <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
 
                             </ul>
-                            <button class="btn fw-500 ms-lg-4 btn-teal" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Login
+                            <a class="btn fw-500 ms-lg-4 btn-teal" href="get-started.php">
+                                Get Started
                                 <i class="ms-2" data-feather="arrow-right"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </nav>
