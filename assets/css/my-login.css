@@ -1,11 +1,3 @@
-html,body {
-	height: 100%;
-}
-
-body.my-login-page {
-	background-color: #f7f9fb;
-	font-size: 14px;
-}
 
 .title-container {
 	position: absolute; 

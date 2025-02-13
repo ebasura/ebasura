@@ -33,42 +33,6 @@ if ($login->isRememberSet()) {
     }
 }
 ?>
-
-<?php
-
-include_once "init.php";
-
-if (isset($_GET["ref"])) {
-    Session::unsetSession("tfaChallenge");
-    Session::unsetSession("uid");
-}
-
-if (isset($_GET["ref_"])) {
-    Cookie::clear("remember_me");
-    Cookie::clear("uid");
-}
-
-if ($login->isLoggedIn()) {
-    header("Location: index.php");
-    die();
-}
-
-if ($login->isTfaLoggedIn()) {
-    header("Location: challenge.php");
-}
-
-if ($login->isRememberSet()) {
-    $user = new User();
-    $user_id = Cookie::get("uid");
-    $uid = Others::decryptData($user_id, ENCRYPTION_KEY);
-    $row = $user->getUserData($uid);
-
-    if(empty($row)){
-        Cookie::clear("remember_me");
-        Cookie::clear("uid");
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
