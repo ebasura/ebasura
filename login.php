@@ -68,56 +68,42 @@ if ($login->isRememberSet()) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
     <style>
-    .my-login-page .brand {
-        width: 90px;
-        height: 90px;
-        overflow: hidden;
-        border-radius: 50%;
-        margin: 0 auto;
-        margin: 40px auto;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
-        position: relative;
-        z-index: 1;
-    }
+        .flip-card {
+            width: 100%;
+            height: 100%;
+            perspective: 1000px;
+        }
 
-    .my-login-page .brand img {
-        width: 100%;
-    }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
 
-    .my-login-page .card-wrapper {
-        width: 400px;
-    }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg); 
+        }
 
-    .my-login-page .card {
-        border-color: transparent;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
-    }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; 
+            text-align: center;
+        }
 
-    .my-login-page .card.fat {
-        padding: 10px;
-    }
+        .flip-card-front {
 
-    .my-login-page .card .card-title {
-        margin-bottom: 30px;
-    }
+        }
 
-    .my-login-page .form-control {
-        border-width: 2.3px;
-    }
+        .flip-card-back {
+            background-color: #f8f9fa;
+            padding: 20px;
+            transform: rotateY(180deg);
+        }
 
-    .my-login-page .form-group label {
-        width: 100%;
-    }
-
-    .my-login-page .btn.btn-block {
-        padding: 12px 10px;
-    }
-
-    .my-login-page .footer {
-        margin: 40px 0;
-        color: #888;
-        text-align: center;
-    }
     </style>
 </head>
 
@@ -365,15 +351,24 @@ if ($login->isRememberSet()) {
                             <div class="col-lg-4 mb-5 mb-lg-n10" data-aos="fade-up" data-aos-delay="100">
                                 <div class="card team-member h-100">
                                     <div class="card-body p-5">
-                                        <div class="text-center">
-                                            <img src="assets/images/members/cyanne.png" alt="Team Member 1"
-                                                class="img-fluid rounded-circle mb-3" width="150" height="150" />
-                                            <h4>Cyanne Justin Vega</h4>
-                                            <p class="text-muted">Project Manager </p>
+                                        <div class="flip-card">
+                                            <div class="flip-card-inner">
+                                                <div class="flip-card-front text-center">
+                                                    <img src="assets/images/members/cyanne.png" alt="Team Member 1"
+                                                        class="img-fluid rounded-circle mb-3" width="150" height="150" />
+                                                    <h4>Cyanne Justin Vega</h4>
+                                                    <p class="text-muted">Project Manager</p>
+                                                </div>
+                                                <div class="flip-card-back">
+                                                    <h5>About Cyanne</h5>
+                                                    <p>With extensive experience in managing projects and leading teams, Cyanne ensures the smooth flow of operations, bringing vision and strategy to life.</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Team Member 2 -->
                             <div class="col-lg-4 mb-5 mb-lg-n10" data-aos="fade-up">
                                 <div class="card team-member h-100">
@@ -638,87 +633,6 @@ if ($login->isRememberSet()) {
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">    
-                <div class="container h-100 d-flex align-items-center justify-content-center">
-        <div class="row w-100 justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-
-                            <div class="card shadow-lg">
-                            <div class="card-body p-5">
-                            <!-- Check if 'Remember me' is set -->
-                                    <?php if (!$login->isRememberSet()): ?>
-                                    <h4 class="card-title">Login</h4>
-                                    <?php else: ?>
-                                    <h4 class="card-title">Login as <?= htmlentities($row["username"]) ?></h4>
-                                    <?php endif; ?>
-
-                                    <form method="POST" id="login_form">
-                                        <input type="hidden" name="token" id="token"
-                                            value="<?= htmlentities(CSRF::generate("login_form")) ?>">
-
-                                        <!-- Username field (only show when 'Remember me' is not set) -->
-                                        <?php if (!$login->isRememberSet()): ?>
-                                        <div class="mb-3">
-                                            <label for="username" class="form-label">Username</label>
-                                            <input id="username" type="text" class="form-control" name="username"
-                                                autofocus>
-                                        </div>
-                                        <?php else: ?>
-                                        <input id="username" type="hidden" class="form-control" name="username"
-                                            value="<?= $row["username"] ?>" autofocus>
-                                        <?php endif; ?>
-
-                                        <!-- Password field -->
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label">Password
-                                                <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#forgotPasswordModal" class="float-end">Forgot
-                                                    password?</a>
-                                            </label>
-                                            <input id="password" type="password" class="form-control"
-                                                name="password" data-eye>
-                                        </div>
-
-                                        <!-- Remember me checkbox (only show when 'Remember me' is not set) -->
-                                        <?php if (!$login->isRememberSet()): ?>
-                                        <div class="mb-3 form-check">
-                                            <input type="checkbox" name="remember" id="remember"
-                                                class="form-check-input">
-                                            <label for="remember" class="form-check-label">Remember me</label>
-                                        </div>
-                                        <?php endif; ?>
-
-                                        <!-- Login button -->
-                                        <div class="mb-3">
-                                            <button type="submit" id="login_button" class="btn btn-primary w-100">
-                                                Log in
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <!-- Footer -->
-                            <div class="footer mt-4 text-center">
-                                <?php if ($login->isRememberSet()): ?>
-                                Not your account? <a href="login.php?ref_">Log in</a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
