@@ -68,42 +68,40 @@ if ($login->isRememberSet()) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
     <style>
-        .flip-card {
-            width: 100%;
-            height: 100%;
-            perspective: 1000px;
-        }
+    .flip-card {
+        width: 100%;
+        height: 100%;
+        perspective: 1000px;
+    }
 
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
 
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg); 
-        }
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
 
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden; 
-            text-align: center;
-        }
+    .flip-card-front,
+    .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        text-align: center;
+    }
 
-        .flip-card-front {
+    .flip-card-front {}
 
-        }
-
-        .flip-card-back {
-            background-color: #f8f9fa;
-            padding: 20px;
-            transform: rotateY(180deg);
-        }
-
+    .flip-card-back {
+        background-color: #f8f9fa;
+        padding: 20px;
+        transform: rotateY(180deg);
+    }
     </style>
 </head>
 
@@ -111,10 +109,9 @@ if ($login->isRememberSet()) {
     <div id="layoutDefault">
         <div id="layoutDefault_content">
             <main>
-                <!-- Navbar-->
-                <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top">
+                <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent  fixed-top">
                     <div class="container px-5">
-                        <a class="navbar-brand text-white" href="index.html">E-Basura</a>
+                        <a class="navbar-brand text-dark" href="index.html">E-Basura</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
@@ -130,30 +127,55 @@ if ($login->isRememberSet()) {
                         </div>
                     </div>
                 </nav>
-                <!-- Page Header-->
-                <header class="page-header-ui page-header-ui-dark bg-gradient-primary-to-secondary">
-                    <div class="page-header-ui-content pt-10">
-                        <div class="container px-5">
-                            <div class="row gx-5 align-items-center">
-                                <div class="col-lg-6" data-aos="fade-up">
-                                    <h1 class="page-header-ui-title">Welcome to E-Basura</h1>
-                                    <p class="page-header-ui-text mb-5">
-                                        This study developed an IoT-based waste segregation system at ISPSC using image
-                                        processing technology. The system aims to improve waste management efficiency
-                                        through automation.
-                                    </p>
-                                    <a class="btn btn-teal fw-500 me-2" href="#!">
-                                        Get Started
-                                        <i class="ms-2" data-feather="arrow-right"></i>
-                                    </a>
-                                    <a class="btn btn-link fw-500" href="#!">Learn More</a>
+                <header class="page-header-ui " style="position: relative; overflow: hidden;">
+                    <div id="carouselBackground" class="carousel slide" data-bs-ride="carousel"
+                        style="position: absolute; top: 0;  left: 0; width: 100%; height: 100%; z-index: 1;">
+                        <div class="carousel-inner" style="height: 100%;">
+                            <div class="carousel-item active">
+                                <img src="https://www.ispsctagudin.info/home/assets/img/banner/1.png"
+                                    class="d-block w-100 h-100" alt="First slide" style="object-fit: cover;" />
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.ispsctagudin.info/home/assets/img/banner/2.png"
+                                    class="d-block w-100 h-100" alt="Second slide" style="object-fit: cover;" />
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.ispsctagudin.info/home/assets/img/banner/3.png"
+                                    class="d-block w-100 h-100" alt="Third slide" style="object-fit: cover;" />
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Content on top of the carousel -->
+                    <div class="page-header-ui-content pt-10" style="position: relative; z-index: 2;">
+                        <div class="container" style="position: relative;">
+                            <div class="card px-5" style="position: relative; background-color: rgba(0, 0, 0, 0.5);">
+                                <div class="row gx-5 align-items-center">
+                                    <div class="col-lg-6" data-aos="fade-up">
+                                        <h1 class="page-header-ui-title text-success">Welcome to E-Basura</h1>
+                                        <p class="page-header-ui-text mb-5 text-light">
+                                            This study developed an IoT-based waste segregation system at ISPSC using
+                                            image
+                                            processing technology. The system aims to improve waste management
+                                            efficiency
+                                            through automation.
+                                        </p>
+                                        <a class="btn btn-teal fw-500 me-2" href="login.php">
+                                            Get Started
+                                            <i class="ms-2" data-feather="arrow-right"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="100">
+                                        <img class="img-fluid"
+                                            src="http://localhost/ebasura/assets/img/android-chrome-512x512.png" />
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="100"><img
-                                        class="img-fluid"
-                                        src="http://localhost/ebasura/assets/img/android-chrome-512x512.png" /></div>
                             </div>
                         </div>
                     </div>
+
                     <div class="svg-border-rounded text-white">
                         <!-- Rounded SVG Border-->
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none"
@@ -163,47 +185,64 @@ if ($login->isRememberSet()) {
                     </div>
                 </header>
                 <section class="bg-white py-10">
-                    <div class="container px-5">
-                        <div class="row gx-5 text-center">
-                            <div class="col-lg-3 mb-5 mb-lg-0">
-                                <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
-                                    <i class="fas fa-broom"></i></div>
-                                <h3>Clean As You Go</h3>
-                                <p class="mb-0">(CLAYGO) encourages everyone to take responsibility for cleaning up
-                                    after themselves. By reducing littering and maintaining cleanliness, we create a
-                                    more inviting environment for all students and staff. Let's all contribute to a tidy
-                                    and respectful campus!</p>
-                            </div>
-                            <div class="col-lg-3 mb-5 mb-lg-0">
-                                <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
-                                    <i class="fas fa-trash"></i></div>
-                                <h3>Dispose Waste Responsibly</h3>
-                                <p class="mb-0">Always use designated trash bins for waste disposal. Proper waste
-                                    management not only keeps the campus looking clean, but it also promotes a healthier
-                                    environment for everyone. Let's all take responsibility for maintaining a beautiful
-                                    school campus.</p>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
-                                    <i class="fas fa-recycle"></i></div>
-                                <h3>Practice Smart Waste Segregation</h3>
-                                <p class="mb-0">Separate recyclable materials from non-recyclables to support our
-                                    school's waste management system. Proper segregation helps make recycling more
-                                    effective and reduces the amount of waste that ends up in landfills. Together, we
-                                    can create a greener, cleaner campus.</p>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
-                                    <i class="fas fa-tree"></i></div>
-                                <h3>Keep Our Campus Clean</h3>
-                                <p class="mb-0">Avoid littering by always carrying your trash until you find a proper
-                                    bin. Encourage others to do the same, helping to keep the campus a welcoming and
-                                    pleasant space for learning. A clean school fosters pride and a sense of community!
-                                </p>
-                            </div>
-                        </div>
+                <div class="container px-5">
+    <div class="row gx-5 text-center">
+        <!-- Clean As You Go -->
+        <div class="col-lg-3 mb-5 mb-lg-0 py-2" 
+            style="position: relative; background-image: url('assets/images/INSIDE_2_CLAYGO.png'); background-size: cover; background-position: center; padding: 20px; overflow: hidden; border-radius: 10px; transition: transform 0.3s ease; margin-bottom: 30px;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5);"></div>
+            <div style="position: relative; z-index: 1;">
+                <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4" style="font-size: 2rem;">
+                    <i class="fas fa-broom"></i>
+                </div>
+                <h3 class="text-white" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">Clean As You Go</h3>
+                <p class="text-white" style="font-size: 1rem; line-height: 1.6;">CLAYGO encourages everyone to take responsibility for cleaning up after themselves. By reducing littering and maintaining cleanliness, we create a more inviting environment for all students and staff. Let's all contribute to a tidy and respectful campus!</p>
+            </div>
+        </div>
 
-                    </div>
+        <!-- Dispose Waste Responsibly -->
+        <div class="col-lg-3 mb-5 mb-lg-0 py-2" 
+            style="position: relative; background-image: url('assets/images/Waste-Management-scaled-1.jpg'); background-size: cover; background-position: center; padding: 20px; overflow: hidden; border-radius: 10px; transition: transform 0.3s ease; margin-bottom: 30px;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5);"></div>
+            <div style="position: relative; z-index: 1;">
+                <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4" style="font-size: 2rem;">
+                    <i class="fas fa-trash"></i>
+                </div>
+                <h3 class="text-white" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">Dispose Waste Responsibly</h3>
+                <p class="text-white" style="font-size: 1rem; line-height: 1.6;">Always use designated trash bins for waste disposal. Proper waste management not only keeps the campus looking clean, but it also promotes a healthier environment for everyone. Let's all take responsibility for maintaining a beautiful school campus.</p>
+            </div>
+        </div>
+
+        <!-- Practice Smart Waste Segregation -->
+        <div class="col-lg-3 mb-5 mb-lg-0 py-2" 
+            style="position: relative; background-image: url('assets/images/carousel/1.png'); background-size: cover; background-position: center; padding: 20px; overflow: hidden; border-radius: 10px; transition: transform 0.3s ease; margin-bottom: 30px;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5);"></div>
+            <div style="position: relative; z-index: 1;">
+                <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4" style="font-size: 2rem;">
+                    <i class="fas fa-recycle"></i>
+                </div>
+                <h3 class="text-white" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">Practice Smart Waste Segregation</h3>
+                <p class="text-white" style="font-size: 1rem; line-height: 1.6;">Separate recyclable materials from non-recyclables to support our school's waste management system. Proper segregation helps make recycling more effective and reduces the amount of waste that ends up in landfills. Together, we can create a greener, cleaner campus.</p>
+            </div>
+        </div>
+
+        <!-- Keep Our Campus Clean -->
+        <div class="col-lg-3 mb-5 mb-lg-0 py-2" 
+            style="position: relative; background-image: url('assets/images/aa.jpg'); background-size: cover; background-position: center; padding: 20px; overflow: hidden; border-radius: 10px; transition: transform 0.3s ease; margin-bottom: 30px;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5);"></div>
+            <div style="position: relative; z-index: 1;">
+                <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4" style="font-size: 2rem;">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <h3 class="text-white" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">Keep Our Campus Clean</h3>
+                <p class="text-white" style="font-size: 1rem; line-height: 1.6;">Avoid littering by always carrying your trash until you find a proper bin. Encourage others to do the same, helping to keep the campus a welcoming and pleasant space for learning. A clean school fosters pride and a sense of community!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
                     <div class="svg-border-rounded text-light">
                         <!-- Rounded SVG Border-->
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none"
@@ -355,13 +394,16 @@ if ($login->isRememberSet()) {
                                             <div class="flip-card-inner">
                                                 <div class="flip-card-front text-center">
                                                     <img src="assets/images/members/cyanne.png" alt="Team Member 1"
-                                                        class="img-fluid rounded-circle mb-3" width="150" height="150" />
+                                                        class="img-fluid rounded-circle mb-3" width="150"
+                                                        height="150" />
                                                     <h4>Cyanne Justin Vega</h4>
                                                     <p class="text-muted">Project Manager</p>
                                                 </div>
                                                 <div class="flip-card-back">
                                                     <h5>About Cyanne</h5>
-                                                    <p>With extensive experience in managing projects and leading teams, Cyanne ensures the smooth flow of operations, bringing vision and strategy to life.</p>
+                                                    <p>With extensive experience in managing projects and leading teams,
+                                                        Cyanne ensures the smooth flow of operations, bringing vision
+                                                        and strategy to life.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -558,7 +600,8 @@ if ($login->isRememberSet()) {
                                     <div class="card-body py-5">
                                         <div class="d-flex align-items-center">
                                             <div class="icon-stack icon-stack-xl bg-secondary text-white flex-shrink-0">
-                                                <i data-feather="code"></i></div>
+                                                <i data-feather="code"></i>
+                                            </div>
                                             <div class="ms-4">
                                                 <h5 class="text-secondary">Built for a cleaner environment</h5>
                                                 <p class="card-text text-gray-600">Our IoT-based waste segregation
